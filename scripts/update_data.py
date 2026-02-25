@@ -404,68 +404,69 @@ def extract_via_gemini(articles: list[dict]) -> list[dict]:
         for a in articles[:15]  # Limit to 15 articles per call
     )
 
-    try:
-        url = f"{GEMINI_API_URL}?key={GEMINI_API_KEY}"
-        response = requests.post(
-            url,
-            headers={"Content-Type": "application/json"},
-            json={
-                "contents": [{
-                    "parts": [{
-                        "text": EXTRACTION_PROMPT.format(articles=articles_text)
-                    }]
-                }],
-                "generationConfig": {
-                    "temperature": 0.1,
-                    "maxOutputTokens": 4096,
-                },
-            },
-            timeout=60,
-        )
+    url = f"{GEMINI_API_URL}?key={GEMINI_API_KEY}"
+    payload = {
+        "contents": [{
+            "parts": [{
+                "text": EXTRACTION_PROMPT.format(articles=articles_text)
+            }]
+        }],
+        "generationConfig": {
+            "temperature": 0.1,
+            "maxOutputTokens": 4096,
+        },
+    }
 
-        if response.status_code == 429:
-            print("  Gemini rate limited. Waiting 20s and retrying...")
-            time.sleep(20)
+    # Retry with exponential backoff (free tier = 5 RPM)
+    max_attempts = 4
+    wait_times = [15, 30, 60, 90]
+
+    for attempt in range(max_attempts):
+        try:
             response = requests.post(
                 url,
                 headers={"Content-Type": "application/json"},
-                json={
-                    "contents": [{
-                        "parts": [{
-                            "text": EXTRACTION_PROMPT.format(articles=articles_text)
-                        }]
-                    }],
-                    "generationConfig": {
-                        "temperature": 0.1,
-                        "maxOutputTokens": 4096,
-                    },
-                },
+                json=payload,
                 timeout=60,
             )
 
-        response.raise_for_status()
-        result = response.json()
+            if response.status_code == 429:
+                wait = wait_times[min(attempt, len(wait_times) - 1)]
+                remaining = max_attempts - attempt - 1
+                print(f"  Gemini rate limited (429). Waiting {wait}s... (attempt {attempt+1}/{max_attempts}, {remaining} retries left)")
+                time.sleep(wait)
+                continue
 
-        # Extract text from Gemini response
-        content = result["candidates"][0]["content"]["parts"][0]["text"]
+            response.raise_for_status()
+            result = response.json()
 
-        # Parse JSON array from response
-        json_match = re.search(r'\[.*\]', content, re.DOTALL)
-        if json_match:
-            candidates = json.loads(json_match.group())
-            extracted.extend(candidates)
-            print(f"  Gemini extracted {len(candidates)} candidates")
-        else:
-            print("  Gemini: No candidates found in articles (this is normal if no election news)")
+            # Extract text from Gemini response
+            content = result["candidates"][0]["content"]["parts"][0]["text"]
 
-    except requests.exceptions.HTTPError as e:
-        print(f"  Gemini HTTP error: {e}")
-    except (KeyError, json.JSONDecodeError) as e:
-        print(f"  Gemini parse error: {e}")
-    except Exception as e:
-        print(f"  Gemini error: {e}")
+            # Parse JSON array from response
+            json_match = re.search(r'\[.*\]', content, re.DOTALL)
+            if json_match:
+                candidates = json.loads(json_match.group())
+                extracted.extend(candidates)
+                print(f"  Gemini extracted {len(candidates)} candidates")
+            else:
+                print("  Gemini: No candidates found in articles (this is normal if no election news)")
+            return extracted
 
+        except requests.exceptions.HTTPError as e:
+            print(f"  Gemini HTTP error: {e}")
+            break
+        except (KeyError, json.JSONDecodeError) as e:
+            print(f"  Gemini parse error: {e}")
+            break
+        except Exception as e:
+            print(f"  Gemini error: {e}")
+            break
+
+    if not extracted:
+        print("  Gemini: All retries exhausted. Will fall through to next source.")
     return extracted
+
 
 
 # ══════════════════════════════════════════════════════

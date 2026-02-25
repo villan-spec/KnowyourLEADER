@@ -1,0 +1,1672 @@
+[
+    {
+        "id": "ariyalur",
+        "name": "Ariyalur",
+        "nameTamil": "அரியலூர்",
+        "constituencies": [
+            {
+                "id": "ariyalur",
+                "name": "Ariyalur",
+                "nameTamil": "அரியலூர்",
+                "districtId": "ariyalur"
+            },
+            {
+                "id": "jayankondam",
+                "name": "Jayankondam",
+                "nameTamil": "ஜெயங்கொண்டம்",
+                "districtId": "ariyalur"
+            }
+        ]
+    },
+    {
+        "id": "chengalpattu",
+        "name": "Chengalpattu",
+        "nameTamil": "செங்கல்பட்டு",
+        "constituencies": [
+            {
+                "id": "chengalpattu",
+                "name": "Chengalpattu",
+                "nameTamil": "செங்கல்பட்டு",
+                "districtId": "chengalpattu"
+            },
+            {
+                "id": "cheyyur",
+                "name": "Cheyyur",
+                "nameTamil": "செய்யூர்",
+                "districtId": "chengalpattu"
+            },
+            {
+                "id": "maduranthakam",
+                "name": "Maduranthakam",
+                "nameTamil": "மதுராந்தகம்",
+                "districtId": "chengalpattu"
+            },
+            {
+                "id": "sholinganallur",
+                "name": "Sholinganallur",
+                "nameTamil": "சோழிங்கநல்லூர்",
+                "districtId": "chengalpattu"
+            },
+            {
+                "id": "pallavaram",
+                "name": "Pallavaram",
+                "nameTamil": "பல்லாவரம்",
+                "districtId": "chengalpattu"
+            },
+            {
+                "id": "tambaram",
+                "name": "Tambaram",
+                "nameTamil": "தாம்பரம்",
+                "districtId": "chengalpattu"
+            },
+            {
+                "id": "thiruporur",
+                "name": "Thiruporur",
+                "nameTamil": "திருப்போரூர்",
+                "districtId": "chengalpattu"
+            }
+        ]
+    },
+    {
+        "id": "chennai",
+        "name": "Chennai",
+        "nameTamil": "சென்னை",
+        "constituencies": [
+            {
+                "id": "royapuram",
+                "name": "Royapuram",
+                "nameTamil": "இராயபுரம்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "harbour",
+                "name": "Harbour",
+                "nameTamil": "துறைமுகம்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "chepauk-thiruvallikeni",
+                "name": "Chepauk-Thiruvallikeni",
+                "nameTamil": "சேப்பாக்கம்-திருவல்லிக்கேணி",
+                "districtId": "chennai"
+            },
+            {
+                "id": "thousand-lights",
+                "name": "Thousand Lights",
+                "nameTamil": "ஆயிரம் விளக்கு",
+                "districtId": "chennai"
+            },
+            {
+                "id": "velachery",
+                "name": "Velachery",
+                "nameTamil": "வேளச்சேரி",
+                "districtId": "chennai"
+            },
+            {
+                "id": "mylapore",
+                "name": "Mylapore",
+                "nameTamil": "மயிலாப்பூர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "saidapet",
+                "name": "Saidapet",
+                "nameTamil": "சைதாப்பேட்டை",
+                "districtId": "chennai"
+            },
+            {
+                "id": "thiyagarayanagar",
+                "name": "Thiyagarayanagar",
+                "nameTamil": "தியாகராய நகர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "anna-nagar",
+                "name": "Anna Nagar",
+                "nameTamil": "அண்ணா நகர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "virugambakkam",
+                "name": "Virugambakkam",
+                "nameTamil": "விருகம்பாக்கம்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "perambur",
+                "name": "Perambur",
+                "nameTamil": "பெரம்பூர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "kolathur",
+                "name": "Kolathur",
+                "nameTamil": "கொளத்தூர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "villivakkam",
+                "name": "Villivakkam",
+                "nameTamil": "வில்லிவாக்கம்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "thiru-vi-ka-nagar",
+                "name": "Thiru-Vi-Ka Nagar",
+                "nameTamil": "திரு.வி.க நகர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "egmore",
+                "name": "Egmore",
+                "nameTamil": "எழும்பூர்",
+                "districtId": "chennai"
+            },
+            {
+                "id": "dr-radhakrishnan-nagar",
+                "name": "Dr. Radhakrishnan Nagar",
+                "nameTamil": "டாக்டர் ராதாகிருஷ்ணன் நகர்",
+                "districtId": "chennai"
+            }
+        ]
+    },
+    {
+        "id": "coimbatore",
+        "name": "Coimbatore",
+        "nameTamil": "கோயம்புத்தூர்",
+        "constituencies": [
+            {
+                "id": "kavundampalayam",
+                "name": "Kavundampalayam",
+                "nameTamil": "கவுண்டம்பாளையம்",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "coimbatore-north",
+                "name": "Coimbatore North",
+                "nameTamil": "கோயம்புத்தூர் வடக்கு",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "coimbatore-south",
+                "name": "Coimbatore South",
+                "nameTamil": "கோயம்புத்தூர் தெற்கு",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "singanallur",
+                "name": "Singanallur",
+                "nameTamil": "சிங்கநல்லூர்",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "kinathukadavu",
+                "name": "Kinathukadavu",
+                "nameTamil": "கிணத்துக்கடவு",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "pollachi",
+                "name": "Pollachi",
+                "nameTamil": "பொள்ளாச்சி",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "valparai",
+                "name": "Valparai",
+                "nameTamil": "வால்பாறை",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "sulur",
+                "name": "Sulur",
+                "nameTamil": "சூலூர்",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "mettupalayam",
+                "name": "Mettupalayam",
+                "nameTamil": "மேட்டுப்பாளையம்",
+                "districtId": "coimbatore"
+            },
+            {
+                "id": "thondamuthur",
+                "name": "Thondamuthur",
+                "nameTamil": "தொண்டாமுத்தூர்",
+                "districtId": "coimbatore"
+            }
+        ]
+    },
+    {
+        "id": "cuddalore",
+        "name": "Cuddalore",
+        "nameTamil": "கடலூர்",
+        "constituencies": [
+            {
+                "id": "cuddalore",
+                "name": "Cuddalore",
+                "nameTamil": "கடலூர்",
+                "districtId": "cuddalore"
+            },
+            {
+                "id": "kurinjipadi",
+                "name": "Kurinjipadi",
+                "nameTamil": "குறிஞ்சிப்பாடி",
+                "districtId": "cuddalore"
+            },
+            {
+                "id": "bhuvanagiri",
+                "name": "Bhuvanagiri",
+                "nameTamil": "புவனகிரி",
+                "districtId": "cuddalore"
+            },
+            {
+                "id": "chidambaram",
+                "name": "Chidambaram",
+                "nameTamil": "சிதம்பரம்",
+                "districtId": "cuddalore"
+            },
+            {
+                "id": "kattumannarkoil",
+                "name": "Kattumannarkoil",
+                "nameTamil": "கட்டுமன்னார்கோயில்",
+                "districtId": "cuddalore"
+            },
+            {
+                "id": "virudhachalam",
+                "name": "Virudhachalam",
+                "nameTamil": "விருத்தாசலம்",
+                "districtId": "cuddalore"
+            }
+        ]
+    },
+    {
+        "id": "dharmapuri",
+        "name": "Dharmapuri",
+        "nameTamil": "தர்மபுரி",
+        "constituencies": [
+            {
+                "id": "dharmapuri",
+                "name": "Dharmapuri",
+                "nameTamil": "தர்மபுரி",
+                "districtId": "dharmapuri"
+            },
+            {
+                "id": "pennagaram",
+                "name": "Pennagaram",
+                "nameTamil": "பென்னாகரம்",
+                "districtId": "dharmapuri"
+            },
+            {
+                "id": "palacode",
+                "name": "Palacode",
+                "nameTamil": "பாலக்கோடு",
+                "districtId": "dharmapuri"
+            },
+            {
+                "id": "harur",
+                "name": "Harur",
+                "nameTamil": "அரூர்",
+                "districtId": "dharmapuri"
+            }
+        ]
+    },
+    {
+        "id": "dindigul",
+        "name": "Dindigul",
+        "nameTamil": "திண்டுக்கல்",
+        "constituencies": [
+            {
+                "id": "dindigul",
+                "name": "Dindigul",
+                "nameTamil": "திண்டுக்கல்",
+                "districtId": "dindigul"
+            },
+            {
+                "id": "palani",
+                "name": "Palani",
+                "nameTamil": "பழனி",
+                "districtId": "dindigul"
+            },
+            {
+                "id": "oddanchatram",
+                "name": "Oddanchatram",
+                "nameTamil": "ஒட்டன்சத்திரம்",
+                "districtId": "dindigul"
+            },
+            {
+                "id": "athoor",
+                "name": "Athoor",
+                "nameTamil": "ஆத்தூர்",
+                "districtId": "dindigul"
+            },
+            {
+                "id": "nilakkottai",
+                "name": "Nilakkottai",
+                "nameTamil": "நிலக்கோட்டை",
+                "districtId": "dindigul"
+            },
+            {
+                "id": "natham",
+                "name": "Natham",
+                "nameTamil": "நாத்தம்",
+                "districtId": "dindigul"
+            },
+            {
+                "id": "vedasandur",
+                "name": "Vedasandur",
+                "nameTamil": "வேடசந்தூர்",
+                "districtId": "dindigul"
+            }
+        ]
+    },
+    {
+        "id": "erode",
+        "name": "Erode",
+        "nameTamil": "ஈரோடு",
+        "constituencies": [
+            {
+                "id": "erode-east",
+                "name": "Erode East",
+                "nameTamil": "ஈரோடு கிழக்கு",
+                "districtId": "erode"
+            },
+            {
+                "id": "erode-west",
+                "name": "Erode West",
+                "nameTamil": "ஈரோடு மேற்கு",
+                "districtId": "erode"
+            },
+            {
+                "id": "modakkurichi",
+                "name": "Modakkurichi",
+                "nameTamil": "மொடக்குறிச்சி",
+                "districtId": "erode"
+            },
+            {
+                "id": "gobichettipalayam",
+                "name": "Gobichettipalayam",
+                "nameTamil": "கோபிசெட்டிபாளையம்",
+                "districtId": "erode"
+            },
+            {
+                "id": "bhavani",
+                "name": "Bhavani",
+                "nameTamil": "பவானி",
+                "districtId": "erode"
+            },
+            {
+                "id": "anthiyur",
+                "name": "Anthiyur",
+                "nameTamil": "ஆண்டியூர்",
+                "districtId": "erode"
+            },
+            {
+                "id": "bhavanisagar",
+                "name": "Bhavanisagar",
+                "nameTamil": "பவானிசாகர்",
+                "districtId": "erode"
+            },
+            {
+                "id": "perundurai",
+                "name": "Perundurai",
+                "nameTamil": "பெருந்துறை",
+                "districtId": "erode"
+            }
+        ]
+    },
+    {
+        "id": "kallakurichi",
+        "name": "Kallakurichi",
+        "nameTamil": "கள்ளக்குறிச்சி",
+        "constituencies": [
+            {
+                "id": "kallakurichi",
+                "name": "Kallakurichi",
+                "nameTamil": "கள்ளக்குறிச்சி",
+                "districtId": "kallakurichi"
+            },
+            {
+                "id": "sankarapuram",
+                "name": "Sankarapuram",
+                "nameTamil": "சங்கராபுரம்",
+                "districtId": "kallakurichi"
+            },
+            {
+                "id": "tirukovilur",
+                "name": "Tirukovilur",
+                "nameTamil": "திருக்கோவிலூர்",
+                "districtId": "kallakurichi"
+            },
+            {
+                "id": "ulundurpettai",
+                "name": "Ulundurpettai",
+                "nameTamil": "உளுந்தூர்ப்பேட்டை",
+                "districtId": "kallakurichi"
+            },
+            {
+                "id": "gangavalli",
+                "name": "Gangavalli",
+                "nameTamil": "கங்கவல்லி",
+                "districtId": "kallakurichi"
+            }
+        ]
+    },
+    {
+        "id": "kancheepuram",
+        "name": "Kancheepuram",
+        "nameTamil": "காஞ்சிபுரம்",
+        "constituencies": [
+            {
+                "id": "kancheepuram",
+                "name": "Kancheepuram",
+                "nameTamil": "காஞ்சிபுரம்",
+                "districtId": "kancheepuram"
+            },
+            {
+                "id": "alandur",
+                "name": "Alandur",
+                "nameTamil": "அலந்தூர்",
+                "districtId": "kancheepuram"
+            },
+            {
+                "id": "sriperumbudur",
+                "name": "Sriperumbudur",
+                "nameTamil": "ஸ்ரீபெரும்புத்தூர்",
+                "districtId": "kancheepuram"
+            },
+            {
+                "id": "uthiramerur",
+                "name": "Uthiramerur",
+                "nameTamil": "உத்திரமேரூர்",
+                "districtId": "kancheepuram"
+            }
+        ]
+    },
+    {
+        "id": "kanyakumari",
+        "name": "Kanyakumari",
+        "nameTamil": "கன்னியாகுமரி",
+        "constituencies": [
+            {
+                "id": "nagercoil",
+                "name": "Nagercoil",
+                "nameTamil": "நாகர்கோவில்",
+                "districtId": "kanyakumari"
+            },
+            {
+                "id": "colachel",
+                "name": "Colachel",
+                "nameTamil": "கொளச்சல்",
+                "districtId": "kanyakumari"
+            },
+            {
+                "id": "padmanabhapuram",
+                "name": "Padmanabhapuram",
+                "nameTamil": "பத்மநாபபுரம்",
+                "districtId": "kanyakumari"
+            },
+            {
+                "id": "vilavancode",
+                "name": "Vilavancode",
+                "nameTamil": "விளவங்கோடு",
+                "districtId": "kanyakumari"
+            },
+            {
+                "id": "killiyoor",
+                "name": "Killiyoor",
+                "nameTamil": "கிள்ளியூர்",
+                "districtId": "kanyakumari"
+            },
+            {
+                "id": "thiruvattar",
+                "name": "Thiruvattar",
+                "nameTamil": "திருவட்டார்",
+                "districtId": "kanyakumari"
+            }
+        ]
+    },
+    {
+        "id": "karur",
+        "name": "Karur",
+        "nameTamil": "கரூர்",
+        "constituencies": [
+            {
+                "id": "karur",
+                "name": "Karur",
+                "nameTamil": "கரூர்",
+                "districtId": "karur"
+            },
+            {
+                "id": "aravakurichi",
+                "name": "Aravakurichi",
+                "nameTamil": "அரவக்குறிச்சி",
+                "districtId": "karur"
+            },
+            {
+                "id": "krishnarayapuram",
+                "name": "Krishnarayapuram",
+                "nameTamil": "கிருஷ்ணராயபுரம்",
+                "districtId": "karur"
+            },
+            {
+                "id": "kulithalai",
+                "name": "Kulithalai",
+                "nameTamil": "குளித்தலை",
+                "districtId": "karur"
+            }
+        ]
+    },
+    {
+        "id": "krishnagiri",
+        "name": "Krishnagiri",
+        "nameTamil": "கிருஷ்ணகிரி",
+        "constituencies": [
+            {
+                "id": "krishnagiri",
+                "name": "Krishnagiri",
+                "nameTamil": "கிருஷ்ணகிரி",
+                "districtId": "krishnagiri"
+            },
+            {
+                "id": "hosur",
+                "name": "Hosur",
+                "nameTamil": "ஓசூர்",
+                "districtId": "krishnagiri"
+            },
+            {
+                "id": "bargur",
+                "name": "Bargur",
+                "nameTamil": "பர்கூர்",
+                "districtId": "krishnagiri"
+            },
+            {
+                "id": "uthangarai",
+                "name": "Uthangarai",
+                "nameTamil": "உத்தங்கரை",
+                "districtId": "krishnagiri"
+            },
+            {
+                "id": "kaveripattinam",
+                "name": "Kaveripattinam",
+                "nameTamil": "காவேரிப்பட்டினம்",
+                "districtId": "krishnagiri"
+            },
+            {
+                "id": "denkanikottai",
+                "name": "Denkanikottai",
+                "nameTamil": "தேன்கனிக்கோட்டை",
+                "districtId": "krishnagiri"
+            },
+            {
+                "id": "veppanahalli",
+                "name": "Veppanahalli",
+                "nameTamil": "வேப்பனஹள்ளி",
+                "districtId": "krishnagiri"
+            }
+        ]
+    },
+    {
+        "id": "madurai",
+        "name": "Madurai",
+        "nameTamil": "மதுரை",
+        "constituencies": [
+            {
+                "id": "madurai-east",
+                "name": "Madurai East",
+                "nameTamil": "மதுரை கிழக்கு",
+                "districtId": "madurai"
+            },
+            {
+                "id": "madurai-north",
+                "name": "Madurai North",
+                "nameTamil": "மதுரை வடக்கு",
+                "districtId": "madurai"
+            },
+            {
+                "id": "madurai-south",
+                "name": "Madurai South",
+                "nameTamil": "மதுரை தெற்கு",
+                "districtId": "madurai"
+            },
+            {
+                "id": "madurai-central",
+                "name": "Madurai Central",
+                "nameTamil": "மதுரை மத்தியம்",
+                "districtId": "madurai"
+            },
+            {
+                "id": "madurai-west",
+                "name": "Madurai West",
+                "nameTamil": "மதுரை மேற்கு",
+                "districtId": "madurai"
+            },
+            {
+                "id": "thiruparankundram",
+                "name": "Thiruparankundram",
+                "nameTamil": "திருப்பரங்குன்றம்",
+                "districtId": "madurai"
+            },
+            {
+                "id": "melur",
+                "name": "Melur",
+                "nameTamil": "மேலூர்",
+                "districtId": "madurai"
+            },
+            {
+                "id": "sholavandan",
+                "name": "Sholavandan",
+                "nameTamil": "சோழவந்தான்",
+                "districtId": "madurai"
+            },
+            {
+                "id": "usilampatti",
+                "name": "Usilampatti",
+                "nameTamil": "உசிலம்பட்டி",
+                "districtId": "madurai"
+            }
+        ]
+    },
+    {
+        "id": "mayiladuthurai",
+        "name": "Mayiladuthurai",
+        "nameTamil": "மயிலாடுதுறை",
+        "constituencies": [
+            {
+                "id": "mayiladuthurai",
+                "name": "Mayiladuthurai",
+                "nameTamil": "மயிலாடுதுறை",
+                "districtId": "mayiladuthurai"
+            },
+            {
+                "id": "sirkazhi",
+                "name": "Sirkazhi",
+                "nameTamil": "சீர்காழி",
+                "districtId": "mayiladuthurai"
+            },
+            {
+                "id": "poompuhar",
+                "name": "Poompuhar",
+                "nameTamil": "பூம்புகார்",
+                "districtId": "mayiladuthurai"
+            },
+            {
+                "id": "kollidam",
+                "name": "Kollidam",
+                "nameTamil": "கொள்ளிடம்",
+                "districtId": "mayiladuthurai"
+            }
+        ]
+    },
+    {
+        "id": "nagapattinam",
+        "name": "Nagapattinam",
+        "nameTamil": "நாகப்பட்டினம்",
+        "constituencies": [
+            {
+                "id": "nagapattinam",
+                "name": "Nagapattinam",
+                "nameTamil": "நாகப்பட்டினம்",
+                "districtId": "nagapattinam"
+            },
+            {
+                "id": "kilvelur",
+                "name": "Kilvelur",
+                "nameTamil": "கீழ்வேளூர்",
+                "districtId": "nagapattinam"
+            },
+            {
+                "id": "vedaranyam",
+                "name": "Vedaranyam",
+                "nameTamil": "வேதாரண்யம்",
+                "districtId": "nagapattinam"
+            }
+        ]
+    },
+    {
+        "id": "namakkal",
+        "name": "Namakkal",
+        "nameTamil": "நாமக்கல்",
+        "constituencies": [
+            {
+                "id": "namakkal",
+                "name": "Namakkal",
+                "nameTamil": "நாமக்கல்",
+                "districtId": "namakkal"
+            },
+            {
+                "id": "rasipuram",
+                "name": "Rasipuram",
+                "nameTamil": "இராசிபுரம்",
+                "districtId": "namakkal"
+            },
+            {
+                "id": "tiruchengode",
+                "name": "Tiruchengode",
+                "nameTamil": "திருச்செங்கோடு",
+                "districtId": "namakkal"
+            },
+            {
+                "id": "paramathi-velur",
+                "name": "Paramathi Velur",
+                "nameTamil": "பரமத்தி வேலூர்",
+                "districtId": "namakkal"
+            },
+            {
+                "id": "kolli-hills",
+                "name": "Kolli Hills",
+                "nameTamil": "கொல்லிமலை",
+                "districtId": "namakkal"
+            },
+            {
+                "id": "senthamangalam",
+                "name": "Senthamangalam",
+                "nameTamil": "செந்தமங்கலம்",
+                "districtId": "namakkal"
+            }
+        ]
+    },
+    {
+        "id": "the-nilgiris",
+        "name": "The Nilgiris",
+        "nameTamil": "நீலகிரி",
+        "constituencies": [
+            {
+                "id": "udhagamandalam",
+                "name": "Udhagamandalam",
+                "nameTamil": "உதகமண்டலம்",
+                "districtId": "the-nilgiris"
+            },
+            {
+                "id": "coonoor",
+                "name": "Coonoor",
+                "nameTamil": "குன்னூர்",
+                "districtId": "the-nilgiris"
+            },
+            {
+                "id": "gudalur",
+                "name": "Gudalur",
+                "nameTamil": "கூடலூர்",
+                "districtId": "the-nilgiris"
+            }
+        ]
+    },
+    {
+        "id": "perambalur",
+        "name": "Perambalur",
+        "nameTamil": "பெரம்பலூர்",
+        "constituencies": [
+            {
+                "id": "perambalur",
+                "name": "Perambalur",
+                "nameTamil": "பெரம்பலூர்",
+                "districtId": "perambalur"
+            },
+            {
+                "id": "kunnam",
+                "name": "Kunnam",
+                "nameTamil": "குன்னம்",
+                "districtId": "perambalur"
+            }
+        ]
+    },
+    {
+        "id": "pudukkottai",
+        "name": "Pudukkottai",
+        "nameTamil": "புதுக்கோட்டை",
+        "constituencies": [
+            {
+                "id": "pudukkottai",
+                "name": "Pudukkottai",
+                "nameTamil": "புதுக்கோட்டை",
+                "districtId": "pudukkottai"
+            },
+            {
+                "id": "thirumayam",
+                "name": "Thirumayam",
+                "nameTamil": "திருமயம்",
+                "districtId": "pudukkottai"
+            },
+            {
+                "id": "alangudi",
+                "name": "Alangudi",
+                "nameTamil": "ஆலங்குடி",
+                "districtId": "pudukkottai"
+            },
+            {
+                "id": "aranthangi",
+                "name": "Aranthangi",
+                "nameTamil": "அறந்தாங்கி",
+                "districtId": "pudukkottai"
+            },
+            {
+                "id": "avudayarkoil",
+                "name": "Avudayarkoil",
+                "nameTamil": "ஆவுடையார்கோவில்",
+                "districtId": "pudukkottai"
+            },
+            {
+                "id": "gandarvakkottai",
+                "name": "Gandarvakkottai",
+                "nameTamil": "கந்தர்வக்கோட்டை",
+                "districtId": "pudukkottai"
+            }
+        ]
+    },
+    {
+        "id": "ramanathapuram",
+        "name": "Ramanathapuram",
+        "nameTamil": "ராமநாதபுரம்",
+        "constituencies": [
+            {
+                "id": "ramanathapuram",
+                "name": "Ramanathapuram",
+                "nameTamil": "ராமநாதபுரம்",
+                "districtId": "ramanathapuram"
+            },
+            {
+                "id": "paramakudi",
+                "name": "Paramakudi",
+                "nameTamil": "பரமக்குடி",
+                "districtId": "ramanathapuram"
+            },
+            {
+                "id": "tiruvadanai",
+                "name": "Tiruvadanai",
+                "nameTamil": "திருவாடானை",
+                "districtId": "ramanathapuram"
+            },
+            {
+                "id": "mudukulathur",
+                "name": "Mudukulathur",
+                "nameTamil": "முதுகுளத்தூர்",
+                "districtId": "ramanathapuram"
+            }
+        ]
+    },
+    {
+        "id": "ranipet",
+        "name": "Ranipet",
+        "nameTamil": "ராணிப்பேட்டை",
+        "constituencies": [
+            {
+                "id": "ranipet",
+                "name": "Ranipet",
+                "nameTamil": "ராணிப்பேட்டை",
+                "districtId": "ranipet"
+            },
+            {
+                "id": "arcot",
+                "name": "Arcot",
+                "nameTamil": "ஆற்காடு",
+                "districtId": "ranipet"
+            },
+            {
+                "id": "sholingur",
+                "name": "Sholingur",
+                "nameTamil": "சோளிங்கர்",
+                "districtId": "ranipet"
+            },
+            {
+                "id": "arakkonam",
+                "name": "Arakkonam",
+                "nameTamil": "அரக்கோணம்",
+                "districtId": "ranipet"
+            },
+            {
+                "id": "walajah",
+                "name": "Walajah",
+                "nameTamil": "வாலாஜா",
+                "districtId": "ranipet"
+            }
+        ]
+    },
+    {
+        "id": "salem",
+        "name": "Salem",
+        "nameTamil": "சேலம்",
+        "constituencies": [
+            {
+                "id": "salem-north",
+                "name": "Salem North",
+                "nameTamil": "சேலம் வடக்கு",
+                "districtId": "salem"
+            },
+            {
+                "id": "salem-south",
+                "name": "Salem South",
+                "nameTamil": "சேலம் தெற்கு",
+                "districtId": "salem"
+            },
+            {
+                "id": "salem-west",
+                "name": "Salem West",
+                "nameTamil": "சேலம் மேற்கு",
+                "districtId": "salem"
+            },
+            {
+                "id": "veerapandi",
+                "name": "Veerapandi",
+                "nameTamil": "வீரபாண்டி",
+                "districtId": "salem"
+            },
+            {
+                "id": "attur",
+                "name": "Attur",
+                "nameTamil": "ஆத்தூர்",
+                "districtId": "salem"
+            },
+            {
+                "id": "yercaud",
+                "name": "Yercaud",
+                "nameTamil": "ஏற்காடு",
+                "districtId": "salem"
+            },
+            {
+                "id": "omalur",
+                "name": "Omalur",
+                "nameTamil": "ஓமலூர்",
+                "districtId": "salem"
+            },
+            {
+                "id": "mettur",
+                "name": "Mettur",
+                "nameTamil": "மேட்டூர்",
+                "districtId": "salem"
+            },
+            {
+                "id": "edappadi",
+                "name": "Edappadi",
+                "nameTamil": "எடப்பாடி",
+                "districtId": "salem"
+            },
+            {
+                "id": "sankari",
+                "name": "Sankari",
+                "nameTamil": "சங்கரி",
+                "districtId": "salem"
+            }
+        ]
+    },
+    {
+        "id": "sivagangai",
+        "name": "Sivagangai",
+        "nameTamil": "சிவகங்கை",
+        "constituencies": [
+            {
+                "id": "sivaganga",
+                "name": "Sivaganga",
+                "nameTamil": "சிவகங்கை",
+                "districtId": "sivagangai"
+            },
+            {
+                "id": "karaikudi",
+                "name": "Karaikudi",
+                "nameTamil": "காரைக்குடி",
+                "districtId": "sivagangai"
+            },
+            {
+                "id": "manamadurai",
+                "name": "Manamadurai",
+                "nameTamil": "மானாமதுரை",
+                "districtId": "sivagangai"
+            },
+            {
+                "id": "ilayankudi",
+                "name": "Ilayankudi",
+                "nameTamil": "இளையான்குடி",
+                "districtId": "sivagangai"
+            },
+            {
+                "id": "devakottai",
+                "name": "Devakottai",
+                "nameTamil": "தேவகோட்டை",
+                "districtId": "sivagangai"
+            },
+            {
+                "id": "thiruppathur",
+                "name": "Thiruppathur",
+                "nameTamil": "திருப்பத்தூர்",
+                "districtId": "sivagangai"
+            }
+        ]
+    },
+    {
+        "id": "tenkasi",
+        "name": "Tenkasi",
+        "nameTamil": "தென்காசி",
+        "constituencies": [
+            {
+                "id": "tenkasi",
+                "name": "Tenkasi",
+                "nameTamil": "தென்காசி",
+                "districtId": "tenkasi"
+            },
+            {
+                "id": "sankarankovil",
+                "name": "Sankarankovil",
+                "nameTamil": "சங்கரன்கோவில்",
+                "districtId": "tenkasi"
+            },
+            {
+                "id": "vasudevanallur",
+                "name": "Vasudevanallur",
+                "nameTamil": "வாசுதேவநல்லூர்",
+                "districtId": "tenkasi"
+            },
+            {
+                "id": "kadayanallur",
+                "name": "Kadayanallur",
+                "nameTamil": "கடையநல்லூர்",
+                "districtId": "tenkasi"
+            },
+            {
+                "id": "alangulam",
+                "name": "Alangulam",
+                "nameTamil": "ஆலங்குளம்",
+                "districtId": "tenkasi"
+            },
+            {
+                "id": "sivagiri",
+                "name": "Sivagiri",
+                "nameTamil": "சிவகிரி",
+                "districtId": "tenkasi"
+            }
+        ]
+    },
+    {
+        "id": "thanjavur",
+        "name": "Thanjavur",
+        "nameTamil": "தஞ்சாவூர்",
+        "constituencies": [
+            {
+                "id": "thanjavur",
+                "name": "Thanjavur",
+                "nameTamil": "தஞ்சாவூர்",
+                "districtId": "thanjavur"
+            },
+            {
+                "id": "kumbakonam",
+                "name": "Kumbakonam",
+                "nameTamil": "கும்பகோணம்",
+                "districtId": "thanjavur"
+            },
+            {
+                "id": "papanasam",
+                "name": "Papanasam",
+                "nameTamil": "பாபநாசம்",
+                "districtId": "thanjavur"
+            },
+            {
+                "id": "thiruvaiyaru",
+                "name": "Thiruvaiyaru",
+                "nameTamil": "திருவையாறு",
+                "districtId": "thanjavur"
+            },
+            {
+                "id": "orathanadu",
+                "name": "Orathanadu",
+                "nameTamil": "ஒரத்தநாடு",
+                "districtId": "thanjavur"
+            },
+            {
+                "id": "pattukkottai",
+                "name": "Pattukkottai",
+                "nameTamil": "பட்டுக்கோட்டை",
+                "districtId": "thanjavur"
+            },
+            {
+                "id": "peravurani",
+                "name": "Peravurani",
+                "nameTamil": "பேராவூரணி",
+                "districtId": "thanjavur"
+            }
+        ]
+    },
+    {
+        "id": "theni",
+        "name": "Theni",
+        "nameTamil": "தேனி",
+        "constituencies": [
+            {
+                "id": "theni",
+                "name": "Theni",
+                "nameTamil": "தேனி",
+                "districtId": "theni"
+            },
+            {
+                "id": "periyakulam",
+                "name": "Periyakulam",
+                "nameTamil": "பெரியகுளம்",
+                "districtId": "theni"
+            },
+            {
+                "id": "bodinayakanur",
+                "name": "Bodinayakanur",
+                "nameTamil": "போடிநாயக்கனூர்",
+                "districtId": "theni"
+            },
+            {
+                "id": "cumbum",
+                "name": "Cumbum",
+                "nameTamil": "கம்பம்",
+                "districtId": "theni"
+            },
+            {
+                "id": "andipatti",
+                "name": "Andipatti",
+                "nameTamil": "ஆண்டிபட்டி",
+                "districtId": "theni"
+            },
+            {
+                "id": "uthamapalayam",
+                "name": "Uthamapalayam",
+                "nameTamil": "உத்தமபாளையம்",
+                "districtId": "theni"
+            }
+        ]
+    },
+    {
+        "id": "thoothukudi",
+        "name": "Thoothukudi",
+        "nameTamil": "தூத்துக்குடி",
+        "constituencies": [
+            {
+                "id": "thoothukudi",
+                "name": "Thoothukudi",
+                "nameTamil": "தூத்துக்குடி",
+                "districtId": "thoothukudi"
+            },
+            {
+                "id": "vilathikulam",
+                "name": "Vilathikulam",
+                "nameTamil": "விளாத்திகுளம்",
+                "districtId": "thoothukudi"
+            },
+            {
+                "id": "kovilpatti",
+                "name": "Kovilpatti",
+                "nameTamil": "கோவில்பட்டி",
+                "districtId": "thoothukudi"
+            },
+            {
+                "id": "ottapidaram",
+                "name": "Ottapidaram",
+                "nameTamil": "ஒட்டப்பிடாரம்",
+                "districtId": "thoothukudi"
+            },
+            {
+                "id": "tiruchendur",
+                "name": "Tiruchendur",
+                "nameTamil": "திருச்செந்தூர்",
+                "districtId": "thoothukudi"
+            },
+            {
+                "id": "srivaikuntam",
+                "name": "Srivaikuntam",
+                "nameTamil": "ஸ்ரீவைகுண்டம்",
+                "districtId": "thoothukudi"
+            }
+        ]
+    },
+    {
+        "id": "tiruchirappalli",
+        "name": "Tiruchirappalli",
+        "nameTamil": "திருச்சிராப்பள்ளி",
+        "constituencies": [
+            {
+                "id": "trichy-east",
+                "name": "Tiruchirappalli East",
+                "nameTamil": "திருச்சி கிழக்கு",
+                "districtId": "tiruchirappalli"
+            },
+            {
+                "id": "trichy-west",
+                "name": "Tiruchirappalli West",
+                "nameTamil": "திருச்சி மேற்கு",
+                "districtId": "tiruchirappalli"
+            },
+            {
+                "id": "srirangam",
+                "name": "Srirangam",
+                "nameTamil": "ஸ்ரீரங்கம்",
+                "districtId": "tiruchirappalli"
+            },
+            {
+                "id": "lalgudi",
+                "name": "Lalgudi",
+                "nameTamil": "லால்குடி",
+                "districtId": "tiruchirappalli"
+            },
+            {
+                "id": "manapparai",
+                "name": "Manapparai",
+                "nameTamil": "மணப்பாறை",
+                "districtId": "tiruchirappalli"
+            },
+            {
+                "id": "musiri",
+                "name": "Musiri",
+                "nameTamil": "முசிறி",
+                "districtId": "tiruchirappalli"
+            },
+            {
+                "id": "thuraiyur",
+                "name": "Thuraiyur",
+                "nameTamil": "துறையூர்",
+                "districtId": "tiruchirappalli"
+            }
+        ]
+    },
+    {
+        "id": "tirunelveli",
+        "name": "Tirunelveli",
+        "nameTamil": "திருநெல்வேலி",
+        "constituencies": [
+            {
+                "id": "tirunelveli-town",
+                "name": "Tirunelveli",
+                "nameTamil": "திருநெல்வேலி",
+                "districtId": "tirunelveli"
+            },
+            {
+                "id": "ambasamudram",
+                "name": "Ambasamudram",
+                "nameTamil": "அம்பாசமுத்திரம்",
+                "districtId": "tirunelveli"
+            },
+            {
+                "id": "palayamkottai",
+                "name": "Palayamkottai",
+                "nameTamil": "பாளையங்கோட்டை",
+                "districtId": "tirunelveli"
+            },
+            {
+                "id": "nanguneri",
+                "name": "Nanguneri",
+                "nameTamil": "நாங்குநேரி",
+                "districtId": "tirunelveli"
+            },
+            {
+                "id": "radhapuram",
+                "name": "Radhapuram",
+                "nameTamil": "ராதாபுரம்",
+                "districtId": "tirunelveli"
+            },
+            {
+                "id": "cheranmahadevi",
+                "name": "Cheranmahadevi",
+                "nameTamil": "சேரன்மாதேவி",
+                "districtId": "tirunelveli"
+            }
+        ]
+    },
+    {
+        "id": "tirupathur",
+        "name": "Tirupathur",
+        "nameTamil": "திருப்பத்தூர்",
+        "constituencies": [
+            {
+                "id": "tirupathur",
+                "name": "Tirupathur",
+                "nameTamil": "திருப்பத்தூர்",
+                "districtId": "tirupathur"
+            },
+            {
+                "id": "natrampalli",
+                "name": "Natrampalli",
+                "nameTamil": "நாத்திரம்பள்ளி",
+                "districtId": "tirupathur"
+            },
+            {
+                "id": "jolarpet",
+                "name": "Jolarpet",
+                "nameTamil": "ஜோலார்பேட்டை",
+                "districtId": "tirupathur"
+            },
+            {
+                "id": "ambur",
+                "name": "Ambur",
+                "nameTamil": "ஆம்பூர்",
+                "districtId": "tirupathur"
+            },
+            {
+                "id": "vaniyambadi",
+                "name": "Vaniyambadi",
+                "nameTamil": "வாணியம்பாடி",
+                "districtId": "tirupathur"
+            }
+        ]
+    },
+    {
+        "id": "tiruppur",
+        "name": "Tiruppur",
+        "nameTamil": "திருப்பூர்",
+        "constituencies": [
+            {
+                "id": "tiruppur-north",
+                "name": "Tiruppur North",
+                "nameTamil": "திருப்பூர் வடக்கு",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "tiruppur-south",
+                "name": "Tiruppur South",
+                "nameTamil": "திருப்பூர் தெற்கு",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "palladam",
+                "name": "Palladam",
+                "nameTamil": "பல்லடம்",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "dharapuram",
+                "name": "Dharapuram",
+                "nameTamil": "தாராபுரம்",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "kangeyam",
+                "name": "Kangeyam",
+                "nameTamil": "காங்கேயம்",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "avanashi",
+                "name": "Avanashi",
+                "nameTamil": "அவனாசி",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "udumalaipettai",
+                "name": "Udumalaipettai",
+                "nameTamil": "உடுமலைப்பேட்டை",
+                "districtId": "tiruppur"
+            },
+            {
+                "id": "madathukulam",
+                "name": "Madathukulam",
+                "nameTamil": "மடத்துக்குளம்",
+                "districtId": "tiruppur"
+            }
+        ]
+    },
+    {
+        "id": "tiruvallur",
+        "name": "Tiruvallur",
+        "nameTamil": "திருவள்ளூர்",
+        "constituencies": [
+            {
+                "id": "tiruvallur",
+                "name": "Tiruvallur",
+                "nameTamil": "திருவள்ளூர்",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "ponneri",
+                "name": "Ponneri",
+                "nameTamil": "பொன்னேரி",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "gummidipoondi",
+                "name": "Gummidipoondi",
+                "nameTamil": "கும்மிடிப்பூண்டி",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "poonamallee",
+                "name": "Poonamallee",
+                "nameTamil": "பூந்தமல்லி",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "avadi",
+                "name": "Avadi",
+                "nameTamil": "ஆவடி",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "maduravoyal",
+                "name": "Maduravoyal",
+                "nameTamil": "மதுரவாயல்",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "ambattur",
+                "name": "Ambattur",
+                "nameTamil": "அம்பத்தூர்",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "tiruttani",
+                "name": "Tiruttani",
+                "nameTamil": "திருத்தணி",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "uthukottai",
+                "name": "Uthukottai",
+                "nameTamil": "உத்துக்கோட்டை",
+                "districtId": "tiruvallur"
+            },
+            {
+                "id": "r-k-nagar",
+                "name": "R.K. Nagar",
+                "nameTamil": "ஆர்.கே. நகர்",
+                "districtId": "tiruvallur"
+            }
+        ]
+    },
+    {
+        "id": "tiruvannamalai",
+        "name": "Tiruvannamalai",
+        "nameTamil": "திருவண்ணாமலை",
+        "constituencies": [
+            {
+                "id": "tiruvannamalai",
+                "name": "Tiruvannamalai",
+                "nameTamil": "திருவண்ணாமலை",
+                "districtId": "tiruvannamalai"
+            },
+            {
+                "id": "kilpennathur",
+                "name": "Kilpennathur",
+                "nameTamil": "கீழ்பெண்ணாத்தூர்",
+                "districtId": "tiruvannamalai"
+            },
+            {
+                "id": "arani",
+                "name": "Arani",
+                "nameTamil": "ஆரணி",
+                "districtId": "tiruvannamalai"
+            },
+            {
+                "id": "chengam",
+                "name": "Chengam",
+                "nameTamil": "செங்கம்",
+                "districtId": "tiruvannamalai"
+            },
+            {
+                "id": "vandavasi",
+                "name": "Vandavasi",
+                "nameTamil": "வந்தவாசி",
+                "districtId": "tiruvannamalai"
+            },
+            {
+                "id": "polur",
+                "name": "Polur",
+                "nameTamil": "போளூர்",
+                "districtId": "tiruvannamalai"
+            },
+            {
+                "id": "kalasapakkam",
+                "name": "Kalasapakkam",
+                "nameTamil": "கலசப்பாக்கம்",
+                "districtId": "tiruvannamalai"
+            }
+        ]
+    },
+    {
+        "id": "thiruvarur",
+        "name": "Thiruvarur",
+        "nameTamil": "திருவாரூர்",
+        "constituencies": [
+            {
+                "id": "thiruvarur",
+                "name": "Thiruvarur",
+                "nameTamil": "திருவாரூர்",
+                "districtId": "thiruvarur"
+            },
+            {
+                "id": "nannilam",
+                "name": "Nannilam",
+                "nameTamil": "நன்னிலம்",
+                "districtId": "thiruvarur"
+            },
+            {
+                "id": "mannargudi",
+                "name": "Mannargudi",
+                "nameTamil": "மன்னார்குடி",
+                "districtId": "thiruvarur"
+            },
+            {
+                "id": "needamangalam",
+                "name": "Needamangalam",
+                "nameTamil": "நீடாமங்கலம்",
+                "districtId": "thiruvarur"
+            }
+        ]
+    },
+    {
+        "id": "vellore",
+        "name": "Vellore",
+        "nameTamil": "வேலூர்",
+        "constituencies": [
+            {
+                "id": "vellore",
+                "name": "Vellore",
+                "nameTamil": "வேலூர்",
+                "districtId": "vellore"
+            },
+            {
+                "id": "anaikattu",
+                "name": "Anaikattu",
+                "nameTamil": "ஆனைக்கட்டு",
+                "districtId": "vellore"
+            },
+            {
+                "id": "kilvaithinankuppam",
+                "name": "Kilvaithinankuppam",
+                "nameTamil": "கீழ்வைத்தீஸ்வரன் கோயில்",
+                "districtId": "vellore"
+            },
+            {
+                "id": "gudiyatham",
+                "name": "Gudiyatham",
+                "nameTamil": "குடியாத்தம்",
+                "districtId": "vellore"
+            }
+        ]
+    },
+    {
+        "id": "villupuram",
+        "name": "Villupuram",
+        "nameTamil": "விழுப்புரம்",
+        "constituencies": [
+            {
+                "id": "villupuram",
+                "name": "Villupuram",
+                "nameTamil": "விழுப்புரம்",
+                "districtId": "villupuram"
+            },
+            {
+                "id": "vanur",
+                "name": "Vanur",
+                "nameTamil": "வானூர்",
+                "districtId": "villupuram"
+            },
+            {
+                "id": "gingee",
+                "name": "Gingee",
+                "nameTamil": "செஞ்சி",
+                "districtId": "villupuram"
+            },
+            {
+                "id": "tindivanam",
+                "name": "Tindivanam",
+                "nameTamil": "திண்டிவனம்",
+                "districtId": "villupuram"
+            },
+            {
+                "id": "rishivandiyam",
+                "name": "Rishivandiyam",
+                "nameTamil": "ரிஷிவந்தியம்",
+                "districtId": "villupuram"
+            },
+            {
+                "id": "mailam",
+                "name": "Mailam",
+                "nameTamil": "மயிலம்",
+                "districtId": "villupuram"
+            },
+            {
+                "id": "vikravandi",
+                "name": "Vikravandi",
+                "nameTamil": "விக்ரவாண்டி",
+                "districtId": "villupuram"
+            }
+        ]
+    },
+    {
+        "id": "virudhunagar",
+        "name": "Virudhunagar",
+        "nameTamil": "விருதுநகர்",
+        "constituencies": [
+            {
+                "id": "virudhunagar",
+                "name": "Virudhunagar",
+                "nameTamil": "விருதுநகர்",
+                "districtId": "virudhunagar"
+            },
+            {
+                "id": "aruppukkottai",
+                "name": "Aruppukkottai",
+                "nameTamil": "அருப்புக்கோட்டை",
+                "districtId": "virudhunagar"
+            },
+            {
+                "id": "sivakasi",
+                "name": "Sivakasi",
+                "nameTamil": "சிவகாசி",
+                "districtId": "virudhunagar"
+            },
+            {
+                "id": "sattur",
+                "name": "Sattur",
+                "nameTamil": "சாத்தூர்",
+                "districtId": "virudhunagar"
+            },
+            {
+                "id": "rajapalayam",
+                "name": "Rajapalayam",
+                "nameTamil": "ராஜபாளையம்",
+                "districtId": "virudhunagar"
+            },
+            {
+                "id": "srivilliputhur",
+                "name": "Srivilliputhur",
+                "nameTamil": "ஸ்ரீவில்லிபுத்தூர்",
+                "districtId": "virudhunagar"
+            },
+            {
+                "id": "tiruchuli",
+                "name": "Tiruchuli",
+                "nameTamil": "திருச்சுழி",
+                "districtId": "virudhunagar"
+            }
+        ]
+    }
+]

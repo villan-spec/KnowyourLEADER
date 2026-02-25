@@ -62,16 +62,18 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                         {candidate.party}
                     </span>
                     <span className="text-xs text-[var(--color-text-tertiary)]">
-                        Age {candidate.age}
+                        Age {candidate.age > 0 ? candidate.age : "--"}
                     </span>
                 </div>
             </div>
 
             {/* Education */}
-            <div className="text-xs text-[var(--color-text-secondary)] flex items-center gap-1.5">
-                <span className="font-medium text-[var(--color-text-tertiary)]">Education:</span>
-                {candidate.education}
-            </div>
+            {candidate.education && (
+                <div className="text-xs text-[var(--color-text-secondary)] flex items-center gap-1.5">
+                    <span className="font-medium text-[var(--color-text-tertiary)]">Education:</span>
+                    {candidate.education}
+                </div>
+            )}
 
             {/* Metric Rings */}
             <div className="flex items-center justify-around py-3 border-t border-b border-[var(--color-border-light)] gap-2">
@@ -102,14 +104,16 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
             </div>
 
             {/* Local Issues */}
-            <div>
-                <p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-2">Local Issues Addressed</p>
-                <div className="flex flex-wrap gap-1.5">
-                    {candidate.localIssues.map((issue) => (
-                        <IssueTag key={issue} issue={issue} />
-                    ))}
+            {candidate.localIssues.length > 0 && (
+                <div>
+                    <p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-2">Local Issues Addressed</p>
+                    <div className="flex flex-wrap gap-1.5">
+                        {candidate.localIssues.map((issue) => (
+                            <IssueTag key={issue} issue={issue} />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Footer */}
             <div className="flex items-center justify-between pt-2 border-t border-[var(--color-border-light)]">

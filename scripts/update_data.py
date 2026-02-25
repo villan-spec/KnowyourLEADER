@@ -1,22 +1,30 @@
 """
-Know Your Leader — Data Update Pipeline v2
-============================================
-A robust, multi-source pipeline to populate candidate data from REAL sources.
+Know Your Leader — Data Update Pipeline v2 (2026 Ready)
+=========================================================
+Daily candidate discovery pipeline for Tamil Nadu 2026 elections.
 
-Data Sources (in priority order):
-  1. MyNeta.info — ECI affidavit data (assets, cases, education) for incumbents
-  2. RSS News Feeds — Tamil Nadu election news
-  3. Google Gemini Free Tier — For intelligent extraction from news (5 RPM, free)
+PRIMARY PURPOSE:
+  Find who is contesting from each constituency — from news & official platforms.
+
+PROFILE DATA POLICY:
+  Profile fields (age, education, assets, criminal cases, local issues) are
+  populated ONCE when a candidate is first discovered. They are NEVER overwritten
+  on subsequent runs. To update a candidate's profile, edit candidates.json directly.
+
+Data Sources:
+  1. MyNeta.info — ECI verified candidate data (dynamic year: 2026 → 2021 fallback)
+  2. RSS News Feeds — Tamil Nadu 2026 election news
+  3. OpenRouter (Llama 3.3) — Intelligent extraction from news articles
   4. Rule-based fallback — Pattern matching when no LLM is available
 
 Usage:
-    python scripts/update_data.py
+    python scripts/update_data.py                     # Full pipeline
+    python scripts/update_data.py --skip-news          # MyNeta only
+    python scripts/update_data.py --skip-profiles      # Skip age fetching (faster)
+    python scripts/update_data.py --skip-news --skip-profiles  # Fastest
 
 Environment Variables (optional):
-    GEMINI_API_KEY     — Google AI Studio key (free at https://aistudio.google.com/apikey)
-    OPENROUTER_API_KEY — OpenRouter key (fallback, heavily rate-limited on free tier)
-
-Designed to run via GitHub Actions on a daily cron schedule.
+    OPENROUTER_API_KEY — OpenRouter key (free tier supported)
 """
 
 import json
@@ -27,34 +35,27 @@ import time
 import html
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote
 
 try:
     import feedparser
     import requests
+    from bs4 import BeautifulSoup
 except ImportError:
     print("Installing dependencies...")
     import subprocess
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "feedparser", "requests"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "feedparser", "requests", "beautifulsoup4"])
     import feedparser
     import requests
-
+    from bs4 import BeautifulSoup
 
 # ──────────────────────────────────────────────────────
 # Configuration
 # ──────────────────────────────────────────────────────
 
-# API Keys
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyCOFmn28jQhsvv4eo99BxpVyeyJPn616ms")
-OPENROUTER_API_KEY = os.environ.get(
-    "OPENROUTER_API_KEY",
-    "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",
-)
+# API Keys — set via environment variable; falls back to empty string if not set
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
-# Gemini (PRIMARY — 5 RPM free, very reliable)
-GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
-
-# OpenRouter (FALLBACK — heavily rate-limited on free tier)
+# OpenRouter (PRIMARY LLM)
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 
@@ -67,9 +68,11 @@ RSS_FEEDS = [
     "https://www.deccanherald.com/rss/tamil-nadu.rss",
 ]
 
-# MyNeta (Association for Democratic Reforms — official ECI data)
+# MyNeta Base
 MYNETA_BASE_URL = "https://myneta.info"
-MYNETA_TN_2021_URL = f"{MYNETA_BASE_URL}/TamilNadu2021"
+MYNETA_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+}
 
 # Paths
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -81,6 +84,7 @@ VALID_DISTRICTS: set[str] = set()
 VALID_CONSTITUENCIES: set[str] = set()
 CONSTITUENCY_NAME_TO_ID: dict[str, str] = {}
 DISTRICT_NAME_TO_ID: dict[str, str] = {}
+CONSTITUENCY_TO_DISTRICT: dict[str, str] = {}  # Cached lookup: constituency_id → district_id
 
 # Party colors
 PARTY_COLORS = {
@@ -98,7 +102,7 @@ PARTY_COLORS = {
     "IND": "#888888",
 }
 
-# Keywords for rule-based extraction
+# Keywords
 PARTY_KEYWORDS = [
     "DMK", "AIADMK", "BJP", "INC", "Congress", "PMK", "DMDK", "NTK",
     "MDMK", "CPI", "CPI(M)", "TVK", "Naam Tamilar", "Makkal Needhi Maiam",
@@ -113,7 +117,7 @@ ELECTION_KEYWORDS = [
 
 def load_valid_locations():
     """Load valid district/constituency IDs and build name→ID lookup maps."""
-    global VALID_DISTRICTS, VALID_CONSTITUENCIES, CONSTITUENCY_NAME_TO_ID, DISTRICT_NAME_TO_ID
+    global VALID_DISTRICTS, VALID_CONSTITUENCIES, CONSTITUENCY_NAME_TO_ID, DISTRICT_NAME_TO_ID, CONSTITUENCY_TO_DISTRICT
     with open(DISTRICTS_FILE, "r", encoding="utf-8") as f:
         districts = json.load(f)
     for d in districts:
@@ -124,131 +128,160 @@ def load_valid_locations():
             VALID_CONSTITUENCIES.add(c["id"])
             CONSTITUENCY_NAME_TO_ID[c["name"].lower()] = c["id"]
             CONSTITUENCY_NAME_TO_ID[c.get("nameTamil", "").lower()] = c["id"]
-            # Also map without hyphens/spaces for fuzzy matching
             clean = c["name"].lower().replace(" ", "").replace("-", "")
             CONSTITUENCY_NAME_TO_ID[clean] = c["id"]
+            # Cache constituency → district mapping (avoids re-reading JSON per candidate)
+            CONSTITUENCY_TO_DISTRICT[c["id"]] = d["id"]
 
 
 # ══════════════════════════════════════════════════════
-# SOURCE 1: MyNeta.info — ECI Verified Data
+# SOURCE 1: MyNeta.info — ECI Verified Data (Dynamic Year)
 # ══════════════════════════════════════════════════════
 
-def scrape_myneta_incumbents() -> list[dict]:
-    """
-    Scrape 2021 TN election winners from MyNeta.info (public ECI data).
-    These are current incumbents who may re-contest in 2026.
-    Returns verified candidate data with assets, cases, education.
-    
-    Uses the winners summary page (paginated, 3 pages of ~75 winners each).
-    """
-    candidates = []
-    
-    # Browser-like headers to avoid 403/404 blocks
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Accept-Encoding": "gzip, deflate",
-        "Connection": "keep-alive",
-    }
+def get_active_myneta_config() -> tuple[str, str]:
+    """Check if 2026 data is available, otherwise fallback to 2021."""
+    headers = {"User-Agent": "Mozilla/5.0"}
+    url_2026 = f"{MYNETA_BASE_URL}/TamilNadu2026/index.php"
 
-    # The winners summary page is paginated (3 pages for 224 winners)
-    for page_num in range(1, 4):
+    try:
+        resp = requests.get(url_2026, headers=headers, timeout=10)
+        if resp.status_code == 200 and "Tamil Nadu" in resp.text:
+            print("  [SUCCESS] 2026 Election data is LIVE on MyNeta! Scraping Candidates...")
+            return "TamilNadu2026", "candidates_analyzed"
+    except requests.RequestException:
+        pass
+
+    print("  [INFO] 2026 ECI data not yet live on MyNeta. Falling back to 2021 Incumbent Winners...")
+    return "TamilNadu2021", "winner_analyzed"
+
+
+def scrape_myneta_data(fetch_profiles: bool = True) -> list[dict]:
+    """
+    Scrape official ECI data from MyNeta.info.
+    Phase 1: Scrape summary pages (fast — name, party, constituency, assets, cases, education)
+    Phase 2: Fetch individual profiles for age (slower, optional via --skip-profiles)
+    """
+    election_year, sub_action = get_active_myneta_config()
+
+    # ── Phase 1: Summary pages ──────────────────────────
+    print(f"\n  Phase 1: Scraping {election_year} summary pages...")
+    raw_candidates = []  # Candidates with profile links (temporary)
+    page_num = 1
+
+    while page_num <= 10:  # Safety cap: TN has 3 pages max (~75 each = ~224 total)
         url = (
-            f"{MYNETA_BASE_URL}/TamilNadu2021/index.php"
-            f"?action=summary&subAction=winner_analyzed&sort=default&page={page_num}"
+            f"{MYNETA_BASE_URL}/{election_year}/index.php"
+            f"?action=summary&subAction={sub_action}&sort=default&page={page_num}"
         )
-        print(f"  Fetching winners page {page_num}/3...")
+        print(f"    Page {page_num}...", end=" ", flush=True)
 
         try:
-            resp = requests.get(url, headers=headers, timeout=30)
+            resp = requests.get(url, headers=MYNETA_HEADERS, timeout=30)
             resp.raise_for_status()
-            page_html = resp.text
-
-            # Parse HTML table rows
-            # MyNeta summary tables have columns:
-            # S.No | Candidate | Constituency | Party | Criminal Cases | Education | Total Assets | Liabilities
-            rows = re.findall(
-                r'<tr[^>]*>(.*?)</tr>',
-                page_html,
-                re.DOTALL | re.IGNORECASE,
-            )
-
-            page_count = 0
-            for row in rows:
-                cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL | re.IGNORECASE)
-                if len(cells) < 7:
-                    continue
-
-                # Clean HTML tags from cell content
-                def clean(cell_html: str) -> str:
-                    text = re.sub(r'<[^>]+>', ' ', cell_html)
-                    text = html.unescape(text).strip()
-                    return re.sub(r'\s+', ' ', text)
-
-                # Column mapping for MyNeta summary table
-                sno = clean(cells[0])
-                # Skip header rows
-                if not sno or not sno[0].isdigit():
-                    continue
-
-                name = clean(cells[1])
-                constituency_raw = clean(cells[2])
-                party_raw = clean(cells[3])
-                cases_raw = clean(cells[4])
-                education_raw = clean(cells[5])
-                assets_raw = clean(cells[6])
-
-                if not name or len(name) < 2:
-                    continue
-
-                # Match constituency to our data
-                constituency_id = _match_constituency(constituency_raw)
-                district_id = _find_district_for_constituency(constituency_id) if constituency_id else None
-
-                if not constituency_id or not district_id:
-                    continue
-
-                # Parse assets (MyNeta format: "Rs 1,23,45,678" or "1 Crore+")
-                assets = _parse_indian_number(assets_raw)
-
-                # Parse criminal cases
-                try:
-                    cases_digits = re.sub(r'[^\d]', '', cases_raw)
-                    cases = int(cases_digits) if cases_digits else 0
-                except ValueError:
-                    cases = 0
-
-                candidates.append({
-                    "name": name,
-                    "nameTamil": "",
-                    "party": _normalize_party(party_raw),
-                    "constituencyId": constituency_id,
-                    "districtId": district_id,
-                    "source": "official",
-                    "declaredAssets": assets,
-                    "pendingCriminalCases": cases,
-                    "education": education_raw,
-                    "localIssues": [],
-                    "age": 0,
-                })
-                page_count += 1
-
-            print(f"    Page {page_num}: found {page_count} winners")
-            time.sleep(1)  # Be polite to the server
-
         except requests.RequestException as e:
-            print(f"  Warning: MyNeta page {page_num} failed: {e}")
-            continue
+            print(f"FAILED ({e})")
+            break
 
-    print(f"  Total scraped: {len(candidates)} incumbent MLAs from MyNeta.info")
+        soup = BeautifulSoup(resp.content, "html.parser")
 
-    if not candidates:
-        print("  Note: MyNeta scraping returned 0 results.")
-        print("  This can happen if MyNeta changes their HTML structure.")
-        print("  Other data sources will still populate the database.")
+        # Find ALL anchor tags that link to candidate.php — this is the most reliable selector
+        candidate_links = soup.find_all("a", href=re.compile(r"candidate\.php\?candidate_id=\d+"))
 
-    return candidates
+        if not candidate_links:
+            print("0 candidates → stopping pagination.")
+            break
+
+        page_count = 0
+        for link in candidate_links:
+            # Walk up to the parent <tr> to extract all columns
+            tr = link.find_parent("tr")
+            if not tr:
+                continue
+
+            cols = tr.find_all("td")
+            if len(cols) < 7:
+                continue
+
+            name = link.text.strip()
+            if not name:
+                continue
+
+            profile_href = link.get("href", "")
+            constituency_raw = cols[2].text.strip()
+            party_raw = cols[3].text.strip()
+            cases_raw = cols[4].text.strip()
+            education_raw = cols[5].text.strip()
+            assets_raw = cols[6].text.strip()
+
+            constituency_id = _match_constituency(constituency_raw)
+            district_id = _find_district_for_constituency(constituency_id) if constituency_id else None
+
+            if not constituency_id or not district_id:
+                continue
+
+            assets = _parse_indian_number(assets_raw)
+            try:
+                cases = int(re.sub(r"[^\d]", "", cases_raw)) if cases_raw and re.search(r"\d", cases_raw) else 0
+            except ValueError:
+                cases = 0
+
+            raw_candidates.append({
+                "name": name,
+                "nameTamil": "",
+                "party": _normalize_party(party_raw),
+                "constituencyId": constituency_id,
+                "districtId": district_id,
+                "source": "official",
+                "declaredAssets": assets,
+                "pendingCriminalCases": cases,
+                "education": education_raw if education_raw.lower() not in ("", "nan", "null") else "",
+                "localIssues": [],
+                "age": 0,
+                "_profile_url": f"{MYNETA_BASE_URL}/{election_year}/{profile_href}" if profile_href else "",
+            })
+            page_count += 1
+
+        print(f"{page_count} candidates")
+        page_num += 1
+        time.sleep(0.5)
+
+    print(f"  Phase 1 complete: {len(raw_candidates)} candidates from summary pages.\n")
+
+    # ── Phase 2: Individual profiles for age ─────────────
+    if fetch_profiles and raw_candidates:
+        print(f"  Phase 2: Fetching age from {len(raw_candidates)} profiles...")
+        ages_found = 0
+
+        for i, c in enumerate(raw_candidates):
+            profile_url = c.pop("_profile_url", "")
+            if not profile_url:
+                continue
+
+            try:
+                p_resp = requests.get(profile_url, headers=MYNETA_HEADERS, timeout=15)
+                page_text = BeautifulSoup(p_resp.content, "html.parser").get_text()
+
+                age_match = re.search(r"Age:\s*(\d+)", page_text)
+                if age_match:
+                    c["age"] = int(age_match.group(1))
+                    ages_found += 1
+
+                if (i + 1) % 25 == 0 or i == len(raw_candidates) - 1:
+                    print(f"    [{i+1}/{len(raw_candidates)}] ({ages_found} ages found)")
+
+                time.sleep(0.3)
+            except Exception:
+                pass  # Age is nice-to-have, don't fail the whole pipeline
+
+        print(f"  Phase 2 complete: {ages_found}/{len(raw_candidates)} ages found.\n")
+    else:
+        for c in raw_candidates:
+            c.pop("_profile_url", None)
+        if not fetch_profiles:
+            print("  Phase 2: Skipped (--skip-profiles)\n")
+
+    print(f"  ✅ Total: {len(raw_candidates)} verified ECI profiles from MyNeta.info")
+    return raw_candidates
 
 
 def _match_constituency(name: str) -> str | None:
@@ -256,38 +289,24 @@ def _match_constituency(name: str) -> str | None:
     name_lower = name.lower().strip()
     if name_lower in CONSTITUENCY_NAME_TO_ID:
         return CONSTITUENCY_NAME_TO_ID[name_lower]
-    # Try without spaces/hyphens
     clean = name_lower.replace(" ", "").replace("-", "")
     if clean in CONSTITUENCY_NAME_TO_ID:
         return CONSTITUENCY_NAME_TO_ID[clean]
-    # Partial match
     for known_name, cid in CONSTITUENCY_NAME_TO_ID.items():
-        if known_name in name_lower or name_lower in known_name:
+        if known_name and (known_name in name_lower or name_lower in known_name):
             return cid
     return None
 
 
 def _find_district_for_constituency(constituency_id: str) -> str | None:
-    """Find which district a constituency belongs to."""
-    with open(DISTRICTS_FILE, "r", encoding="utf-8") as f:
-        districts = json.load(f)
-    for d in districts:
-        for c in d["constituencies"]:
-            if c["id"] == constituency_id:
-                return d["id"]
-    return None
+    """Find which district a constituency belongs to (cached lookup)."""
+    return CONSTITUENCY_TO_DISTRICT.get(constituency_id)
 
 
 def _parse_indian_number(text: str) -> int:
     """Parse Indian-style numbers like 'Rs 1,23,45,678' or '₹ 12.5 Cr'."""
-    text = text.replace("Rs", "").replace("₹", "").replace("~", "").strip()
-    if "cr" in text.lower():
-        match = re.search(r'([\d.]+)', text)
-        return int(float(match.group(1)) * 10_000_000) if match else 0
-    if "lakh" in text.lower() or "lac" in text.lower():
-        match = re.search(r'([\d.]+)', text)
-        return int(float(match.group(1)) * 100_000) if match else 0
-    digits = re.sub(r'[^\d]', '', text)
+    exact_part = text.split("~")[0]
+    digits = re.sub(r"[^\d]", "", exact_part)
     return int(digits) if digits else 0
 
 
@@ -325,30 +344,24 @@ def fetch_articles() -> list[dict]:
             for entry in feed.entries[:10]:
                 title = entry.get("title", "")
                 summary = entry.get("summary", entry.get("description", ""))
-                # Clean HTML from summary
-                summary = re.sub(r'<[^>]+>', '', summary)
+                summary = re.sub(r"<[^>]+>", "", summary)
                 summary = html.unescape(summary).strip()
-
                 articles.append({
                     "title": title,
-                    "summary": summary[:500],  # Limit length
+                    "summary": summary[:500],
                     "link": entry.get("link", ""),
                     "published": entry.get("published", ""),
                 })
         except Exception as e:
             print(f"  Warning: Failed to fetch {feed_url}: {e}")
 
-    # Filter for election-relevant articles
     relevant = []
     for a in articles:
         text = (a["title"] + " " + a["summary"]).lower()
-        has_party = any(kw.lower() in text for kw in PARTY_KEYWORDS)
-        has_election = any(kw.lower() in text for kw in ELECTION_KEYWORDS)
-        # Include if it mentions both a party AND election-related term
-        if has_party and has_election:
-            relevant.append(a)
-        # Also include if it mentions "tamil nadu" + "election"
-        elif "tamil nadu" in text and "election" in text:
+        if (
+            any(kw.lower() in text for kw in PARTY_KEYWORDS)
+            and any(kw.lower() in text for kw in ELECTION_KEYWORDS)
+        ) or ("tamil nadu" in text and "election" in text):
             relevant.append(a)
 
     print(f"  Total articles fetched: {len(articles)}, election-relevant: {len(relevant)}")
@@ -356,7 +369,7 @@ def fetch_articles() -> list[dict]:
 
 
 # ══════════════════════════════════════════════════════
-# SOURCE 3a: Google Gemini Free Tier (PRIMARY LLM)
+# SOURCE 3: OpenRouter LLM
 # ══════════════════════════════════════════════════════
 
 EXTRACTION_PROMPT = """You are a data extraction assistant for Tamil Nadu elections.
@@ -388,108 +401,25 @@ ARTICLES:
 Respond with ONLY a JSON array (or empty array []):"""
 
 
-def extract_via_gemini(articles: list[dict]) -> list[dict]:
-    """Extract candidates using Google Gemini free tier (5 RPM)."""
-    if not GEMINI_API_KEY:
-        print("  No GEMINI_API_KEY set. Skipping Gemini extraction.")
-        print("  Get a free key at: https://aistudio.google.com/apikey")
+def extract_via_openrouter(articles: list[dict]) -> list[dict]:
+    """Extract candidates using OpenRouter (with retry and exponential backoff)."""
+    if not OPENROUTER_API_KEY:
+        print("  No OPENROUTER_API_KEY set. Skipping LLM extraction.")
+        print("  Set: OPENROUTER_API_KEY=your_key_here (free at https://openrouter.ai)")
         return []
 
-    print("  Using Google Gemini 2.0 Flash (free tier, 5 RPM)...")
+    print("  Using OpenRouter Llama 3.3 for news extraction...")
     extracted = []
 
-    # Process all articles in ONE batch (Gemini handles larger contexts well)
     articles_text = "\n\n---\n\n".join(
-        f"Title: {a['title']}\nSummary: {a['summary']}\nDate: {a['published']}"
-        for a in articles[:15]  # Limit to 15 articles per call
+        f"Title: {a['title']}\nSummary: {a['summary']}"
+        for a in articles[:5]  # Only 5 articles to conserve tokens
     )
 
-    url = f"{GEMINI_API_URL}?key={GEMINI_API_KEY}"
-    payload = {
-        "contents": [{
-            "parts": [{
-                "text": EXTRACTION_PROMPT.format(articles=articles_text)
-            }]
-        }],
-        "generationConfig": {
-            "temperature": 0.1,
-            "maxOutputTokens": 4096,
-        },
-    }
-
-    # Retry with exponential backoff (free tier = 5 RPM)
     max_attempts = 4
     wait_times = [15, 30, 60, 90]
 
     for attempt in range(max_attempts):
-        try:
-            response = requests.post(
-                url,
-                headers={"Content-Type": "application/json"},
-                json=payload,
-                timeout=60,
-            )
-
-            if response.status_code == 429:
-                wait = wait_times[min(attempt, len(wait_times) - 1)]
-                remaining = max_attempts - attempt - 1
-                print(f"  Gemini rate limited (429). Waiting {wait}s... (attempt {attempt+1}/{max_attempts}, {remaining} retries left)")
-                time.sleep(wait)
-                continue
-
-            response.raise_for_status()
-            result = response.json()
-
-            # Extract text from Gemini response
-            content = result["candidates"][0]["content"]["parts"][0]["text"]
-
-            # Parse JSON array from response
-            json_match = re.search(r'\[.*\]', content, re.DOTALL)
-            if json_match:
-                candidates = json.loads(json_match.group())
-                extracted.extend(candidates)
-                print(f"  Gemini extracted {len(candidates)} candidates")
-            else:
-                print("  Gemini: No candidates found in articles (this is normal if no election news)")
-            return extracted
-
-        except requests.exceptions.HTTPError as e:
-            print(f"  Gemini HTTP error: {e}")
-            break
-        except (KeyError, json.JSONDecodeError) as e:
-            print(f"  Gemini parse error: {e}")
-            break
-        except Exception as e:
-            print(f"  Gemini error: {e}")
-            break
-
-    if not extracted:
-        print("  Gemini: All retries exhausted. Will fall through to next source.")
-    return extracted
-
-
-
-# ══════════════════════════════════════════════════════
-# SOURCE 3b: OpenRouter (FALLBACK LLM)
-# ══════════════════════════════════════════════════════
-
-def extract_via_openrouter(articles: list[dict]) -> list[dict]:
-    """Extract candidates using OpenRouter (fallback, aggressive rate limits)."""
-    if not OPENROUTER_API_KEY:
-        print("  No OPENROUTER_API_KEY set. Skipping.")
-        return []
-
-    print("  Using OpenRouter Llama 3.3 (free tier — may be slow)...")
-    print("  Note: Free tier is heavily rate-limited. Sending ONE batch only.")
-    extracted = []
-
-    # Send ONLY ONE request to avoid 429 (free tier ~1 RPM)
-    articles_text = "\n\n---\n\n".join(
-        f"Title: {a['title']}\nSummary: {a['summary']}"
-        for a in articles[:5]  # Only 5 articles to keep it small
-    )
-
-    for attempt in range(3):
         try:
             response = requests.post(
                 OPENROUTER_API_URL,
@@ -509,8 +439,9 @@ def extract_via_openrouter(articles: list[dict]) -> list[dict]:
             )
 
             if response.status_code == 429:
-                wait = 30 * (attempt + 1)
-                print(f"  Rate limited (429). Waiting {wait}s... (attempt {attempt+1}/3)")
+                wait = wait_times[min(attempt, len(wait_times) - 1)]
+                remaining = max_attempts - attempt - 1
+                print(f"  Rate limited (429). Waiting {wait}s... (attempt {attempt+1}/{max_attempts}, {remaining} retries left)")
                 time.sleep(wait)
                 continue
 
@@ -518,32 +449,32 @@ def extract_via_openrouter(articles: list[dict]) -> list[dict]:
             result = response.json()
             content = result["choices"][0]["message"]["content"]
 
-            json_match = re.search(r'\[.*\]', content, re.DOTALL)
+            json_match = re.search(r"\[.*\]", content, re.DOTALL)
             if json_match:
                 candidates = json.loads(json_match.group())
                 extracted.extend(candidates)
                 print(f"  OpenRouter extracted {len(candidates)} candidates")
             else:
-                print("  OpenRouter: No candidates found in articles")
-            break
+                print("  OpenRouter: No candidates found in articles (normal if no election news)")
+            return extracted
 
         except requests.exceptions.HTTPError as e:
-            if "429" in str(e):
-                wait = 30 * (attempt + 1)
-                print(f"  Rate limited. Waiting {wait}s... (attempt {attempt+1}/3)")
-                time.sleep(wait)
-            else:
-                print(f"  OpenRouter error: {e}")
-                break
+            print(f"  OpenRouter HTTP error: {e}")
+            break
+        except (KeyError, json.JSONDecodeError) as e:
+            print(f"  OpenRouter parse error: {e}")
+            break
         except Exception as e:
             print(f"  OpenRouter error: {e}")
             break
 
+    if not extracted:
+        print("  OpenRouter: All retries exhausted. Falling through to rule-based extraction.")
     return extracted
 
 
 # ══════════════════════════════════════════════════════
-# SOURCE 3c: Rule-Based Extraction (NO API NEEDED)
+# SOURCE 4: Rule-Based Extraction (NO API NEEDED)
 # ══════════════════════════════════════════════════════
 
 def extract_via_rules(articles: list[dict]) -> list[dict]:
@@ -558,36 +489,29 @@ def extract_via_rules(articles: list[dict]) -> list[dict]:
     for article in articles:
         text = article["title"] + " " + article["summary"]
 
-        # Find party mentions
         parties_found = [p for p in PARTY_KEYWORDS if p.lower() in text.lower()]
 
-        # Find constituency mentions
-        constituencies_found = []
-        for name, cid in CONSTITUENCY_NAME_TO_ID.items():
-            if name and len(name) > 2 and name in text.lower():
-                constituencies_found.append(cid)
+        constituencies_found = [
+            cid for name, cid in CONSTITUENCY_NAME_TO_ID.items()
+            if name and len(name) > 2 and name in text.lower()
+        ]
+        districts_found = [
+            did for name, did in DISTRICT_NAME_TO_ID.items()
+            if name and len(name) > 2 and name in text.lower()
+        ]
 
-        # Find district mentions
-        districts_found = []
-        for name, did in DISTRICT_NAME_TO_ID.items():
-            if name and len(name) > 2 and name in text.lower():
-                districts_found.append(did)
-
-        # Extract quoted names or "Mr./Ms./Dr." patterns as potential candidate names
         name_patterns = [
-            r'(?:Mr\.|Ms\.|Mrs\.|Dr\.|Thiru\.|Selvi\.|Selvan\.)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)',
+            r"(?:Mr\.|Ms\.|Mrs\.|Dr\.|Thiru\.|Selvi\.|Selvan\.)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)",
             r'"([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)"',
             r"'([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)'",
         ]
 
         names_found = []
         for pattern in name_patterns:
-            matches = re.findall(pattern, text)
-            names_found.extend(matches)
+            names_found.extend(re.findall(pattern, text))
 
-        # Only create candidates if we have meaningful data
         if names_found and parties_found and (constituencies_found or districts_found):
-            for name in names_found[:2]:  # Max 2 per article
+            for name in names_found[:2]:
                 candidate = {
                     "name": name.strip(),
                     "nameTamil": "",
@@ -609,18 +533,66 @@ def extract_via_rules(articles: list[dict]) -> list[dict]:
 
 
 # ══════════════════════════════════════════════════════
-# Validation & Merge
+# Validation, Dedup & Merge
 # ══════════════════════════════════════════════════════
+
+def _normalize_name_key(name: str) -> str:
+    """
+    Normalize a candidate name for deduplication.
+    Uses a condensed key: strip punctuation, remove single-char initials,
+    join remaining name parts WITHOUT spaces, then sort alphabetically.
+    
+    Examples:
+      'P.K. Sekar Babu'  → 'babusekar'  (initials stripped, parts joined+sorted)
+      'Sekarbabu. P.K'   → 'sekarbabu'  (initials stripped, single token)
+    
+    For these to match, we use BOTH this key AND a "contains" check in dedup.
+    """
+    # Remove dots, commas, extra spaces
+    clean = re.sub(r"[.,;:'\"\-]", " ", name.lower().strip())
+    clean = re.sub(r"\s+", " ", clean).strip()
+    
+    tokens = clean.split()
+    # Keep only name parts (2+ chars), drop single-letter initials
+    name_parts = [t for t in tokens if len(t) > 1]
+    
+    # Sort and join without spaces → "condensed" form
+    return "".join(sorted(name_parts))
+
+
+def _names_match(name_a: str, name_b: str) -> bool:
+    """
+    Check if two candidate names refer to the same person.
+    Handles: 'P.K. Sekar Babu' vs 'Sekarbabu. P.K'
+    """
+    key_a = _normalize_name_key(name_a)
+    key_b = _normalize_name_key(name_b)
+    
+    # Exact normalized match
+    if key_a == key_b:
+        return True
+    
+    # One contains the other (handles "sekarbabu" vs "babusekar" → no)
+    # But handles "senthilbalaji" vs "balajisenthil" → no
+    # Better: check if one condensed form is a substring of the other
+    if key_a in key_b or key_b in key_a:
+        return True
+    
+    # Sort the characters themselves for anagram-like matching
+    # "babusekar" sorted = "aabbeksru" vs "sekarbabu" sorted = "aabbeksru" ✓
+    if sorted(key_a) == sorted(key_b):
+        return True
+    
+    return False
+
 
 def validate_candidate(candidate: dict) -> bool:
     """Validate that a candidate has required fields and valid location."""
     required = ["name", "party", "constituencyId", "districtId"]
-    for field in required:
-        if not candidate.get(field):
-            return False
+    if not all(candidate.get(f) for f in required):
+        return False
 
     if candidate["districtId"] not in VALID_DISTRICTS:
-        # Try to match by name
         dist_id = DISTRICT_NAME_TO_ID.get(candidate["districtId"].lower())
         if dist_id:
             candidate["districtId"] = dist_id
@@ -628,7 +600,6 @@ def validate_candidate(candidate: dict) -> bool:
             return False
 
     if candidate["constituencyId"] not in VALID_CONSTITUENCIES:
-        # Try to match by name
         con_id = _match_constituency(candidate["constituencyId"])
         if con_id:
             candidate["constituencyId"] = con_id
@@ -638,12 +609,113 @@ def validate_candidate(candidate: dict) -> bool:
     return True
 
 
+def _candidate_quality_score(c: dict) -> int:
+    """Score a candidate entry by how much useful data it has."""
+    score = 0
+    if c.get("nameTamil"):
+        score += 3
+    if c.get("age", 0) > 0:
+        score += 2
+    if c.get("declaredAssets", 0) > 0:
+        score += 1
+    if c.get("pendingCriminalCases", 0) > 0:
+        score += 1
+    if c.get("education"):
+        score += 1
+    if c.get("localIssues"):
+        score += len(c["localIssues"])
+    if c.get("source") == "official":
+        score += 2
+    return score
+
+
+def _merge_into(target: dict, source: dict):
+    """
+    Fill EMPTY fields in target from source. Never overwrite existing data.
+    This ensures profile data (assets, cases, age, etc.) is populated once
+    and preserved across subsequent pipeline runs.
+    """
+    # Profile fields — only fill if target is empty/zero
+    if source.get("declaredAssets", 0) > 0 and target.get("declaredAssets", 0) == 0:
+        target["declaredAssets"] = source["declaredAssets"]
+    if source.get("pendingCriminalCases", 0) > 0 and target.get("pendingCriminalCases", 0) == 0:
+        target["pendingCriminalCases"] = source["pendingCriminalCases"]
+    if source.get("age", 0) > 0 and target.get("age", 0) == 0:
+        target["age"] = source["age"]
+    if source.get("education") and not target.get("education"):
+        target["education"] = source["education"]
+    if source.get("nameTamil") and not target.get("nameTamil"):
+        target["nameTamil"] = source["nameTamil"]
+    if source.get("localIssues") and not target.get("localIssues"):
+        target["localIssues"] = source["localIssues"]
+    # Source tag — "official" always wins
+    if source.get("source") == "official":
+        target["source"] = "official"
+
+
+def dedup_existing(candidates: list[dict]) -> list[dict]:
+    """
+    Remove duplicate candidates from existing data.
+    Groups by (constituency, party) then pairwise fuzzy-matches names.
+    Merges data from duplicates into the highest-quality entry.
+    """
+    # Group by (constituency, party)
+    groups: dict[tuple, list[int]] = {}
+    for i, c in enumerate(candidates):
+        key = (c.get("constituencyId", ""), c.get("party", ""))
+        groups.setdefault(key, []).append(i)
+
+    to_remove = set()
+    merge_count = 0
+
+    for key, indices in groups.items():
+        if len(indices) <= 1:
+            continue
+
+        # Pairwise compare names within the same party+constituency
+        merged_sets: list[set[int]] = []
+        for i in range(len(indices)):
+            if indices[i] in to_remove:
+                continue
+            current_set = {indices[i]}
+            for j in range(i + 1, len(indices)):
+                if indices[j] in to_remove:
+                    continue
+                if _names_match(candidates[indices[i]]["name"], candidates[indices[j]]["name"]):
+                    current_set.add(indices[j])
+            if len(current_set) > 1:
+                merged_sets.append(current_set)
+
+        for group in merged_sets:
+            # Pick the best entry as keeper
+            scored = [(idx, _candidate_quality_score(candidates[idx])) for idx in group]
+            scored.sort(key=lambda x: x[1], reverse=True)
+            keeper_idx = scored[0][0]
+
+            for idx, _ in scored[1:]:
+                _merge_into(candidates[keeper_idx], candidates[idx])
+                to_remove.add(idx)
+                merge_count += 1
+
+            candidates[keeper_idx]["lastUpdated"] = datetime.now().strftime("%Y-%m-%d")
+
+    if merge_count > 0:
+        result = [c for i, c in enumerate(candidates) if i not in to_remove]
+        print(f"  Dedup: merged {merge_count} duplicates → {len(result)} unique candidates")
+        return result
+    else:
+        print("  Dedup: no duplicates found")
+
+    return candidates
+
+
 def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[dict]:
-    """Merge new candidates into existing data. Avoid duplicates."""
-    existing_keys = {
-        (c["name"].lower().strip(), c["constituencyId"]): i
-        for i, c in enumerate(existing)
-    }
+    """Merge new candidates into existing data using fuzzy name matching."""
+    # Build indices by (constituency, party) for fast fuzzy lookup
+    group_index: dict[tuple, list[int]] = {}
+    for i, c in enumerate(existing):
+        key = (c.get("constituencyId", ""), c.get("party", ""))
+        group_index.setdefault(key, []).append(i)
 
     today = datetime.now().strftime("%Y-%m-%d")
     added = 0
@@ -653,49 +725,43 @@ def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[d
         if not validate_candidate(nc):
             continue
 
-        key = (nc["name"].lower().strip(), nc["constituencyId"])
         source = nc.get("source", "news")
+        group_key = (nc["constituencyId"], nc.get("party", ""))
 
-        candidate = {
-            "id": f"candidate-auto-{len(existing) + added + 1:04d}",
-            "name": nc["name"],
-            "nameTamil": nc.get("nameTamil", ""),
-            "party": nc["party"],
-            "partyColor": PARTY_COLORS.get(nc["party"], "#888888"),
-            "constituencyId": nc["constituencyId"],
-            "districtId": nc["districtId"],
-            "photo": None,
-            "source": source,
-            "declaredAssets": nc.get("declaredAssets", 0),
-            "pendingCriminalCases": nc.get("pendingCriminalCases", 0),
-            "localIssues": nc.get("localIssues", []),
-            "education": nc.get("education", ""),
-            "age": nc.get("age", 0),
-            "lastUpdated": today,
-        }
+        # Search for fuzzy name match within same constituency+party
+        match_idx = None
+        for idx in group_index.get(group_key, []):
+            if _names_match(nc["name"], existing[idx]["name"]):
+                match_idx = idx
+                break
 
-        if key in existing_keys:
-            idx = existing_keys[key]
-            # Update with new data (prefer non-zero values)
-            if candidate["declaredAssets"] > 0:
-                existing[idx]["declaredAssets"] = candidate["declaredAssets"]
-            if candidate["pendingCriminalCases"] > 0:
-                existing[idx]["pendingCriminalCases"] = candidate["pendingCriminalCases"]
-            if candidate["localIssues"]:
-                merged_issues = list(set(existing[idx].get("localIssues", []) + candidate["localIssues"]))
-                existing[idx]["localIssues"] = merged_issues
-            if candidate["education"] and not existing[idx].get("education"):
-                existing[idx]["education"] = candidate["education"]
-            # Upgrade source from "news" to "official" if we have verified data
-            if source == "official":
-                existing[idx]["source"] = "official"
-            existing[idx]["lastUpdated"] = today
+        if match_idx is not None:
+            _merge_into(existing[match_idx], nc)
+            existing[match_idx]["lastUpdated"] = today
             updated += 1
         else:
+            candidate = {
+                "id": f"candidate-auto-{len(existing) + added + 1:04d}",
+                "name": nc["name"],
+                "nameTamil": nc.get("nameTamil", ""),
+                "party": nc["party"],
+                "partyColor": PARTY_COLORS.get(nc["party"], "#888888"),
+                "constituencyId": nc["constituencyId"],
+                "districtId": nc["districtId"],
+                "photo": None,
+                "source": source,
+                "declaredAssets": nc.get("declaredAssets", 0),
+                "pendingCriminalCases": nc.get("pendingCriminalCases", 0),
+                "localIssues": nc.get("localIssues", []),
+                "education": nc.get("education", ""),
+                "age": nc.get("age", 0),
+                "lastUpdated": today,
+            }
             existing.append(candidate)
+            group_index.setdefault(group_key, []).append(len(existing) - 1)
             added += 1
 
-    print(f"  Added {added} new candidates, updated {updated} existing")
+    print(f"  Added {added} new, updated {updated} existing")
     return existing
 
 
@@ -704,75 +770,70 @@ def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[d
 # ══════════════════════════════════════════════════════
 
 def main():
+    args = sys.argv[1:]
+    skip_news = "--skip-news" in args
+    skip_profiles = "--skip-profiles" in args
+
     print("=" * 60)
-    print("  Know Your Leader — Data Update Pipeline v2")
+    print("  Know Your Leader — Data Update Pipeline v2 (2026 Ready)")
     print("=" * 60)
     print()
 
-    # ── Step 1: Load locations ────────────────────────
+    # ── Step 1 ──
     print("[1/5] Loading district/constituency data...")
     load_valid_locations()
-    print(f"  {len(VALID_DISTRICTS)} districts, {len(VALID_CONSTITUENCIES)} constituencies")
+    print(f"  {len(VALID_DISTRICTS)} districts, {len(VALID_CONSTITUENCIES)} constituencies\n")
+
+    # ── Step 2 ──
+    print("[2/5] Scraping MyNeta.info for ECI data...")
+    myneta_candidates = scrape_myneta_data(fetch_profiles=not skip_profiles)
     print()
 
-    # ── Step 2: Scrape MyNeta.info for incumbents ─────
-    print("[2/5] Scraping MyNeta.info for incumbent ECI data...")
-    myneta_candidates = scrape_myneta_incumbents()
-    print()
-
-    # ── Step 3: Fetch RSS news feeds ──────────────────
-    print("[3/5] Fetching RSS news feeds...")
-    articles = fetch_articles()
-    print()
-
-    # ── Step 4: Extract from news (LLM or rules) ─────
-    print("[4/5] Extracting candidate data from news...")
+    # ── Step 3 & 4 ──
     news_candidates = []
+    if not skip_news:
+        print("[3/5] Fetching RSS news feeds...")
+        articles = fetch_articles()
+        print()
 
-    # Try Gemini first (best free option: 5 RPM)
-    if GEMINI_API_KEY:
-        news_candidates = extract_via_gemini(articles)
-
-    # Fallback to OpenRouter if Gemini didn't work
-    if not news_candidates and OPENROUTER_API_KEY:
+        print("[4/5] Extracting candidate data from news...")
         news_candidates = extract_via_openrouter(articles)
+        if not news_candidates and articles:
+            news_candidates = extract_via_rules(articles)
+        print(f"  Total from news: {len(news_candidates)} candidates\n")
+    else:
+        print("[3/5] Skipping news feeds (--skip-news)\n")
+        print("[4/5] Skipping news extraction\n")
 
-    # Last resort: rule-based extraction (always works, no API)
-    if not news_candidates and articles:
-        news_candidates = extract_via_rules(articles)
-
-    print(f"  Total from news: {len(news_candidates)} candidates")
-    print()
-
-    # ── Step 5: Merge and save ────────────────────────
-    print("[5/5] Merging and saving...")
+    # ── Step 5 ──
+    print("[5/5] Deduplicating, merging and saving...")
     with open(CANDIDATES_FILE, "r", encoding="utf-8") as f:
         existing = json.load(f)
 
+    # First, deduplicate existing data
+    existing = dedup_existing(existing)
+
+    # Then merge new candidates
     all_new = myneta_candidates + news_candidates
     merged = merge_candidates(existing, all_new)
 
     with open(CANDIDATES_FILE, "w", encoding="utf-8") as f:
         json.dump(merged, f, indent=2, ensure_ascii=False)
 
-    print(f"  Total candidates in database: {len(merged)}")
-    print()
+    print(f"  Total candidates in database: {len(merged)}\n")
 
-    # Summary
+    # ── Summary ──
     print("─" * 60)
     print("  Pipeline Summary:")
-    print(f"  • MyNeta incumbents scraped: {len(myneta_candidates)}")
-    print(f"  • News candidates extracted: {len(news_candidates)}")
-    print(f"  • LLM used: {'Gemini' if GEMINI_API_KEY and news_candidates else 'OpenRouter' if news_candidates else 'Rule-based (no API)'}")
-    print(f"  • Database total: {len(merged)}")
-    if not GEMINI_API_KEY:
+    print(f"  • MyNeta ECI profiles: {len(myneta_candidates)}")
+    print(f"  • News candidates:     {len(news_candidates)}")
+    print(f"  • Database total:      {len(merged)}")
+    if not OPENROUTER_API_KEY and not skip_news:
         print()
-        print("  💡 TIP: Get a FREE Gemini API key for better extraction:")
-        print("     https://aistudio.google.com/apikey")
-        print("     Then set: GEMINI_API_KEY=your_key_here")
+        print("  💡 TIP: Set OPENROUTER_API_KEY for better news extraction")
+        print("     Free at: https://openrouter.ai")
     print("─" * 60)
-    print()
-    print("Done!")
+    print("\n✅ Done!")
 
 
 if __name__ == "__main__":

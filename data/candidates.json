@@ -9,7 +9,7 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 290000000,
+    "declaredAssets": 290777932,
     "pendingCriminalCases": 22,
     "localIssues": [
       "Water",
@@ -18,7 +18,7 @@
     ],
     "education": "B.Com",
     "age": 47,
-    "lastUpdated": "2026-02-25"
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-002",
@@ -92,9 +92,9 @@
     "constituencyId": "coimbatore-south",
     "districtId": "coimbatore",
     "photo": null,
-    "source": "news",
+    "source": "official",
     "declaredAssets": 15000000,
-    "pendingCriminalCases": 0,
+    "pendingCriminalCases": 2,
     "localIssues": [
       "Women Safety",
       "Healthcare",
@@ -102,7 +102,7 @@
     ],
     "education": "B.L.",
     "age": 53,
-    "lastUpdated": "2026-02-17"
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-006",
@@ -114,8 +114,8 @@
     "districtId": "thiruvarur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 18000000,
-    "pendingCriminalCases": 0,
+    "declaredAssets": 418159401,
+    "pendingCriminalCases": 2,
     "localIssues": [
       "Agriculture",
       "Water",
@@ -123,7 +123,7 @@
     ],
     "education": "B.E.",
     "age": 44,
-    "lastUpdated": "2026-02-20"
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-007",
@@ -156,8 +156,8 @@
     "districtId": "karur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 65000000,
-    "pendingCriminalCases": 2,
+    "declaredAssets": 29270169,
+    "pendingCriminalCases": 30,
     "localIssues": [
       "Transport",
       "Employment",
@@ -165,7 +165,7 @@
     ],
     "education": "B.E.",
     "age": 50,
-    "lastUpdated": "2026-02-20"
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-009",
@@ -324,8 +324,8 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 31000000,
-    "pendingCriminalCases": 0,
+    "declaredAssets": 21054762,
+    "pendingCriminalCases": 25,
     "localIssues": [
       "Housing",
       "Water",
@@ -333,7 +333,7 @@
     ],
     "education": "B.Com",
     "age": 56,
-    "lastUpdated": "2026-02-20"
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-017",
@@ -408,8 +408,8 @@
     "districtId": "kancheepuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 41000000,
-    "pendingCriminalCases": 0,
+    "declaredAssets": 275457744,
+    "pendingCriminalCases": 3,
     "localIssues": [
       "Infrastructure",
       "Employment",
@@ -417,7 +417,7 @@
     ],
     "education": "B.L.",
     "age": 52,
-    "lastUpdated": "2026-02-20"
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-021",
@@ -639,12 +639,12 @@
     "districtId": "pudukkottai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 13459578,
     "pendingCriminalCases": 29,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0033",
@@ -656,12 +656,12 @@
     "districtId": "tenkasi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 160000000,
+    "declaredAssets": 169567880,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0035",
@@ -677,8 +677,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Doctorate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 56,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0037",
@@ -690,12 +690,12 @@
     "districtId": "tiruvallur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 13801888,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 58,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0039",
@@ -707,12 +707,12 @@
     "districtId": "tirupathur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 38635845,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0041",
@@ -728,8 +728,8 @@
     "pendingCriminalCases": 10,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0043",
@@ -741,12 +741,12 @@
     "districtId": "theni",
     "photo": null,
     "source": "official",
-    "declaredAssets": 150000000,
+    "declaredAssets": 155530084,
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 67,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0045",
@@ -758,12 +758,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 2112099843,
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 68,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0047",
@@ -775,12 +775,12 @@
     "districtId": "ranipet",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 11574232,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 57,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0049",
@@ -792,12 +792,12 @@
     "districtId": "tiruvannamalai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 140000000,
+    "declaredAssets": 148950984,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 63,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0051",
@@ -813,8 +813,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 40,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0053",
@@ -826,12 +826,12 @@
     "districtId": "karur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 38329734,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 50,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0055",
@@ -843,12 +843,12 @@
     "districtId": "ranipet",
     "photo": null,
     "source": "official",
-    "declaredAssets": 130000000,
+    "declaredAssets": 131771131,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 42,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0057",
@@ -864,8 +864,8 @@
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 73,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0059",
@@ -877,12 +877,12 @@
     "districtId": "dindigul",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 76394882,
     "pendingCriminalCases": 12,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 67,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0061",
@@ -894,12 +894,12 @@
     "districtId": "tiruvallur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 110000000,
+    "declaredAssets": 113357880,
     "pendingCriminalCases": 29,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0063",
@@ -911,12 +911,12 @@
     "districtId": "tiruppur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 40000000,
+    "declaredAssets": 49443148,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 69,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0065",
@@ -932,8 +932,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0067",
@@ -945,12 +945,12 @@
     "districtId": "erode",
     "photo": null,
     "source": "official",
-    "declaredAssets": 180000000,
+    "declaredAssets": 181870779,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 64,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0069",
@@ -962,12 +962,12 @@
     "districtId": "erode",
     "photo": null,
     "source": "official",
-    "declaredAssets": 2500000,
+    "declaredAssets": 2548917,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 41,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0071",
@@ -983,8 +983,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0073",
@@ -996,12 +996,12 @@
     "districtId": "chengalpattu",
     "photo": null,
     "source": "official",
-    "declaredAssets": 410000000,
+    "declaredAssets": 414445408,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Others",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 47,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0075",
@@ -1013,12 +1013,12 @@
     "districtId": "cuddalore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 60000000,
+    "declaredAssets": 62079604,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 60,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0077",
@@ -1030,29 +1030,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 120000000,
+    "declaredAssets": 127857798,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
-  },
-  {
-    "id": "candidate-auto-0079",
-    "name": "Vanathi Srinivasan",
-    "nameTamil": "",
-    "party": "BJP",
-    "partyColor": "#FF6B00",
-    "constituencyId": "coimbatore-south",
-    "districtId": "coimbatore",
-    "photo": null,
-    "source": "official",
-    "declaredAssets": 0,
-    "pendingCriminalCases": 2,
-    "localIssues": [],
-    "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 63,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0081",
@@ -1064,12 +1047,12 @@
     "districtId": "the-nilgiris",
     "photo": null,
     "source": "official",
-    "declaredAssets": 100000000,
+    "declaredAssets": 105441336,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 69,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0083",
@@ -1081,12 +1064,12 @@
     "districtId": "theni",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 73891559,
     "pendingCriminalCases": 7,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 72,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0085",
@@ -1098,12 +1081,12 @@
     "districtId": "tiruppur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 40000000,
+    "declaredAssets": 41707053,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0087",
@@ -1119,8 +1102,8 @@
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0089",
@@ -1132,12 +1115,12 @@
     "districtId": "dindigul",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 77539989,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 72,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0091",
@@ -1149,12 +1132,12 @@
     "districtId": "erode",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 24039279,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 45,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0093",
@@ -1166,12 +1149,12 @@
     "districtId": "kallakurichi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 5600000,
+    "declaredAssets": 5631971,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "5th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 56,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0095",
@@ -1187,8 +1170,8 @@
     "pendingCriminalCases": 29,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 65,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0097",
@@ -1200,12 +1183,12 @@
     "districtId": "erode",
     "photo": null,
     "source": "official",
-    "declaredAssets": 120000000,
+    "declaredAssets": 123914561,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 73,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0099",
@@ -1217,12 +1200,12 @@
     "districtId": "the-nilgiris",
     "photo": null,
     "source": "official",
-    "declaredAssets": 3100000,
+    "declaredAssets": 3110871,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 48,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0101",
@@ -1234,29 +1217,12 @@
     "districtId": "tiruvallur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 74880993,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
-  },
-  {
-    "id": "candidate-auto-0103",
-    "name": "Sekarbabu. P.K",
-    "nameTamil": "",
-    "party": "DMK",
-    "partyColor": "#E31E24",
-    "constituencyId": "harbour",
-    "districtId": "chennai",
-    "photo": null,
-    "source": "official",
-    "declaredAssets": 20000000,
-    "pendingCriminalCases": 25,
-    "localIssues": [],
-    "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 60,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0105",
@@ -1268,12 +1234,12 @@
     "districtId": "krishnagiri",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 78553505,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 56,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0107",
@@ -1285,12 +1251,12 @@
     "districtId": "ariyalur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 120000000,
+    "declaredAssets": 126349042,
     "pendingCriminalCases": 21,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 43,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0109",
@@ -1306,8 +1272,8 @@
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 64,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0111",
@@ -1319,12 +1285,12 @@
     "districtId": "tenkasi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 31480837,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 38,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0113",
@@ -1340,8 +1306,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 43,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0115",
@@ -1353,12 +1319,12 @@
     "districtId": "kancheepuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 71455672,
     "pendingCriminalCases": 5,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0117",
@@ -1370,29 +1336,12 @@
     "districtId": "sivagangai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 50000000,
+    "declaredAssets": 53887265,
     "pendingCriminalCases": 9,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
-  },
-  {
-    "id": "candidate-auto-0119",
-    "name": "Senthilbalaji V",
-    "nameTamil": "",
-    "party": "DMK",
-    "partyColor": "#E31E24",
-    "constituencyId": "karur",
-    "districtId": "karur",
-    "photo": null,
-    "source": "official",
-    "declaredAssets": 20000000,
-    "pendingCriminalCases": 30,
-    "localIssues": [],
-    "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 58,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0121",
@@ -1404,12 +1353,12 @@
     "districtId": "cuddalore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 9500000,
+    "declaredAssets": 9562905,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Others",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 55,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0123",
@@ -1421,12 +1370,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 36589365,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 59,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0125",
@@ -1442,8 +1391,8 @@
     "pendingCriminalCases": 52,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 46,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0127",
@@ -1455,12 +1404,12 @@
     "districtId": "tiruvannamalai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 34967503,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 67,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0129",
@@ -1472,12 +1421,12 @@
     "districtId": "vellore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 13351510,
     "pendingCriminalCases": 2,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0131",
@@ -1493,8 +1442,8 @@
     "pendingCriminalCases": 2,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0133",
@@ -1506,12 +1455,12 @@
     "districtId": "krishnagiri",
     "photo": null,
     "source": "official",
-    "declaredAssets": 3600000,
+    "declaredAssets": 3612824,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 68,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0135",
@@ -1523,12 +1472,12 @@
     "districtId": "karur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 6400000,
+    "declaredAssets": 6436018,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 50,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0137",
@@ -1544,8 +1493,8 @@
     "pendingCriminalCases": 6,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0139",
@@ -1557,12 +1506,12 @@
     "districtId": "thanjavur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 410000000,
+    "declaredAssets": 417302510,
     "pendingCriminalCases": 6,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 72,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0141",
@@ -1574,12 +1523,12 @@
     "districtId": "cuddalore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 100000000,
+    "declaredAssets": 109345490,
     "pendingCriminalCases": 12,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 63,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0143",
@@ -1591,12 +1540,12 @@
     "districtId": "tiruchirappalli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 17290507,
     "pendingCriminalCases": 12,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 56,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0145",
@@ -1612,8 +1561,8 @@
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "Doctorate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 55,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0147",
@@ -1625,12 +1574,12 @@
     "districtId": "madurai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 110000000,
+    "declaredAssets": 113569676,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 62,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0149",
@@ -1642,12 +1591,12 @@
     "districtId": "madurai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 130000000,
+    "declaredAssets": 135925170,
     "pendingCriminalCases": 12,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 65,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0151",
@@ -1659,12 +1608,12 @@
     "districtId": "madurai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 60000000,
+    "declaredAssets": 64904706,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 68,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0153",
@@ -1676,12 +1625,12 @@
     "districtId": "sivagangai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 21845568,
     "pendingCriminalCases": 8,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 44,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0155",
@@ -1697,25 +1646,8 @@
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
-  },
-  {
-    "id": "candidate-auto-0157",
-    "name": "Rajaa T R B",
-    "nameTamil": "",
-    "party": "DMK",
-    "partyColor": "#E31E24",
-    "constituencyId": "mannargudi",
-    "districtId": "thiruvarur",
-    "photo": null,
-    "source": "official",
-    "declaredAssets": 410000000,
-    "pendingCriminalCases": 2,
-    "localIssues": [],
-    "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0159",
@@ -1727,12 +1659,12 @@
     "districtId": "mayiladuthurai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 80000000,
+    "declaredAssets": 82782454,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0096",
@@ -1748,8 +1680,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 44,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0098",
@@ -1761,12 +1693,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 1500000,
+    "declaredAssets": 1580302,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 45,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0100",
@@ -1782,8 +1714,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 67,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0102",
@@ -1795,12 +1727,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 11246806,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 44,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0104",
@@ -1812,12 +1744,12 @@
     "districtId": "tiruvannamalai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 40000000,
+    "declaredAssets": 44963590,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 52,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0106",
@@ -1829,12 +1761,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 50000000,
+    "declaredAssets": 51251260,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 69,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0108",
@@ -1846,12 +1778,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 80000000,
+    "declaredAssets": 88875339,
     "pendingCriminalCases": 47,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 68,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0110",
@@ -1867,8 +1799,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0112",
@@ -1884,8 +1816,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 47,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0114",
@@ -1897,12 +1829,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 10470989,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 62,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0116",
@@ -1914,12 +1846,12 @@
     "districtId": "salem",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 27812072,
     "pendingCriminalCases": 2,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0118",
@@ -1935,8 +1867,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 76,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0120",
@@ -1948,12 +1880,12 @@
     "districtId": "ramanathapuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 14007776,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 72,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0122",
@@ -1965,12 +1897,12 @@
     "districtId": "tiruchirappalli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 6700000,
+    "declaredAssets": 6785000,
     "pendingCriminalCases": 24,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 60,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0124",
@@ -1986,8 +1918,8 @@
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 39,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0126",
@@ -1999,12 +1931,12 @@
     "districtId": "kanyakumari",
     "photo": null,
     "source": "official",
-    "declaredAssets": 5000000,
+    "declaredAssets": 5050000,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 76,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0128",
@@ -2016,12 +1948,12 @@
     "districtId": "namakkal",
     "photo": null,
     "source": "official",
-    "declaredAssets": 270000000,
+    "declaredAssets": 275560913,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 55,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0130",
@@ -2033,12 +1965,12 @@
     "districtId": "dindigul",
     "photo": null,
     "source": "official",
-    "declaredAssets": 40000000,
+    "declaredAssets": 46267279,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 71,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0132",
@@ -2054,8 +1986,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 59,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0134",
@@ -2067,12 +1999,12 @@
     "districtId": "dindigul",
     "photo": null,
     "source": "official",
-    "declaredAssets": 90000000,
+    "declaredAssets": 94867797,
     "pendingCriminalCases": 6,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 59,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0136",
@@ -2084,12 +2016,12 @@
     "districtId": "salem",
     "photo": null,
     "source": "official",
-    "declaredAssets": 40000000,
+    "declaredAssets": 49871511,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 43,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0138",
@@ -2105,8 +2037,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 66,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0140",
@@ -2118,12 +2050,12 @@
     "districtId": "thoothukudi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 14258275,
     "pendingCriminalCases": 10,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 50,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0142",
@@ -2135,12 +2067,12 @@
     "districtId": "kanyakumari",
     "photo": null,
     "source": "official",
-    "declaredAssets": 2300000,
+    "declaredAssets": 2339869,
     "pendingCriminalCases": 29,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 53,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0144",
@@ -2152,12 +2084,12 @@
     "districtId": "dindigul",
     "photo": null,
     "source": "official",
-    "declaredAssets": 80000000,
+    "declaredAssets": 80615229,
     "pendingCriminalCases": 14,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 42,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0146",
@@ -2169,12 +2101,12 @@
     "districtId": "tirunelveli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 22718035,
     "pendingCriminalCases": 26,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0148",
@@ -2190,8 +2122,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 59,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0150",
@@ -2203,12 +2135,12 @@
     "districtId": "chengalpattu",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 10008315,
     "pendingCriminalCases": 12,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 62,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0152",
@@ -2224,8 +2156,8 @@
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Doctorate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0154",
@@ -2237,12 +2169,12 @@
     "districtId": "ramanathapuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 18040919,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "5th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0156",
@@ -2254,12 +2186,12 @@
     "districtId": "thanjavur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 18232530,
     "pendingCriminalCases": 6,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 63,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0158",
@@ -2271,12 +2203,12 @@
     "districtId": "dharmapuri",
     "photo": null,
     "source": "official",
-    "declaredAssets": 7300000,
+    "declaredAssets": 7323252,
     "pendingCriminalCases": 8,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 69,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0160",
@@ -2292,8 +2224,8 @@
     "pendingCriminalCases": 6,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 46,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0162",
@@ -2305,12 +2237,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 12891842,
     "pendingCriminalCases": 10,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0164",
@@ -2322,12 +2254,12 @@
     "districtId": "thanjavur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 60000000,
+    "declaredAssets": 61020192,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 63,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0166",
@@ -2343,8 +2275,8 @@
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0168",
@@ -2356,12 +2288,12 @@
     "districtId": "erode",
     "photo": null,
     "source": "official",
-    "declaredAssets": 80000000,
+    "declaredAssets": 87219470,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Others",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 41,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0170",
@@ -2373,12 +2305,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 300000000,
+    "declaredAssets": 308896045,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Doctorate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 67,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0172",
@@ -2390,12 +2322,12 @@
     "districtId": "tiruvallur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 6600000,
+    "declaredAssets": 6671323,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 48,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0174",
@@ -2407,12 +2339,12 @@
     "districtId": "tiruvallur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 130000000,
+    "declaredAssets": 131317837,
     "pendingCriminalCases": 8,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 55,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0176",
@@ -2428,8 +2360,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 44,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0178",
@@ -2441,12 +2373,12 @@
     "districtId": "tirunelveli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 25354570,
     "pendingCriminalCases": 7,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 69,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0180",
@@ -2458,12 +2390,12 @@
     "districtId": "ramanathapuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 10260895,
     "pendingCriminalCases": 5,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0182",
@@ -2479,8 +2411,8 @@
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 75,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0184",
@@ -2492,12 +2424,12 @@
     "districtId": "namakkal",
     "photo": null,
     "source": "official",
-    "declaredAssets": 50000000,
+    "declaredAssets": 52243724,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 36,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0186",
@@ -2509,12 +2441,12 @@
     "districtId": "villupuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 150000000,
+    "declaredAssets": 152201957,
     "pendingCriminalCases": 34,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 43,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0188",
@@ -2526,12 +2458,12 @@
     "districtId": "salem",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 26063861,
     "pendingCriminalCases": 16,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0190",
@@ -2543,12 +2475,12 @@
     "districtId": "salem",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 35609566,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 60,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0192",
@@ -2564,8 +2496,8 @@
     "pendingCriminalCases": 7,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0194",
@@ -2577,12 +2509,12 @@
     "districtId": "tenkasi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 60000000,
+    "declaredAssets": 63156370,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 35,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0196",
@@ -2594,12 +2526,12 @@
     "districtId": "kallakurichi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 80000000,
+    "declaredAssets": 88192627,
     "pendingCriminalCases": 38,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 57,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0198",
@@ -2615,8 +2547,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0200",
@@ -2628,12 +2560,12 @@
     "districtId": "virudhunagar",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 18072721,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 49,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0202",
@@ -2645,12 +2577,12 @@
     "districtId": "namakkal",
     "photo": null,
     "source": "official",
-    "declaredAssets": 7600000,
+    "declaredAssets": 7665424,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 69,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0204",
@@ -2662,12 +2594,12 @@
     "districtId": "chengalpattu",
     "photo": null,
     "source": "official",
-    "declaredAssets": 280000000,
+    "declaredAssets": 285905344,
     "pendingCriminalCases": 22,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0206",
@@ -2683,8 +2615,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 47,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0208",
@@ -2696,12 +2628,12 @@
     "districtId": "mayiladuthurai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 20890000,
     "pendingCriminalCases": 11,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 66,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0210",
@@ -2713,12 +2645,12 @@
     "districtId": "sivagangai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 70000000,
+    "declaredAssets": 72008344,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 53,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0212",
@@ -2734,25 +2666,8 @@
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
-  },
-  {
-    "id": "candidate-auto-0214",
-    "name": "Selvaperunthagai",
-    "nameTamil": "",
-    "party": "INC",
-    "partyColor": "#19AAED",
-    "constituencyId": "sriperumbudur",
-    "districtId": "kancheepuram",
-    "photo": null,
-    "source": "official",
-    "declaredAssets": 270000000,
-    "pendingCriminalCases": 3,
-    "localIssues": [],
-    "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 62,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0216",
@@ -2764,12 +2679,12 @@
     "districtId": "tiruchirappalli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 90000000,
+    "declaredAssets": 90742428,
     "pendingCriminalCases": 7,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0218",
@@ -2781,12 +2696,12 @@
     "districtId": "virudhunagar",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 11024579,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 43,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0220",
@@ -2798,12 +2713,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 40000000,
+    "declaredAssets": 43893608,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 62,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0222",
@@ -2819,8 +2734,8 @@
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 64,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0224",
@@ -2832,12 +2747,12 @@
     "districtId": "thanjavur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 9600000,
+    "declaredAssets": 9607836,
     "pendingCriminalCases": 5,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 57,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0226",
@@ -2849,12 +2764,12 @@
     "districtId": "pudukkottai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 150000000,
+    "declaredAssets": 153261761,
     "pendingCriminalCases": 23,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 70,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0228",
@@ -2866,12 +2781,12 @@
     "districtId": "chengalpattu",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 31099633,
     "pendingCriminalCases": 2,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 51,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0230",
@@ -2887,8 +2802,8 @@
     "pendingCriminalCases": 10,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 61,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0232",
@@ -2900,12 +2815,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 34408856,
     "pendingCriminalCases": 3,
     "localIssues": [],
     "education": "8th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 51,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0234",
@@ -2917,12 +2832,12 @@
     "districtId": "coimbatore",
     "photo": null,
     "source": "official",
-    "declaredAssets": 50000000,
+    "declaredAssets": 55931162,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 51,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0236",
@@ -2934,12 +2849,12 @@
     "districtId": "chennai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 11851770,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 41,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0238",
@@ -2951,12 +2866,12 @@
     "districtId": "tiruchirappalli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 6300000,
+    "declaredAssets": 6389252,
     "pendingCriminalCases": 13,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 36,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0240",
@@ -2972,8 +2887,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 51,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0242",
@@ -2985,12 +2900,12 @@
     "districtId": "thoothukudi",
     "photo": null,
     "source": "official",
-    "declaredAssets": 50000000,
+    "declaredAssets": 52870844,
     "pendingCriminalCases": 16,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 68,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0244",
@@ -3006,8 +2921,8 @@
     "pendingCriminalCases": 2,
     "localIssues": [],
     "education": "Doctorate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 48,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0246",
@@ -3019,12 +2934,12 @@
     "districtId": "tiruchirappalli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 39391122,
     "pendingCriminalCases": 10,
     "localIssues": [],
     "education": "12th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 68,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0248",
@@ -3036,12 +2951,12 @@
     "districtId": "virudhunagar",
     "photo": null,
     "source": "official",
-    "declaredAssets": 110000000,
+    "declaredAssets": 118761867,
     "pendingCriminalCases": 7,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 54,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0250",
@@ -3053,12 +2968,12 @@
     "districtId": "tirunelveli",
     "photo": null,
     "source": "official",
-    "declaredAssets": 260000000,
+    "declaredAssets": 267772882,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 60,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0252",
@@ -3070,12 +2985,12 @@
     "districtId": "salem",
     "photo": null,
     "source": "official",
-    "declaredAssets": 10000000,
+    "declaredAssets": 19536484,
     "pendingCriminalCases": 5,
     "localIssues": [],
     "education": "10th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 45,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0254",
@@ -3087,12 +3002,12 @@
     "districtId": "tiruppur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 24287144,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "5th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 64,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0256",
@@ -3104,12 +3019,12 @@
     "districtId": "tiruppur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 25357510,
     "pendingCriminalCases": 4,
     "localIssues": [],
     "education": "5th Pass",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 64,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0258",
@@ -3125,8 +3040,8 @@
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 57,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0260",
@@ -3138,12 +3053,12 @@
     "districtId": "ramanathapuram",
     "photo": null,
     "source": "official",
-    "declaredAssets": 30000000,
+    "declaredAssets": 31130586,
     "pendingCriminalCases": 0,
     "localIssues": [],
     "education": "Graduate Professional",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 35,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0262",
@@ -3155,12 +3070,12 @@
     "districtId": "tiruvannamalai",
     "photo": null,
     "source": "official",
-    "declaredAssets": 230000000,
+    "declaredAssets": 233227340,
     "pendingCriminalCases": 7,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 71,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0264",
@@ -3172,12 +3087,12 @@
     "districtId": "the-nilgiris",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 21567308,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Post Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 59,
+    "lastUpdated": "2026-02-26"
   },
   {
     "id": "candidate-auto-0266",
@@ -3189,11 +3104,317 @@
     "districtId": "tiruppur",
     "photo": null,
     "source": "official",
-    "declaredAssets": 20000000,
+    "declaredAssets": 21233053,
     "pendingCriminalCases": 1,
     "localIssues": [],
     "education": "Graduate",
-    "age": 0,
-    "lastUpdated": "2026-02-25"
+    "age": 55,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0182",
+    "name": "Manikannan A J",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "ulundurpettai",
+    "districtId": "kallakurichi",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 0,
+    "pendingCriminalCases": 4,
+    "localIssues": [],
+    "education": "10th Pass",
+    "age": 56,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0184",
+    "name": "Ayyappan P",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "usilampatti",
+    "districtId": "madurai",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 5013217,
+    "pendingCriminalCases": 1,
+    "localIssues": [],
+    "education": "Graduate",
+    "age": 56,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0186",
+    "name": "T.M.Tamilselvam",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "uthangarai",
+    "districtId": "krishnagiri",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 4576885,
+    "pendingCriminalCases": 0,
+    "localIssues": [],
+    "education": "10th Pass",
+    "age": 47,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0188",
+    "name": "Sundar K",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "uthiramerur",
+    "districtId": "kancheepuram",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 0,
+    "pendingCriminalCases": 3,
+    "localIssues": [],
+    "education": "Graduate",
+    "age": 66,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0190",
+    "name": "Amulkandasami T K",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "valparai",
+    "districtId": "coimbatore",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 19754937,
+    "pendingCriminalCases": 0,
+    "localIssues": [],
+    "education": "10th Pass",
+    "age": 55,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0192",
+    "name": "G.Sendhil Kumar",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "vaniyambadi",
+    "districtId": "tirupathur",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 24029751,
+    "pendingCriminalCases": 1,
+    "localIssues": [],
+    "education": "Graduate Professional",
+    "age": 36,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0194",
+    "name": "Sadhan Thirumalaikumar, Doctor.T",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "vasudevanallur",
+    "districtId": "tenkasi",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 83285025,
+    "pendingCriminalCases": 1,
+    "localIssues": [],
+    "education": "Graduate Professional",
+    "age": 68,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0196",
+    "name": "Gandhirajan S",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "vedasandur",
+    "districtId": "dindigul",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 99325525,
+    "pendingCriminalCases": 2,
+    "localIssues": [],
+    "education": "Graduate Professional",
+    "age": 70,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0198",
+    "name": "Rajamuthu M",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "veerapandi",
+    "districtId": "salem",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 36450974,
+    "pendingCriminalCases": 0,
+    "localIssues": [],
+    "education": "Graduate",
+    "age": 52,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0200",
+    "name": "Jmh.Aassan Maulaana",
+    "nameTamil": "",
+    "party": "INC",
+    "partyColor": "#19AAED",
+    "constituencyId": "velachery",
+    "districtId": "chennai",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 117841833,
+    "pendingCriminalCases": 5,
+    "localIssues": [],
+    "education": "Post Graduate",
+    "age": 36,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0202",
+    "name": "Karthikeyan .P",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "vellore",
+    "districtId": "vellore",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 0,
+    "pendingCriminalCases": 4,
+    "localIssues": [],
+    "education": "5th Pass",
+    "age": 59,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0204",
+    "name": "K.P.Munusamy",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "veppanahalli",
+    "districtId": "krishnagiri",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 123538973,
+    "pendingCriminalCases": 0,
+    "localIssues": [],
+    "education": "Graduate Professional",
+    "age": 68,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0206",
+    "name": "Pugazhenthi N",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "vikravandi",
+    "districtId": "villupuram",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 5210805,
+    "pendingCriminalCases": 4,
+    "localIssues": [],
+    "education": "8th Pass",
+    "age": 66,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0208",
+    "name": "Vijayadharani S",
+    "nameTamil": "",
+    "party": "INC",
+    "partyColor": "#19AAED",
+    "constituencyId": "vilavancode",
+    "districtId": "kanyakumari",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 91153377,
+    "pendingCriminalCases": 8,
+    "localIssues": [],
+    "education": "Graduate Professional",
+    "age": 51,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0210",
+    "name": "A . Vetriazhagan",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "villivakkam",
+    "districtId": "chennai",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 232762681,
+    "pendingCriminalCases": 0,
+    "localIssues": [],
+    "education": "Post Graduate",
+    "age": 42,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0212",
+    "name": "Lakshmanan R",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "villupuram",
+    "districtId": "villupuram",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 0,
+    "pendingCriminalCases": 2,
+    "localIssues": [],
+    "education": "Graduate Professional",
+    "age": 49,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0214",
+    "name": "Seenivasan A.R.R",
+    "nameTamil": "",
+    "party": "DMK",
+    "partyColor": "#E31E24",
+    "constituencyId": "virudhunagar",
+    "districtId": "virudhunagar",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 9629516,
+    "pendingCriminalCases": 3,
+    "localIssues": [],
+    "education": "12th Pass",
+    "age": 64,
+    "lastUpdated": "2026-02-26"
+  },
+  {
+    "id": "candidate-auto-0216",
+    "name": "G. Chitra",
+    "nameTamil": "",
+    "party": "AIADMK",
+    "partyColor": "#006B3F",
+    "constituencyId": "yercaud",
+    "districtId": "salem",
+    "photo": null,
+    "source": "official",
+    "declaredAssets": 16904643,
+    "pendingCriminalCases": 0,
+    "localIssues": [],
+    "education": "5th Pass",
+    "age": 40,
+    "lastUpdated": "2026-02-26"
   }
 ]

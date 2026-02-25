@@ -1,7 +1,7 @@
 import MetricRing from "./MetricRing";
 import TrustBadge from "./TrustBadge";
 import IssueTag from "./IssueTag";
-import { User, Scale, AlertTriangle } from "lucide-react";
+import { User, AlertTriangle } from "lucide-react";
 import type { Candidate } from "@/lib/data";
 import { formatAssets } from "@/lib/data";
 
@@ -11,9 +11,19 @@ interface CandidateCardProps {
     maxCases: number;
 }
 
+/** Map party colors that have poor contrast on white to readable alternatives */
+function getReadablePartyColor(color: string): string {
+    const lowContrast: Record<string, string> = {
+        "#FFD700": "#B8860B", // PMK gold → dark goldenrod
+        "#ffd700": "#B8860B",
+    };
+    return lowContrast[color] || color;
+}
+
 export default function CandidateCard({ candidate, maxAssets, maxCases }: CandidateCardProps) {
     const isOfficial = candidate.source === "official";
     const cardClass = isOfficial ? "card" : "card-glass";
+    const readableColor = getReadablePartyColor(candidate.partyColor);
 
     return (
         <div className={`${cardClass} relative overflow-hidden p-4 sm:p-6 flex flex-col gap-3 sm:gap-4`}>
@@ -21,39 +31,40 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
             <div className="party-accent" style={{ background: candidate.partyColor }} />
 
             {/* Header: Name + Party + Badge */}
-            <div className="flex items-start justify-between gap-2 sm:gap-3 pt-1">
-                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                    <div
-                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: `${candidate.partyColor}12` }}
-                    >
-                        <User size={18} style={{ color: candidate.partyColor }} strokeWidth={1.8} className="sm:hidden" />
-                        <User size={20} style={{ color: candidate.partyColor }} strokeWidth={1.8} className="hidden sm:block" />
-                    </div>
-                    <div className="min-w-0">
-                        <h3 className="text-sm sm:text-base font-semibold leading-tight truncate">
-                            {candidate.name}
-                        </h3>
-                        <p className="text-tamil text-xs text-[var(--color-text-tertiary)] mt-0.5 truncate">
-                            {candidate.nameTamil}
-                        </p>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span
-                                className="text-xs font-semibold px-2 py-0.5 rounded-md"
-                                style={{
-                                    background: `${candidate.partyColor}12`,
-                                    color: candidate.partyColor,
-                                }}
-                            >
-                                {candidate.party}
-                            </span>
-                            <span className="text-xs text-[var(--color-text-tertiary)]">
-                                Age {candidate.age}
-                            </span>
+            <div className="pt-1">
+                <div className="flex items-start justify-between gap-2 mb-1">
+                    <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                        <div
+                            className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                            style={{ background: `${candidate.partyColor}12` }}
+                        >
+                            <User size={18} style={{ color: candidate.partyColor }} strokeWidth={1.8} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                            <h3 className="text-sm sm:text-base font-semibold leading-tight break-words">
+                                {candidate.name}
+                            </h3>
+                            <p className="text-tamil text-xs text-[var(--color-text-tertiary)] mt-0.5">
+                                {candidate.nameTamil}
+                            </p>
                         </div>
                     </div>
+                    <TrustBadge source={candidate.source} />
                 </div>
-                <TrustBadge source={candidate.source} />
+                <div className="flex items-center gap-2 ml-[50px]">
+                    <span
+                        className="text-xs font-semibold px-2 py-0.5 rounded-md"
+                        style={{
+                            background: `${candidate.partyColor}12`,
+                            color: readableColor,
+                        }}
+                    >
+                        {candidate.party}
+                    </span>
+                    <span className="text-xs text-[var(--color-text-tertiary)]">
+                        Age {candidate.age}
+                    </span>
+                </div>
             </div>
 
             {/* Education */}
@@ -63,14 +74,14 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
             </div>
 
             {/* Metric Rings */}
-            <div className="flex items-center justify-around py-2 border-t border-b border-[var(--color-border-light)]">
+            <div className="flex items-center justify-around py-3 border-t border-b border-[var(--color-border-light)] gap-2">
                 <MetricRing
                     value={candidate.declaredAssets}
                     max={maxAssets}
                     label="Declared Assets"
                     displayValue={formatAssets(candidate.declaredAssets)}
                     color="var(--color-accent-blue)"
-                    size={64}
+                    size={68}
                 />
                 <MetricRing
                     value={candidate.pendingCriminalCases}
@@ -78,7 +89,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     label="Criminal Cases"
                     displayValue={String(candidate.pendingCriminalCases)}
                     color={candidate.pendingCriminalCases > 0 ? "var(--color-accent-red)" : "var(--color-accent-green)"}
-                    size={64}
+                    size={68}
                 />
                 <MetricRing
                     value={candidate.localIssues.length}
@@ -86,7 +97,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     label="Issues Tracked"
                     displayValue={String(candidate.localIssues.length)}
                     color="var(--color-accent-amber)"
-                    size={64}
+                    size={68}
                 />
             </div>
 

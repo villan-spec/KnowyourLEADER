@@ -16,8 +16,12 @@ export default function MetricRing({ value, max, label, displayValue, color, siz
     const percentage = Math.min(value / max, 1);
     const offset = circumference - percentage * circumference;
 
+    // Scale font size based on ring size and text length
+    const baseFontSize = size * 0.17;
+    const fontSize = displayValue.length > 5 ? Math.min(baseFontSize, 11) : baseFontSize;
+
     return (
-        <div className="flex flex-col items-center gap-1.5">
+        <div className="flex flex-col items-center gap-1.5" style={{ minWidth: size }}>
             <div className="relative" style={{ width: size, height: size }}>
                 <svg className="metric-ring" width={size} height={size}>
                     <circle
@@ -40,13 +44,16 @@ export default function MetricRing({ value, max, label, displayValue, color, siz
                         } as React.CSSProperties}
                     />
                 </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-sm font-semibold" style={{ color, letterSpacing: "-0.02em" }}>
+                <div className="absolute inset-0 flex items-center justify-center px-1">
+                    <span
+                        className="font-semibold text-center leading-none whitespace-nowrap"
+                        style={{ color, letterSpacing: "-0.02em", fontSize: `${fontSize}px` }}
+                    >
                         {displayValue}
                     </span>
                 </div>
             </div>
-            <span className="text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight">
+            <span className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight">
                 {label}
             </span>
         </div>

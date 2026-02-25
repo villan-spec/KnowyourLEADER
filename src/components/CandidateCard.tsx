@@ -16,21 +16,22 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
     const cardClass = isOfficial ? "card" : "card-glass";
 
     return (
-        <div className={`${cardClass} relative overflow-hidden p-6 flex flex-col gap-4`}>
+        <div className={`${cardClass} relative overflow-hidden p-4 sm:p-6 flex flex-col gap-3 sm:gap-4`}>
             {/* Party accent strip */}
             <div className="party-accent" style={{ background: candidate.partyColor }} />
 
             {/* Header: Name + Party + Badge */}
-            <div className="flex items-start justify-between gap-3 pt-1">
-                <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-start justify-between gap-2 sm:gap-3 pt-1">
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                     <div
-                        className="w-11 h-11 rounded-full flex items-center justify-center shrink-0"
+                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0"
                         style={{ background: `${candidate.partyColor}12` }}
                     >
-                        <User size={20} style={{ color: candidate.partyColor }} strokeWidth={1.8} />
+                        <User size={18} style={{ color: candidate.partyColor }} strokeWidth={1.8} className="sm:hidden" />
+                        <User size={20} style={{ color: candidate.partyColor }} strokeWidth={1.8} className="hidden sm:block" />
                     </div>
                     <div className="min-w-0">
-                        <h3 className="text-base font-semibold leading-tight truncate">
+                        <h3 className="text-sm sm:text-base font-semibold leading-tight truncate">
                             {candidate.name}
                         </h3>
                         <p className="text-tamil text-xs text-[var(--color-text-tertiary)] mt-0.5 truncate">
@@ -69,7 +70,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     label="Declared Assets"
                     displayValue={formatAssets(candidate.declaredAssets)}
                     color="var(--color-accent-blue)"
-                    size={76}
+                    size={64}
                 />
                 <MetricRing
                     value={candidate.pendingCriminalCases}
@@ -77,7 +78,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     label="Criminal Cases"
                     displayValue={String(candidate.pendingCriminalCases)}
                     color={candidate.pendingCriminalCases > 0 ? "var(--color-accent-red)" : "var(--color-accent-green)"}
-                    size={76}
+                    size={64}
                 />
                 <MetricRing
                     value={candidate.localIssues.length}
@@ -85,7 +86,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     label="Issues Tracked"
                     displayValue={String(candidate.localIssues.length)}
                     color="var(--color-accent-amber)"
-                    size={76}
+                    size={64}
                 />
             </div>
 

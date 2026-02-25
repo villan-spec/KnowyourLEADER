@@ -46,23 +46,23 @@ export default function DistrictHubClient({ districts, candidates }: DistrictHub
     const totalConstituencies = districts.reduce((sum, d) => sum + d.constituencies.length, 0);
 
     return (
-        <div className="container-app py-10">
+        <div className="container-app py-6 sm:py-10">
             {/* Hero Section */}
-            <div className="text-center mb-10">
+            <div className="text-center mb-8 sm:mb-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--color-card)] border border-[var(--color-border-light)] text-xs font-medium text-[var(--color-text-secondary)] mb-4">
                     <Vote size={12} strokeWidth={2.5} />
                     Tamil Nadu Assembly Elections 2026
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3">
                     Know Your Leader
                 </h1>
-                <p className="text-base text-[var(--color-text-secondary)] max-w-xl mx-auto leading-relaxed">
+                <p className="text-sm sm:text-base text-[var(--color-text-secondary)] max-w-xl mx-auto leading-relaxed px-2">
                     Compare candidates running for your constituency based on objective facts — declared assets, criminal records, and local issues addressed.
                 </p>
             </div>
 
             {/* Stats */}
-            <div className="flex items-center justify-center gap-6 mb-8">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mb-6 sm:mb-8">
                 <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
                     <MapPin size={14} className="text-[var(--color-accent-blue)]" strokeWidth={2} />
                     <span className="font-semibold text-[var(--color-text-primary)]">{districts.length}</span> Districts
@@ -72,14 +72,14 @@ export default function DistrictHubClient({ districts, candidates }: DistrictHub
                     <Users size={14} className="text-[var(--color-accent-green)]" strokeWidth={2} />
                     <span className="font-semibold text-[var(--color-text-primary)]">{totalConstituencies}</span> Constituencies
                 </div>
-                <div className="w-px h-4 bg-[var(--color-border)]" />
-                <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
+                <div className="hidden sm:block w-px h-4 bg-[var(--color-border)]" />
+                <div className="hidden sm:flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
                     <span className="font-semibold text-[var(--color-text-primary)]">{candidates.length}</span> Candidates Tracked
                 </div>
             </div>
 
             {/* Search */}
-            <div className="relative max-w-md mx-auto mb-10">
+            <div className="relative max-w-md mx-auto mb-8 sm:mb-10">
                 <Search
                     size={18}
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)]"
@@ -101,7 +101,7 @@ export default function DistrictHubClient({ districts, candidates }: DistrictHub
                     <p className="text-sm text-[var(--color-text-secondary)]">No districts match your search</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
                     {filtered.map((district, i) => (
                         <DistrictCard
                             key={district.id}

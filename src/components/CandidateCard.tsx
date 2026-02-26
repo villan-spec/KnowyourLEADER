@@ -78,32 +78,32 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
             )}
 
             {/* Metric Rings */}
-            <div className="flex items-center justify-around py-3 border-t border-b border-[var(--color-border-light)] gap-2">
+            <div className="flex items-center justify-around py-2 sm:py-3 border-t border-b border-[var(--color-border-light)] gap-2">
                 <MetricRing
                     value={candidate.declaredAssets}
                     max={maxAssets}
-                    label="Declared Assets"
+                    label="Assets"
                     displayValue={formatAssets(candidate.declaredAssets)}
                     color="var(--color-accent-blue)"
-                    size={68}
+                    size={60}
                     href={candidate.assetsSourceUrl || candidate.sourceUrl || getAssetsSourceUrl(candidate)}
                 />
                 <MetricRing
                     value={candidate.pendingCriminalCases}
                     max={Math.max(maxCases, 1)}
-                    label="Criminal Cases"
+                    label="Cases"
                     displayValue={String(candidate.pendingCriminalCases)}
                     color={candidate.pendingCriminalCases > 0 ? "var(--color-accent-red)" : "var(--color-accent-green)"}
-                    size={68}
+                    size={60}
                     href={candidate.casesSourceUrl || candidate.sourceUrl || getCriminalCasesSourceUrl(candidate)}
                 />
                 <MetricRing
                     value={candidate.localIssues.length}
                     max={6}
-                    label="Issues Tracked"
+                    label="Issues"
                     displayValue={String(candidate.localIssues.length)}
                     color="var(--color-accent-amber)"
-                    size={68}
+                    size={60}
                     href={candidate.localIssues.length > 0 ? (candidate.sourceUrl || getIssuesSourceUrl(candidate)) : undefined}
                 />
             </div>

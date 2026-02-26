@@ -69,7 +69,6 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
 
     return (
         <main className="min-h-screen bg-background">
-
             <div className="container-app py-10 sm:py-16">
                 <Link
                     href="/party"
@@ -113,35 +112,37 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                         <p className="text-xs font-bold text-secondary uppercase tracking-widest">{party.alliance} Alliance</p>
                     </div>
 
-                    <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="card-glass p-6 flex flex-col justify-between">
+                    <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
+                        <div className="card-glass p-4 sm:p-6 flex flex-col justify-between">
                             <div>
-                                <div className="p-2 w-10 h-10 rounded-xl bg-accent-green/10 text-accent-green mb-4 flex items-center justify-center">
-                                    <TrendingUp size={20} />
+                                <div className="p-2 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-accent-green/10 text-accent-green mb-3 sm:mb-4 flex items-center justify-center">
+                                    <TrendingUp size={16} className="sm:hidden" />
+                                    <TrendingUp size={20} className="hidden sm:block" />
                                 </div>
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Average Wealth</p>
-                                <h3 className="text-2xl font-bold">{formatAssets(party.averageAssets)}</h3>
+                                <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Average Wealth</p>
+                                <h3 className="text-lg sm:text-2xl font-bold">{formatAssets(party.averageAssets)}</h3>
                             </div>
-                            <p className="text-xs text-secondary mt-4 italic">Declared Assets per Candidate</p>
+                            <p className="text-[10px] sm:text-xs text-secondary mt-2 sm:mt-4 italic">Declared Assets per Candidate</p>
                         </div>
 
-                        <div className="card-glass p-6 flex flex-col justify-between">
+                        <div className="card-glass p-4 sm:p-6 flex flex-col justify-between">
                             <EducationBarChart
                                 graduate={party.educationBreakdown.graduate}
                                 nonGraduate={party.educationBreakdown.nonGraduate}
                             />
-                            <p className="text-xs text-secondary mt-4 italic">Qualifications Breakdown</p>
+                            <p className="text-[10px] sm:text-xs text-secondary mt-2 sm:mt-4 italic">Qualifications Breakdown</p>
                         </div>
 
-                        <div className="card-glass p-6 flex flex-col justify-between">
+                        <div className="card-glass p-4 sm:p-6 flex flex-col justify-between col-span-2 md:col-span-1">
                             <div>
-                                <div className="p-2 w-10 h-10 rounded-xl bg-accent-blue/10 text-accent-blue mb-4 flex items-center justify-center">
-                                    <AlertCircle size={20} />
+                                <div className="p-2 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-accent-blue/10 text-accent-blue mb-3 sm:mb-4 flex items-center justify-center">
+                                    <AlertCircle size={16} className="sm:hidden" />
+                                    <AlertCircle size={20} className="hidden sm:block" />
                                 </div>
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Ticket Allocation</p>
-                                <h3 className="text-2xl font-bold">{party.declaredCandidates} / {party.totalCandidates}</h3>
+                                <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Ticket Allocation</p>
+                                <h3 className="text-lg sm:text-2xl font-bold">{party.declaredCandidates} / {party.totalCandidates}</h3>
                             </div>
-                            <div className="w-full h-2 bg-black/5 rounded-full overflow-hidden mt-4">
+                            <div className="w-full h-1.5 sm:h-2 bg-black/5 rounded-full overflow-hidden mt-3 sm:mt-4">
                                 <div
                                     className="h-full rounded-full transition-all duration-1000 ease-out"
                                     style={{
@@ -164,19 +165,21 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                 </div>
 
                 {/* Candidates List with Sticky Header */}
-                <div>
-                    <div className="sticky top-[72px] z-30 card-glass p-4 mb-8 flex flex-wrap items-center justify-between gap-4">
-                        <div className="flex items-center gap-6">
-                            <h3 className="font-bold flex items-center gap-2">
-                                <Filter size={16} /> Filters
+                <div className="mt-16">
+                    <div className="sticky top-[60px] sm:top-[72px] z-30 card-glass p-3 sm:p-4 mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                        <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto pb-1 sm:pb-0 hide-scrollbar">
+                            <h3 className="text-xs sm:text-sm font-bold flex items-center gap-2 shrink-0">
+                                <Filter size={14} className="sm:hidden" />
+                                <Filter size={16} className="hidden sm:block" />
+                                Filters
                             </h3>
 
-                            <div className="flex items-center gap-2">
-                                <span className="text-xs font-bold text-tertiary uppercase tracking-wider">Region:</span>
+                            <div className="flex items-center gap-2 shrink-0">
+                                <span className="text-[10px] sm:text-xs font-bold text-tertiary uppercase tracking-wider">Region:</span>
                                 <select
                                     value={filterRegion}
                                     onChange={(e) => setFilterRegion(e.target.value)}
-                                    className="bg-black/5 rounded-lg px-2 py-1 text-xs font-semibold focus:outline-none"
+                                    className="bg-black/5 rounded-lg px-2 py-1 text-[10px] sm:text-xs font-semibold focus:outline-none"
                                 >
                                     {regions.map(r => <option key={r} value={r}>{r}</option>)}
                                 </select>
@@ -184,24 +187,24 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
 
                             <button
                                 onClick={() => setFilterAge(!filterAge)}
-                                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${filterAge ? "bg-accent-blue text-white" : "bg-black/5 hover:bg-black/10"}`}
+                                className={`px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${filterAge ? "bg-accent-blue text-white" : "bg-black/5 hover:bg-black/10"}`}
                             >
-                                Show Youth (Under 40)
+                                Youth
                             </button>
                         </div>
 
-                        <div className="flex items-center gap-4">
-                            <span className="text-xs font-bold text-tertiary uppercase tracking-wider flex items-center gap-1">
-                                <SortAsc size={14} /> Sort By:
+                        <div className="flex items-center gap-3 sm:gap-4 justify-between sm:justify-end">
+                            <span className="text-[10px] sm:text-xs font-bold text-tertiary uppercase tracking-wider flex items-center gap-1 shrink-0">
+                                <SortAsc size={14} /> Sort:
                             </span>
                             <div className="flex bg-black/5 p-1 rounded-xl">
                                 {["name", "assets", "cases"].map((s) => (
                                     <button
                                         key={s}
                                         onClick={() => setSortBy(s as any)}
-                                        className={`px-3 py-1 text-xs font-bold rounded-lg transition-all capitalize ${sortBy === s ? "bg-white text-accent-blue shadow-sm" : "opacity-60 hover:opacity-100"}`}
+                                        className={`px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-bold rounded-lg transition-all capitalize ${sortBy === s ? "bg-white text-accent-blue shadow-sm" : "opacity-60 hover:opacity-100"}`}
                                     >
-                                        {s === "cases" ? "Criminal Cases" : s}
+                                        {s === "cases" ? "Cases" : s}
                                     </button>
                                 ))}
                             </div>

@@ -28,7 +28,7 @@ export default function MetricRing({ value, max, label, displayValue, color, siz
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight hover:text-[var(--color-accent-blue)] transition-colors inline-flex items-center gap-0.5"
+            className="text-[9px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight hover:text-[var(--color-accent-blue)] transition-colors inline-flex items-center gap-0.5"
             style={{ textDecoration: "none" }}
             title={`View source for ${label}`}
         >
@@ -36,7 +36,7 @@ export default function MetricRing({ value, max, label, displayValue, color, siz
             <ExternalLink size={8} strokeWidth={2.5} className="opacity-50 shrink-0" />
         </a>
     ) : (
-        <span className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight">
+        <span className="text-[9px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight">
             {label}
         </span>
     );

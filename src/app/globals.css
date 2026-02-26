@@ -190,6 +190,20 @@ h4 {
   border: 1px solid rgba(255, 159, 10, 0.2);
 }
 
+.badge-potential {
+  background: linear-gradient(135deg, #FF9F0A, #FFB340);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(255, 159, 10, 0.3);
+}
+
 /* ---- Issue Tag ---- */
 .issue-tag {
   background: #F5F5F7;
@@ -328,6 +342,16 @@ h4 {
     font-size: 1rem;
     /* prevent iOS zoom */
     padding: 10px 14px 10px 40px;
+  }
+}
+
+.grid-cols-13 {
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .grid-cols-13 {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 }
 

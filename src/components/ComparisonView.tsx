@@ -26,6 +26,7 @@ export default function ComparisonView({ candidates, constituencyName, constitue
     const maxCases = Math.max(...candidates.map((c) => c.pendingCriminalCases));
 
     const officialCount = candidates.filter((c) => c.source === "official").length;
+    const potentialCount = candidates.filter((c) => c.source === "potential").length;
     const newsCount = candidates.filter((c) => c.source === "news").length;
 
     return (
@@ -47,8 +48,13 @@ export default function ComparisonView({ candidates, constituencyName, constitue
                             {officialCount} Official
                         </span>
                     )}
-                    {newsCount > 0 && (
+                    {potentialCount > 0 && (
                         <span className="text-xs px-3 py-1.5 rounded-full bg-[var(--color-accent-amber)]/8 text-[var(--color-accent-amber)] font-semibold">
+                            {potentialCount} Potential
+                        </span>
+                    )}
+                    {newsCount > 0 && (
+                        <span className="text-xs px-3 py-1.5 rounded-full bg-[var(--color-accent-blue)]/8 text-[var(--color-accent-blue)] font-semibold">
                             {newsCount} News-Sourced
                         </span>
                     )}

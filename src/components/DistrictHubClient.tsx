@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import DistrictCard from "@/components/DistrictCard";
-import { Search, MapPin, Users, Vote } from "lucide-react";
+import { Search, MapPin, Users, Vote, ShieldCheck, Newspaper, ExternalLink } from "lucide-react";
 
 // Import data at build time via page wrapper
 interface District {
@@ -16,12 +16,20 @@ interface Candidate {
     districtId: string;
 }
 
+interface DataSource {
+    name: string;
+    url: string;
+    description: string;
+    type: "official" | "news" | "potential";
+}
+
 interface DistrictHubClientProps {
     districts: District[];
     candidates: Candidate[];
+    dataSources: DataSource[];
 }
 
-export default function DistrictHubClient({ districts, candidates }: DistrictHubClientProps) {
+export default function DistrictHubClient({ districts, candidates, dataSources }: DistrictHubClientProps) {
     const [search, setSearch] = useState("");
 
     const filtered = useMemo(() => {
@@ -45,8 +53,11 @@ export default function DistrictHubClient({ districts, candidates }: DistrictHub
 
     const totalConstituencies = districts.reduce((sum, d) => sum + d.constituencies.length, 0);
 
+    const officialSources = dataSources.filter((s) => s.type === "official");
+    const newsSources = dataSources.filter((s) => s.type === "news");
+
     return (
-        <div className="container-app py-6 sm:py-10">
+        <div className="container-app py-10 sm:py-16">
             {/* Hero Section */}
             <div className="text-center mb-8 sm:mb-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--color-card)] border border-[var(--color-border-light)] text-xs font-medium text-[var(--color-text-secondary)] mb-4">
@@ -77,6 +88,7 @@ export default function DistrictHubClient({ districts, candidates }: DistrictHub
                     <span className="font-semibold text-[var(--color-text-primary)]">{candidates.length}</span> Candidates Tracked
                 </div>
             </div>
+
 
             {/* Search */}
             <div className="relative max-w-md mx-auto mb-8 sm:mb-10">

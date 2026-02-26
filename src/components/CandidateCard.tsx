@@ -1,9 +1,9 @@
 import MetricRing from "./MetricRing";
 import TrustBadge from "./TrustBadge";
 import IssueTag from "./IssueTag";
-import { User, AlertTriangle } from "lucide-react";
+import { User, AlertTriangle, ExternalLink } from "lucide-react";
 import type { Candidate } from "@/lib/data";
-import { formatAssets } from "@/lib/data";
+import { formatAssets, getSourceUrl, getAssetsSourceUrl, getCriminalCasesSourceUrl, getIssuesSourceUrl } from "@/lib/data";
 
 interface CandidateCardProps {
     candidate: Candidate;
@@ -22,8 +22,10 @@ function getReadablePartyColor(color: string): string {
 
 export default function CandidateCard({ candidate, maxAssets, maxCases }: CandidateCardProps) {
     const isOfficial = candidate.source === "official";
-    const cardClass = isOfficial ? "card" : "card-glass";
+    const isPotential = candidate.source === "potential";
+    const cardClass = (isOfficial || isPotential) ? "card" : "card-glass";
     const readableColor = getReadablePartyColor(candidate.partyColor);
+    const sourceUrl = getSourceUrl(candidate);
 
     return (
         <div className={`${cardClass} relative overflow-hidden p-4 sm:p-6 flex flex-col gap-3 sm:gap-4`}>
@@ -49,7 +51,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                             </p>
                         </div>
                     </div>
-                    <TrustBadge source={candidate.source} />
+                    <TrustBadge source={candidate.source} href={sourceUrl} />
                 </div>
                 <div className="flex items-center gap-2 ml-[50px]">
                     <span
@@ -84,6 +86,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     displayValue={formatAssets(candidate.declaredAssets)}
                     color="var(--color-accent-blue)"
                     size={68}
+                    href={candidate.assetsSourceUrl || candidate.sourceUrl || getAssetsSourceUrl(candidate)}
                 />
                 <MetricRing
                     value={candidate.pendingCriminalCases}
@@ -92,6 +95,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     displayValue={String(candidate.pendingCriminalCases)}
                     color={candidate.pendingCriminalCases > 0 ? "var(--color-accent-red)" : "var(--color-accent-green)"}
                     size={68}
+                    href={candidate.casesSourceUrl || candidate.sourceUrl || getCriminalCasesSourceUrl(candidate)}
                 />
                 <MetricRing
                     value={candidate.localIssues.length}
@@ -100,6 +104,7 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     displayValue={String(candidate.localIssues.length)}
                     color="var(--color-accent-amber)"
                     size={68}
+                    href={candidate.localIssues.length > 0 ? (candidate.sourceUrl || getIssuesSourceUrl(candidate)) : undefined}
                 />
             </div>
 
@@ -120,12 +125,25 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                 <span className="text-xs text-[var(--color-text-tertiary)]">
                     Updated {candidate.lastUpdated}
                 </span>
-                {candidate.pendingCriminalCases > 0 && (
-                    <span className="text-xs text-[var(--color-accent-red)] flex items-center gap-1 font-medium">
-                        <AlertTriangle size={12} strokeWidth={2.5} />
-                        {candidate.pendingCriminalCases} case{candidate.pendingCriminalCases > 1 ? "s" : ""} pending
-                    </span>
-                )}
+                <div className="flex items-center gap-3">
+                    {candidate.pendingCriminalCases > 0 && (
+                        <span className="text-xs text-[var(--color-accent-red)] flex items-center gap-1 font-medium">
+                            <AlertTriangle size={12} strokeWidth={2.5} />
+                            {candidate.pendingCriminalCases} case{candidate.pendingCriminalCases > 1 ? "s" : ""} pending
+                        </span>
+                    )}
+                    <a
+                        href={sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-[var(--color-accent-blue)] flex items-center gap-1 font-medium hover:opacity-80 transition-opacity"
+                        style={{ textDecoration: "none" }}
+                        title={isOfficial ? "View on MyNeta.info (ECI 2026)" : isPotential ? "View on MyNeta.info (2021 data)" : "Search news source"}
+                    >
+                        Source
+                        <ExternalLink size={10} strokeWidth={2.5} />
+                    </a>
+                </div>
             </div>
         </div>
     );

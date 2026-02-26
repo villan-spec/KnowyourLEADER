@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllConstituencies, getConstituencyBySlug, getCandidatesByConstituency } from "@/lib/data";
+import { getAllConstituencies, getConstituencyBySlug, getCandidatesByConstituency } from "@/lib/data.server";
 import ComparisonView from "@/components/ComparisonView";
 import JsonLd from "@/components/JsonLd";
 import { ChevronRight } from "lucide-react";
@@ -82,7 +82,7 @@ export default async function ConstituencyPage({ params }: Props) {
     };
 
     return (
-        <div className="container-app py-6 sm:py-10">
+        <div className="container-app py-10 sm:py-16">
             <JsonLd data={jsonLdData} />
 
             {/* Breadcrumb */}

@@ -40,6 +40,9 @@ for cand in candidates:
     for f in ["id", "name", "party", "constituencyId", "districtId", "source"]:
         if not cand.get(f):
             errors.append(f"BUG: {cand.get('name','?')} missing field '{f}'")
+    if cand.get("source") not in ("official", "news", "potential"):
+        errors.append(f"BUG: {cand.get('name','?')} has invalid source '{cand.get('source')}'")
+
 
 # Summary
 print(f"Districts: {len(districts)}")

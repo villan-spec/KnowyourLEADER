@@ -1,5 +1,7 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
+
 interface MetricRingProps {
     value: number;
     max: number;
@@ -7,9 +9,10 @@ interface MetricRingProps {
     displayValue: string;
     color: string;
     size?: number;
+    href?: string;
 }
 
-export default function MetricRing({ value, max, label, displayValue, color, size = 80 }: MetricRingProps) {
+export default function MetricRing({ value, max, label, displayValue, color, size = 80, href }: MetricRingProps) {
     const strokeWidth = 6;
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
@@ -19,6 +22,24 @@ export default function MetricRing({ value, max, label, displayValue, color, siz
     // Scale font size based on ring size and text length
     const baseFontSize = size * 0.17;
     const fontSize = displayValue.length > 5 ? Math.min(baseFontSize, 11) : baseFontSize;
+
+    const labelElement = href ? (
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight hover:text-[var(--color-accent-blue)] transition-colors inline-flex items-center gap-0.5"
+            style={{ textDecoration: "none" }}
+            title={`View source for ${label}`}
+        >
+            {label}
+            <ExternalLink size={8} strokeWidth={2.5} className="opacity-50 shrink-0" />
+        </a>
+    ) : (
+        <span className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight">
+            {label}
+        </span>
+    );
 
     return (
         <div className="flex flex-col items-center gap-1.5" style={{ minWidth: size }}>
@@ -53,9 +74,7 @@ export default function MetricRing({ value, max, label, displayValue, color, siz
                     </span>
                 </div>
             </div>
-            <span className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-medium text-center leading-tight">
-                {label}
-            </span>
+            {labelElement}
         </div>
     );
 }

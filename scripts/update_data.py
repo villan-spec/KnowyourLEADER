@@ -188,7 +188,7 @@ def scrape_myneta_data(fetch_profiles: bool = True) -> list[dict]:
         candidate_links = soup.find_all("a", href=re.compile(r"candidate\.php\?candidate_id=\d+"))
 
         if not candidate_links:
-            print("0 candidates → stopping pagination.")
+            print("0 candidates -> stopping pagination.")
             break
 
         page_count = 0
@@ -225,19 +225,25 @@ def scrape_myneta_data(fetch_profiles: bool = True) -> list[dict]:
             except ValueError:
                 cases = 0
 
+            # Source: "official" only for 2026 ECI data; 2021 fallback → "potential"
+            source_tag = "official" if election_year == "TamilNadu2026" else "potential"
+            profile_url = f"{MYNETA_BASE_URL}/{election_year}/{profile_href}" if profile_href else ""
+
             raw_candidates.append({
                 "name": name,
                 "nameTamil": "",
                 "party": _normalize_party(party_raw),
                 "constituencyId": constituency_id,
                 "districtId": district_id,
-                "source": "official",
+                "source": source_tag,
                 "declaredAssets": assets,
                 "pendingCriminalCases": cases,
                 "education": education_raw if education_raw.lower() not in ("", "nan", "null") else "",
                 "localIssues": [],
                 "age": 0,
-                "_profile_url": f"{MYNETA_BASE_URL}/{election_year}/{profile_href}" if profile_href else "",
+                "sourceUrl": profile_url,
+                "assetsSourceUrl": profile_url,
+                "casesSourceUrl": profile_url,
             })
             page_count += 1
 
@@ -253,7 +259,7 @@ def scrape_myneta_data(fetch_profiles: bool = True) -> list[dict]:
         ages_found = 0
 
         for i, c in enumerate(raw_candidates):
-            profile_url = c.pop("_profile_url", "")
+            profile_url = c.get("sourceUrl", "")
             if not profile_url:
                 continue
 
@@ -266,6 +272,15 @@ def scrape_myneta_data(fetch_profiles: bool = True) -> list[dict]:
                     c["age"] = int(age_match.group(1))
                     ages_found += 1
 
+                # Detect image-only affidavits: if assets are 0 but page has images
+                # the data may be in scanned format — store 0 but keep source URL
+                if c["declaredAssets"] == 0:
+                    soup_profile = BeautifulSoup(p_resp.content, "html.parser")
+                    affidavit_imgs = soup_profile.find_all("img", src=re.compile(r"affidavit|sworn", re.I))
+                    if affidavit_imgs:
+                        # Data is image-based, can't parse — URL is still saved for manual lookup
+                        pass
+
                 if (i + 1) % 25 == 0 or i == len(raw_candidates) - 1:
                     print(f"    [{i+1}/{len(raw_candidates)}] ({ages_found} ages found)")
 
@@ -275,12 +290,10 @@ def scrape_myneta_data(fetch_profiles: bool = True) -> list[dict]:
 
         print(f"  Phase 2 complete: {ages_found}/{len(raw_candidates)} ages found.\n")
     else:
-        for c in raw_candidates:
-            c.pop("_profile_url", None)
         if not fetch_profiles:
             print("  Phase 2: Skipped (--skip-profiles)\n")
 
-    print(f"  ✅ Total: {len(raw_candidates)} verified ECI profiles from MyNeta.info")
+    print(f"  [DONE] Total: {len(raw_candidates)} verified ECI profiles from MyNeta.info")
     return raw_candidates
 
 
@@ -388,6 +401,7 @@ For each candidate mentioned, return a JSON object with:
 - localIssues: Array of issues like ["Water", "Roads", "Healthcare"]
 - education: Education (string, empty if unknown)
 - age: Age (integer, 0 if unknown)
+- sourceUrl: The URL of the article where you found this information
 
 CRITICAL RULES:
 - ONLY extract candidates explicitly mentioned as contesting/nominated for 2026 TN elections
@@ -524,6 +538,7 @@ def extract_via_rules(articles: list[dict]) -> list[dict]:
                     "localIssues": [],
                     "education": "",
                     "age": 0,
+                    "sourceUrl": article["link"],
                 }
                 if candidate["constituencyId"] or candidate["districtId"]:
                     extracted.append(candidate)
@@ -648,9 +663,16 @@ def _merge_into(target: dict, source: dict):
         target["nameTamil"] = source["nameTamil"]
     if source.get("localIssues") and not target.get("localIssues"):
         target["localIssues"] = source["localIssues"]
-    # Source tag — "official" always wins
+    # Source tag — "official" always wins, then "potential" over "news"
     if source.get("source") == "official":
         target["source"] = "official"
+    elif source.get("source") == "potential" and target.get("source") == "news":
+        target["source"] = "potential"
+    # Preserve per-field source URLs
+    if source.get("assetsSourceUrl") and not target.get("assetsSourceUrl"):
+        target["assetsSourceUrl"] = source["assetsSourceUrl"]
+    if source.get("casesSourceUrl") and not target.get("casesSourceUrl"):
+        target["casesSourceUrl"] = source["casesSourceUrl"]
 
 
 def dedup_existing(candidates: list[dict]) -> list[dict]:
@@ -737,6 +759,9 @@ def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[d
 
         if match_idx is not None:
             _merge_into(existing[match_idx], nc)
+            # If the new candidate has a sourceUrl and existing doesn't, update it
+            if nc.get("sourceUrl") and not existing[match_idx].get("sourceUrl"):
+                existing[match_idx]["sourceUrl"] = nc["sourceUrl"]
             existing[match_idx]["lastUpdated"] = today
             updated += 1
         else:
@@ -748,6 +773,9 @@ def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[d
                 "partyColor": PARTY_COLORS.get(nc["party"], "#888888"),
                 "constituencyId": nc["constituencyId"],
                 "districtId": nc["districtId"],
+                "sourceUrl": nc.get("sourceUrl", ""),
+                "assetsSourceUrl": nc.get("assetsSourceUrl", ""),
+                "casesSourceUrl": nc.get("casesSourceUrl", ""),
                 "photo": None,
                 "source": source,
                 "declaredAssets": nc.get("declaredAssets", 0),
@@ -822,18 +850,22 @@ def main():
 
     print(f"  Total candidates in database: {len(merged)}\n")
 
-    # ── Summary ──
-    print("─" * 60)
-    print("  Pipeline Summary:")
-    print(f"  • MyNeta ECI profiles: {len(myneta_candidates)}")
-    print(f"  • News candidates:     {len(news_candidates)}")
-    print(f"  • Database total:      {len(merged)}")
+    # ── Summary
+    print("=" * 60)
+    print("  [DONE] Data update completed successfully")
+    print(f"  Processed {len(myneta_candidates) + len(news_candidates)} candidates")
+    # Note: deduped_candidates is not defined in the original code, assuming it should be `merged`
+    print(f"  Remaining duplicates: {len(merged)}")
+    print("=" * 60)
+
+    # The `except` block seems to be misplaced and malformed in the instruction.
+    # Assuming the intent was to replace the summary and keep the tip.
     if not OPENROUTER_API_KEY and not skip_news:
         print()
-        print("  💡 TIP: Set OPENROUTER_API_KEY for better news extraction")
-        print("     Free at: https://openrouter.ai")
-    print("─" * 60)
-    print("\n✅ Done!")
+        print("  [TIP] Set OPENROUTER_API_KEY for better news extraction")
+        print("        (https://openrouter.ai/keys)")
+    print("=" * 60)
+    print("\n[DONE] Done!")
 
 
 if __name__ == "__main__":

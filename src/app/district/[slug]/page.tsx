@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getDistricts, getDistrictBySlug, getCandidatesByDistrict } from "@/lib/data";
+import { getDistricts, getDistrictBySlug, getCandidatesByDistrict } from "@/lib/data.server";
 import ConstituencyList from "@/components/ConstituencyList";
 import { ChevronRight, MapPin } from "lucide-react";
 import type { Metadata } from "next";
@@ -63,7 +63,7 @@ export default async function DistrictPage({ params }: Props) {
     }
 
     return (
-        <div className="container-app py-6 sm:py-10">
+        <div className="container-app py-10 sm:py-16">
             {/* Breadcrumb */}
             <nav className="breadcrumb flex items-center gap-1.5 text-sm mb-6 sm:mb-8">
                 <Link href="/">Districts</Link>

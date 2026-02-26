@@ -12,9 +12,9 @@ export default function EducationBarChart({ graduate, nonGraduate }: EducationBa
 
     return (
         <div className="w-full">
-            <div className="flex justify-between items-end mb-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-tertiary">Education Breakdown</span>
-                <span className="text-[11px] font-medium text-secondary">{graduate} Grad / {nonGraduate} Non-Grad</span>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-2 gap-1 sm:gap-0">
+                <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary">Education Breakdown</span>
+                <span className="text-[10px] sm:text-[11px] font-bold text-secondary">{graduate} Grad / {nonGraduate} Non-Grad</span>
             </div>
             <div className="flex h-3 w-full rounded-full overflow-hidden bg-black/5">
                 <div

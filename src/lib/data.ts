@@ -107,6 +107,24 @@ export const PARTY_ALLIANCE: Record<string, Alliance> = {
     "MNM": "INDIA"
 };
 
+export const PARTY_NAMES: Record<string, string> = {
+    "DMK": "DMK - Dravida Munnetra Kazhagam",
+    "AIADMK": "AIADMK - All India Anna Dravida Munnetra Kazhagam",
+    "BJP": "BJP - Bharatiya Janata Party",
+    "INC": "INC - Indian National Congress",
+    "NTK": "NTK - Naam Tamilar Katchi",
+    "TVK": "TVK - Tamilaga Vettri Kazhagam",
+    "PMK": "PMK - Pattali Makkal Katchi",
+    "DMDK": "DMDK - Desiya Murpokku Dravida Kazhagam",
+    "MDMK": "MDMK - Marumalarchi Dravida Munnetra Kazhagam",
+    "VCK": "VCK - Viduthalai Chiruthaigal Katchi",
+    "AMMK": "AMMK - Amma Makkal Munnetra Kazagam",
+    "MNM": "MNM - Makkal Needhi Maiam",
+    "CPI": "CPI - Communist Party of India",
+    "CPM": "CPI(M) - Communist Party of India (Marxist)",
+    "IUML": "IUML - Indian Union Muslim League"
+};
+
 export interface DataSource {
     name: string;
     url: string;

@@ -3,7 +3,7 @@ import TrustBadge from "./TrustBadge";
 import IssueTag from "./IssueTag";
 import { User, AlertTriangle, ExternalLink } from "lucide-react";
 import type { Candidate } from "@/lib/data";
-import { formatAssets, getSourceUrl, getAssetsSourceUrl, getCriminalCasesSourceUrl, getIssuesSourceUrl } from "@/lib/data";
+import { formatAssets, getSourceUrl, getAssetsSourceUrl, getCriminalCasesSourceUrl, getIssuesSourceUrl, PARTY_NAMES } from "@/lib/data";
 
 interface CandidateCardProps {
     candidate: Candidate;
@@ -23,9 +23,11 @@ function getReadablePartyColor(color: string): string {
 export default function CandidateCard({ candidate, maxAssets, maxCases }: CandidateCardProps) {
     const isOfficial = candidate.source === "official";
     const isPotential = candidate.source === "potential";
-    const cardClass = (isOfficial || isPotential) ? "card" : "card-glass";
+    const isTBA = candidate.id.startsWith("tba-");
+    const cardClass = isTBA ? "card-glass opacity-75 grayscale-[0.2]" : (isOfficial || isPotential) ? "card" : "card-glass";
     const readableColor = getReadablePartyColor(candidate.partyColor);
-    const sourceUrl = getSourceUrl(candidate);
+    const sourceUrl = isTBA ? "" : getSourceUrl(candidate);
+    const displayParty = PARTY_NAMES[candidate.party] || candidate.party;
 
     return (
         <div className={`${cardClass} relative overflow-hidden p-4 sm:p-6 flex flex-col gap-3 sm:gap-4`}>
@@ -43,29 +45,34 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                             <User size={18} style={{ color: candidate.partyColor }} strokeWidth={1.8} />
                         </div>
                         <div className="min-w-0 flex-1">
-                            <h3 className="text-sm sm:text-base font-semibold leading-tight break-words">
+                            <h3 className={`text-sm sm:text-base font-semibold leading-tight break-words ${isTBA ? "text-[var(--color-text-tertiary)] italic" : ""}`}>
                                 {candidate.name}
                             </h3>
-                            <p className="text-tamil text-xs text-[var(--color-text-tertiary)] mt-0.5">
-                                {candidate.nameTamil}
-                            </p>
+                            {candidate.nameTamil && (
+                                <p className="text-tamil text-xs text-[var(--color-text-tertiary)] mt-0.5">
+                                    {candidate.nameTamil}
+                                </p>
+                            )}
                         </div>
                     </div>
-                    <TrustBadge source={candidate.source} href={sourceUrl} />
+                    {!isTBA && <TrustBadge source={candidate.source} href={sourceUrl} />}
                 </div>
                 <div className="flex items-center gap-2 ml-[50px]">
                     <span
-                        className="text-xs font-semibold px-2 py-0.5 rounded-md"
+                        className="text-xs font-semibold px-2 py-0.5 rounded-md truncate max-w-[200px] sm:max-w-xs"
                         style={{
                             background: `${candidate.partyColor}12`,
                             color: readableColor,
                         }}
+                        title={displayParty}
                     >
-                        {candidate.party}
+                        {displayParty}
                     </span>
-                    <span className="text-xs text-[var(--color-text-tertiary)]">
-                        Age {candidate.age > 0 ? candidate.age : "--"}
-                    </span>
+                    {!isTBA && (
+                        <span className="text-xs text-[var(--color-text-tertiary)] shrink-0">
+                            Age {candidate.age > 0 ? candidate.age : "--"}
+                        </span>
+                    )}
                 </div>
             </div>
 
@@ -123,27 +130,29 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
             {/* Footer */}
             <div className="flex items-center justify-between pt-2 border-t border-[var(--color-border-light)]">
                 <span className="text-xs text-[var(--color-text-tertiary)]">
-                    Updated {candidate.lastUpdated}
+                    {isTBA ? "Awaiting announcement" : `Updated ${candidate.lastUpdated}`}
                 </span>
-                <div className="flex items-center gap-3">
-                    {candidate.pendingCriminalCases > 0 && (
-                        <span className="text-xs text-[var(--color-accent-red)] flex items-center gap-1 font-medium">
-                            <AlertTriangle size={12} strokeWidth={2.5} />
-                            {candidate.pendingCriminalCases} case{candidate.pendingCriminalCases > 1 ? "s" : ""} pending
-                        </span>
-                    )}
-                    <a
-                        href={sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-[var(--color-accent-blue)] flex items-center gap-1 font-medium hover:opacity-80 transition-opacity"
-                        style={{ textDecoration: "none" }}
-                        title={isOfficial ? "View on MyNeta.info (ECI 2026)" : isPotential ? "View on MyNeta.info (2021 data)" : "Search news source"}
-                    >
-                        Source
-                        <ExternalLink size={10} strokeWidth={2.5} />
-                    </a>
-                </div>
+                {!isTBA && (
+                    <div className="flex items-center gap-3">
+                        {candidate.pendingCriminalCases > 0 && (
+                            <span className="text-xs text-[var(--color-accent-red)] flex items-center gap-1 font-medium">
+                                <AlertTriangle size={12} strokeWidth={2.5} />
+                                {candidate.pendingCriminalCases} case{candidate.pendingCriminalCases > 1 ? "s" : ""} pending
+                            </span>
+                        )}
+                        <a
+                            href={sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-[var(--color-accent-blue)] flex items-center gap-1 font-medium hover:opacity-80 transition-opacity"
+                            style={{ textDecoration: "none" }}
+                            title={isOfficial ? "View on MyNeta.info (ECI 2026)" : isPotential ? "View on MyNeta.info (2021 data)" : "Search news source"}
+                        >
+                            Source
+                            <ExternalLink size={10} strokeWidth={2.5} />
+                        </a>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -14,6 +14,7 @@ interface District {
 
 interface Candidate {
     districtId: string;
+    source: "official" | "news" | "potential";
 }
 
 interface DataSource {
@@ -52,9 +53,8 @@ export default function DistrictHubClient({ districts, candidates, dataSources }
     }, [candidates]);
 
     const totalConstituencies = districts.reduce((sum, d) => sum + d.constituencies.length, 0);
-
-    const officialSources = dataSources.filter((s) => s.type === "official");
-    const newsSources = dataSources.filter((s) => s.type === "news");
+    const officialCount = candidates.filter(c => c.source === "official").length;
+    const potentialCount = candidates.filter(c => c.source === "potential" || c.source === "news").length;
 
     return (
         <div className="container-app py-10 sm:py-16">
@@ -70,6 +70,18 @@ export default function DistrictHubClient({ districts, candidates, dataSources }
                 <p className="text-sm sm:text-base text-[var(--color-text-secondary)] max-w-xl mx-auto leading-relaxed px-2">
                     Compare candidates running for your constituency based on objective facts — declared assets, criminal records, and local issues addressed.
                 </p>
+            </div>
+
+            {/* Tracker Section */}
+            <div className="max-w-md mx-auto mb-8 sm:mb-10 p-4 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border-light)] flex items-center justify-between">
+                <div className="flex flex-col items-center justify-center w-1/2 border-r border-[var(--color-border-light)]">
+                    <span className="text-3xl font-bold text-[var(--color-accent-green)]">{officialCount}</span>
+                    <span className="text-xs text-[var(--color-text-tertiary)] font-medium mt-1">Official Candidates</span>
+                </div>
+                <div className="flex flex-col items-center justify-center w-1/2">
+                    <span className="text-3xl font-bold text-[var(--color-accent-blue)]">{potentialCount}</span>
+                    <span className="text-xs text-[var(--color-text-tertiary)] font-medium mt-1">Potential Candidates</span>
+                </div>
             </div>
 
             {/* Stats */}

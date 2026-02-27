@@ -11,7 +11,7 @@ import EducationBarChart from "@/components/EducationBarChart";
 import SeatMatrix from "@/components/SeatMatrix";
 import { ArrowLeft, Filter, SortAsc, AlertCircle, TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { Party, Candidate, Constituency } from "@/lib/data";
+import { Party, Candidate, Constituency, PARTY_NAMES } from "@/lib/data";
 
 interface PartyAuditClientProps {
     party: Party;
@@ -56,6 +56,9 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
             maxCases: Math.max(...allCandidates.map(c => c.pendingCriminalCases), 1)
         };
     }, [allCandidates]);
+
+    const officialCount = partyCandidates.filter(c => c.source === "official").length;
+    const potentialCount = partyCandidates.filter(c => c.source === "potential" || c.source === "news").length;
 
     const candidateMap = useMemo(() => {
         const map: Record<string, { partyColor: string; party: string }> = {};
@@ -108,7 +111,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                 <span className="text-[9px] font-bold uppercase tracking-widest opacity-60">Clean Roster</span>
                             </div>
                         </div>
-                        <h1 className="text-4xl font-black mb-1">{party.id}</h1>
+                        <h1 className="text-3xl sm:text-4xl font-black mb-1">{PARTY_NAMES[party.id] || party.id}</h1>
                         <p className="text-xs font-bold text-secondary uppercase tracking-widest">{party.alliance} Alliance</p>
                     </div>
 
@@ -152,6 +155,18 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                 />
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* Tracker Section */}
+                <div className="max-w-md mx-auto mb-12 p-4 rounded-2xl card-glass border border-[var(--color-border-light)] flex items-center justify-between">
+                    <div className="flex flex-col items-center justify-center w-1/2 border-r border-[var(--color-border-light)]">
+                        <span className="text-3xl font-bold text-accent-green">{officialCount}</span>
+                        <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Official Candidates</span>
+                    </div>
+                    <div className="flex flex-col items-center justify-center w-1/2">
+                        <span className="text-3xl font-bold text-accent-blue">{potentialCount}</span>
+                        <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Potential Candidates</span>
                     </div>
                 </div>
 

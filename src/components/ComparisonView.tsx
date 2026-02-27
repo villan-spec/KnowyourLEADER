@@ -1,5 +1,6 @@
 import CandidateCard from "./CandidateCard";
 import type { Candidate } from "@/lib/data";
+import { PARTY_NAMES } from "@/lib/data";
 import { Users, Scale } from "lucide-react";
 
 interface ComparisonViewProps {
@@ -22,12 +23,46 @@ export default function ComparisonView({ candidates, constituencyName, constitue
     }
 
     // Calculate max values for synchronized scales across all candidates
-    const maxAssets = Math.max(...candidates.map((c) => c.declaredAssets));
-    const maxCases = Math.max(...candidates.map((c) => c.pendingCriminalCases));
+    const maxAssets = Math.max(0, ...candidates.map((c) => c.declaredAssets));
+    const maxCases = Math.max(0, ...candidates.map((c) => c.pendingCriminalCases));
 
     const officialCount = candidates.filter((c) => c.source === "official").length;
     const potentialCount = candidates.filter((c) => c.source === "potential").length;
     const newsCount = candidates.filter((c) => c.source === "news").length;
+
+    // Generate TBA candidates for major parties that are missing
+    const MAJOR_PARTIES = ["DMK", "AIADMK", "BJP", "INC", "NTK", "TVK"];
+    const existingParties = new Set(candidates.map((c) => c.party));
+
+    // Some basic colors for missing parties in case they aren't in data.ts yet (TVK is already there but just to be safe)
+    const PARTY_COLORS_FALLBACK: Record<string, string> = {
+        "DMK": "#E31E24",
+        "AIADMK": "#006B3F",
+        "BJP": "#FF6B00",
+        "INC": "#19AAED",
+        "NTK": "#8B0000",
+        "TVK": "#FFAA00"
+    };
+
+    const missingCandidates: Candidate[] = MAJOR_PARTIES.filter(p => !existingParties.has(p)).map(party => ({
+        id: `tba-${party}-${constituencyName.toLowerCase().replace(/\s+/g, '-')}`,
+        name: "To Be Announced",
+        nameTamil: "அறிவிக்கப்படவில்லை",
+        party: party,
+        partyColor: PARTY_COLORS_FALLBACK[party] || "#888888",
+        constituencyId: "",
+        districtId: "",
+        photo: null,
+        source: "news", // Doesn't matter for TBA due to rendering logic
+        declaredAssets: 0,
+        pendingCriminalCases: 0,
+        localIssues: [],
+        education: "",
+        age: 0,
+        lastUpdated: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+    }));
+
+    const displayCandidates = [...candidates, ...missingCandidates];
 
     return (
         <div>
@@ -68,18 +103,18 @@ export default function ComparisonView({ candidates, constituencyName, constitue
 
             {/* Candidate cards grid */}
             <div
-                className={`grid gap-4 sm:gap-5 ${candidates.length === 1
+                className={`grid gap-4 sm:gap-5 ${displayCandidates.length === 1
                     ? "grid-cols-1 max-w-md"
-                    : candidates.length === 2
+                    : displayCandidates.length === 2
                         ? "grid-cols-1 md:grid-cols-2"
                         : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                     }`}
             >
-                {candidates.map((candidate, index) => (
+                {displayCandidates.map((candidate, index) => (
                     <div
                         key={candidate.id}
                         className="animate-[slide-up_0.6s_ease-out_forwards] opacity-0"
-                        style={{ animationDelay: `${index * 100}ms` }}
+                        style={{ animationDelay: `${index * 50}ms` }}
                     >
                         <CandidateCard
                             candidate={candidate}

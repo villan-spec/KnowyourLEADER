@@ -15,7 +15,7 @@ export default function PartyCard({ party }: PartyCardProps) {
         >
             {/* Subtle Watermark Logo Background */}
             <div
-                className="absolute -right-4 -bottom-8 text-8xl font-black opacity-[0.03] select-none pointer-events-none group-hover:opacity-[0.05] transition-opacity duration-500"
+                className="absolute right-2 bottom-1 text-7xl sm:text-8xl font-black opacity-[0.08] select-none pointer-events-none group-hover:opacity-[0.12] transition-opacity duration-500 leading-none"
                 style={{ color: party.color }}
             >
                 {party.id}

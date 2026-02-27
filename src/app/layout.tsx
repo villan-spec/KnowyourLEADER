@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import DisclaimerModal from "@/components/DisclaimerModal";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
                 <Header />
                 <main className="flex-1 pt-28 sm:pt-32">{children}</main>
                 <Footer />
+                <Analytics />
             </body>
         </html>
     );

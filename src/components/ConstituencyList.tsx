@@ -29,9 +29,13 @@ export default function ConstituencyList({ constituencies, candidateCounts }: Co
                                     <p className="text-tamil text-xs text-[var(--color-text-tertiary)] mt-0.5 truncate">
                                         {c.nameTamil}
                                     </p>
-                                    {count > 0 && (
+                                    {count > 0 ? (
                                         <p className="text-xs text-[var(--color-text-secondary)] mt-1.5">
                                             <span className="font-semibold text-[var(--color-text-primary)]">{count}</span> candidate{count !== 1 ? "s" : ""}
+                                        </p>
+                                    ) : (
+                                        <p className="text-xs text-[var(--color-text-tertiary)] mt-1.5 italic">
+                                            Yet to be announced
                                         </p>
                                     )}
                                 </div>

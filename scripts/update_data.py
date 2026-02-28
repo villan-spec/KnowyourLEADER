@@ -33,6 +33,7 @@ import re
 import sys
 import time
 import html
+import csv
 from datetime import datetime
 from pathlib import Path
 
@@ -61,12 +62,34 @@ OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 
 # RSS Feeds
 RSS_FEEDS = [
+    # English feeds
     "https://www.thehindu.com/news/national/tamil-nadu/feeder/default.rss",
     "https://timesofindia.indiatimes.com/rssfeeds/4923200.cms",
     "https://www.ndtv.com/rss/tamil-nadu",
     "https://indianexpress.com/section/cities/chennai/feed/",
     "https://www.deccanherald.com/rss/tamil-nadu.rss",
+    # Tamil feeds
+    "https://tamil.oneindia.com/rss/tamil-news-fb.xml",
+    "https://feeds.feedburner.com/dinamalar/Front_page_news",
+    "https://tamil.news18.com/rss/tamil-nadu.xml",
 ]
+
+# Party Websites
+PARTY_WEBSITES = {
+    "DMK": "https://www.dmk.in/ta/resources/media/",
+    "AIADMK": "https://aiadmk.org.in/news/",
+    "NTK": "https://www.naamtamilar.org/category/head-office-news/",
+    "INC": "https://inctamilnadu.in/pressrelease/",
+    "MNM": "https://www.maiam.com/blog/press-release-9",
+    "CPI(M)": "https://cpimtn.org/news/",
+}
+
+# Specific triggers for candidate list / announcements
+TRIGGER_KEYWORDS = [
+    "வேட்பாளர் பட்டியல்", "அறிவிப்பு", "2026 தேர்தல்", "சட்டமன்றத் தேர்தல் 2026",
+    "candidate list", "announcement", "2026 election"
+]
+
 
 # MyNeta Base
 MYNETA_BASE_URL = "https://myneta.info"
@@ -111,7 +134,8 @@ PARTY_KEYWORDS = [
 ELECTION_KEYWORDS = [
     "candidate", "contestant", "contesting", "nomination", "MLA",
     "assembly election", "constituency", "bypolls", "bye-election",
-    "fielded", "ticket", "seat", "nominee", "poll",
+    "fielded", "ticket", "seat", "nominee", "poll", "2026 election",
+    "வேட்பாளர்", "களம்", "சட்டமன்றத் தேர்தல்", "2026 தேர்தல்"
 ]
 
 
@@ -371,14 +395,77 @@ def fetch_articles() -> list[dict]:
     relevant = []
     for a in articles:
         text = (a["title"] + " " + a["summary"]).lower()
-        if (
-            any(kw.lower() in text for kw in PARTY_KEYWORDS)
-            and any(kw.lower() in text for kw in ELECTION_KEYWORDS)
-        ) or ("tamil nadu" in text and "election" in text):
+        has_party = any(kw.lower() in text for kw in PARTY_KEYWORDS)
+        has_election = any(kw.lower() in text for kw in ELECTION_KEYWORDS)
+        has_trigger = any(kw.lower() in text for kw in TRIGGER_KEYWORDS)
+        
+        # Strict filter for 2026 or 2026 triggers
+        is_2026 = "2026" in text or has_trigger
+        
+        if (has_party and has_election and is_2026) or ("tamil nadu" in text and "election" in text and "2026" in text):
             relevant.append(a)
 
     print(f"  Total articles fetched: {len(articles)}, election-relevant: {len(relevant)}")
     return relevant if relevant else articles[:10]  # Fallback to first 10 if no relevant found
+
+def fetch_party_websites() -> list[dict]:
+    """Scrape explicit party websites looking for candidate list / announcements."""
+    print("  Fetching explicit party websites...")
+    articles = []
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+    
+    for party, url in PARTY_WEBSITES.items():
+        try:
+            print(f"    Checking {party}: {url}")
+            # AIADMK portal has SSL issues sometimes, verify=False to bypass for now
+            verify_ssl = False if party == "AIADMK" else True
+            # Suppress InsecureRequestWarning if verify is False
+            if not verify_ssl:
+                import urllib3
+                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+            
+            resp = requests.get(url, headers=headers, timeout=15, verify=verify_ssl)
+            if resp.status_code != 200:
+                 continue
+            
+            soup = BeautifulSoup(resp.content, "html.parser")
+            links = soup.find_all("a", href=True)
+            
+            for link in links:
+                text = link.get_text(separator=' ', strip=True).lower()
+                href = link.get("href")
+                
+                if not href.startswith("http"):
+                    if href.startswith("/"):
+                        from urllib.parse import urlparse
+                        parsed_uri = urlparse(url)
+                        base = '{uri.scheme}://{uri.netloc}'.format(uri=parsed_uri)
+                        href = base + href
+                    else:
+                        continue
+                        
+                has_trigger = any(kw.lower() in text for kw in TRIGGER_KEYWORDS)
+                
+                # Broaden trigger for party websites to include "2026" mentions explicitly
+                if has_trigger or ("2026" in text and any(kw.lower() in text for kw in ELECTION_KEYWORDS)):
+                    articles.append({
+                        "title": f"[{party} Update] {link.get_text(strip=True)[:100]}",
+                        "summary": text[:500],
+                        "link": href,
+                        "published": datetime.now().isoformat(),
+                    })
+        except Exception as e:
+            print(f"    Warning: Failed to fetch {party} website: {e}")
+            
+    # Deduplicate party links
+    unique_links = {}
+    for a in articles:
+        if a["link"] not in unique_links:
+            unique_links[a["link"]] = a
+            
+    result = list(unique_links.values())
+    print(f"  Total relevant announcements from party sites: {len(result)}")
+    return result
 
 
 # ══════════════════════════════════════════════════════
@@ -532,7 +619,7 @@ def extract_via_rules(articles: list[dict]) -> list[dict]:
                     "party": parties_found[0] if parties_found else "IND",
                     "constituencyId": constituencies_found[0] if constituencies_found else "",
                     "districtId": districts_found[0] if districts_found else "",
-                    "source": "news",
+                    "source": "potential",
                     "declaredAssets": 0,
                     "pendingCriminalCases": 0,
                     "localIssues": [],
@@ -663,10 +750,10 @@ def _merge_into(target: dict, source: dict):
         target["nameTamil"] = source["nameTamil"]
     if source.get("localIssues") and not target.get("localIssues"):
         target["localIssues"] = source["localIssues"]
-    # Source tag — "official" always wins, then "potential" over "news"
+    # Source tag — "official" always wins
     if source.get("source") == "official":
         target["source"] = "official"
-    elif source.get("source") == "potential" and target.get("source") == "news":
+    elif target.get("source") != "official":
         target["source"] = "potential"
     # Preserve per-field source URLs
     if source.get("assetsSourceUrl") and not target.get("assetsSourceUrl"):
@@ -747,7 +834,7 @@ def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[d
         if not validate_candidate(nc):
             continue
 
-        source = nc.get("source", "news")
+        source = nc.get("source", "potential")
         group_key = (nc["constituencyId"], nc.get("party", ""))
 
         # Search for fuzzy name match within same constituency+party
@@ -794,6 +881,130 @@ def merge_candidates(existing: list[dict], new_candidates: list[dict]) -> list[d
 
 
 # ══════════════════════════════════════════════════════
+# SOURCE 4: CSV Gap Filling
+# ══════════════════════════════════════════════════════
+
+def fill_gaps_from_csvs(existing: list[dict]) -> list[dict]:
+    """Inject missing candidates from CSV and patch missing stats from MLA CSV."""
+    print("  [Phase: CSV Gap Filling]")
+    ntk_csv = DATA_DIR.parent / "(2026 Official Candidate List).csv"
+    mla_csv = DATA_DIR.parent / "MLA Candidates (Education, Assets, Criminal Rec).csv"
+    
+    # Track existing constituency + party
+    seen = {(c["constituencyId"], c["party"]) for c in existing if "constituencyId" in c}
+    added_ntk = 0
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    # 1. Parse NTK Candidates
+    if ntk_csv.exists():
+        with open(ntk_csv, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            try:
+                next(reader, None); next(reader, None)
+            except Exception:
+                pass
+            for row in reader:
+                if len(row) < 2: continue
+                name_col = row[0].strip()
+                if "|" not in name_col: continue
+                parts = name_col.split("|")
+                name = parts[0].strip()
+                const_part = parts[1].strip()
+                if "-" in const_part:
+                    const_slug = const_part.split("-")[-1].strip().lower().replace(" ", "")
+                else:
+                    const_slug = const_part.strip().lower().replace(" ", "")
+                
+                const_id = CONSTITUENCY_NAME_TO_ID.get(const_slug)
+                if not const_id:
+                    clean_slug = const_slug.replace(".", "").replace("'", "")
+                    const_id = CONSTITUENCY_NAME_TO_ID.get(clean_slug)
+
+                if const_id:
+                    if (const_id, "NTK") not in seen:
+                        existing.append({
+                            "id": f"candidate-auto-ntk-{added_ntk:04d}",
+                            "name": name,
+                            "nameTamil": "",
+                            "party": "NTK",
+                            "partyColor": PARTY_COLORS.get("NTK", "#8B0000"),
+                            "constituencyId": const_id,
+                            "districtId": CONSTITUENCY_TO_DISTRICT.get(const_id, ""),
+                            "sourceUrl": "",
+                            "assetsSourceUrl": "",
+                            "casesSourceUrl": "",
+                            "photo": None,
+                            "source": "official",
+                            "declaredAssets": 0,
+                            "pendingCriminalCases": 0,
+                            "localIssues": [],
+                            "education": "",
+                            "age": 0,
+                            "lastUpdated": today,
+                        })
+                        seen.add((const_id, "NTK"))
+                        added_ntk += 1
+        print(f"  -> Injected {added_ntk} missing NTK candidates")
+    else:
+        print(f"  -> Warning: {ntk_csv.name} not found")
+
+    # 2. Patch Profile Stats
+    patched_crimes = 0
+    patched_assets = 0
+    patched_edu = 0
+
+    if mla_csv.exists():
+        with open(mla_csv, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            for _ in range(3): next(reader, None)
+            
+            for row in reader:
+                if len(row) < 3: continue
+                
+                c0 = row[0].split("|") if "|" in row[0] else []
+                c1 = row[1].split("|") if "|" in row[1] else []
+                c2 = row[2].split("|") if "|" in row[2] else []
+                
+                edu_name = c0[0].strip().lower() if len(c0) > 0 else ""
+                edu_val = c0[3].strip() if len(c0) > 3 else ""
+
+                assets_name = c1[0].strip().lower() if len(c1) > 0 else ""
+                assets_val = c1[3].strip() if len(c1) > 3 else ""
+
+                crime_name = c2[0].strip().lower() if len(c2) > 0 else ""
+                crime_val = c2[3].strip() if len(c2) > 3 else ""
+
+                for c in existing:
+                    c_name = c["name"].lower()
+                    
+                    if not c.get("education") and edu_name and edu_name in c_name:
+                        if edu_val and "NA" not in edu_val.upper() and edu_val.lower() != "nan":
+                            c["education"] = edu_val
+                            patched_edu += 1
+                            c["lastUpdated"] = today
+                    
+                    if c.get("declaredAssets", 0) == 0 and assets_name and assets_name in c_name:
+                        assets_clean = re.sub(r"[^\d]", "", assets_val)
+                        if assets_clean:
+                            c["declaredAssets"] = int(assets_clean)
+                            patched_assets += 1
+                            c["lastUpdated"] = today
+                    
+                    if c.get("pendingCriminalCases", 0) == 0 and crime_name and crime_name in c_name:
+                        crime_clean = re.sub(r"[^\d]", "", crime_val)
+                        if crime_clean:
+                            c["pendingCriminalCases"] = int(crime_clean)
+                            patched_crimes += 1
+                            c["lastUpdated"] = today
+
+        print(f"  -> Patched {patched_assets} assets, {patched_crimes} criminal records, {patched_edu} education stats from CSV")
+    else:
+        print(f"  -> Warning: {mla_csv.name} not found")
+
+    return existing
+
+
+# ══════════════════════════════════════════════════════
 # Main Pipeline
 # ══════════════════════════════════════════════════════
 
@@ -808,63 +1019,61 @@ def main():
     print()
 
     # ── Step 1 ──
-    print("[1/5] Loading district/constituency data...")
+    print("[1/6] Loading district/constituency data...")
     load_valid_locations()
     print(f"  {len(VALID_DISTRICTS)} districts, {len(VALID_CONSTITUENCIES)} constituencies\n")
 
     # ── Step 2 ──
-    print("[2/5] Scraping MyNeta.info for ECI data...")
+    print("[2/6] Scraping MyNeta.info for ECI data...")
     myneta_candidates = scrape_myneta_data(fetch_profiles=not skip_profiles)
     print()
 
     # ── Step 3 & 4 ──
     news_candidates = []
     if not skip_news:
-        print("[3/5] Fetching RSS news feeds...")
+        print("[3/6] Fetching RSS news feeds and Party websites...")
         articles = fetch_articles()
+        party_articles = fetch_party_websites()
+        all_articles = articles + party_articles
         print()
 
-        print("[4/5] Extracting candidate data from news...")
-        news_candidates = extract_via_openrouter(articles)
-        if not news_candidates and articles:
-            news_candidates = extract_via_rules(articles)
-        print(f"  Total from news: {len(news_candidates)} candidates\n")
+        print("[4/6] Extracting candidate data from news and party updates...")
+        news_candidates = extract_via_openrouter(all_articles)
+        if not news_candidates and all_articles:
+            news_candidates = extract_via_rules(all_articles)
+        print(f"  Total from news and party updates: {len(news_candidates)} candidates\n")
     else:
-        print("[3/5] Skipping news feeds (--skip-news)\n")
-        print("[4/5] Skipping news extraction\n")
+        print("[3/6] Skipping news feeds and party websites (--skip-news)\n")
+        print("[4/6] Skipping news extraction\n")
 
     # ── Step 5 ──
-    print("[5/5] Deduplicating, merging and saving...")
+    print("[5/6] Deduplicating, merging existing...")
     with open(CANDIDATES_FILE, "r", encoding="utf-8") as f:
         existing = json.load(f)
 
-    # First, deduplicate existing data
     existing = dedup_existing(existing)
-
-    # Then merge new candidates
     all_new = myneta_candidates + news_candidates
     merged = merge_candidates(existing, all_new)
 
+    # ── Step 6 ──
+    print("[6/6] Filling Gaps with Local CSV Data...")
+    final_candidates = fill_gaps_from_csvs(merged)
+
     with open(CANDIDATES_FILE, "w", encoding="utf-8") as f:
-        json.dump(merged, f, indent=2, ensure_ascii=False)
+        json.dump(final_candidates, f, indent=2, ensure_ascii=False)
 
-    print(f"  Total candidates in database: {len(merged)}\n")
-
+    print()
     # ── Summary
     print("=" * 60)
     print("  [DONE] Data update completed successfully")
-    print(f"  Processed {len(myneta_candidates) + len(news_candidates)} candidates")
-    # Note: deduped_candidates is not defined in the original code, assuming it should be `merged`
-    print(f"  Remaining duplicates: {len(merged)}")
+    print(f"  Total candidates in database: {len(final_candidates)}")
     print("=" * 60)
 
-    # The `except` block seems to be misplaced and malformed in the instruction.
-    # Assuming the intent was to replace the summary and keep the tip.
     if not OPENROUTER_API_KEY and not skip_news:
         print()
         print("  [TIP] Set OPENROUTER_API_KEY for better news extraction")
         print("        (https://openrouter.ai/keys)")
-    print("=" * 60)
+        print("=" * 60)
     print("\n[DONE] Done!")
 
 

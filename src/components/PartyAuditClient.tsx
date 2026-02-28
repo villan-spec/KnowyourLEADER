@@ -27,8 +27,30 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
     const [filterAge, setFilterAge] = useState<boolean>(false);
 
     const partyCandidates = useMemo(() => {
-        return allCandidates.filter(c => c.party === party.id);
-    }, [allCandidates, party.id]);
+        return constituencies.map(constituency => {
+            const existing = allCandidates.find(c => c.party === party.id && c.constituencyId === constituency.id);
+            if (existing) return existing;
+
+            return {
+                id: `tba-${party.id}-${constituency.id}`,
+                name: "Yet to be announced",
+                nameTamil: "அறிவிக்கப்படவில்லை",
+                party: party.id,
+                partyColor: party.color,
+                constituencyId: constituency.id,
+                districtId: constituency.districtId,
+                photo: null,
+                source: "potential",
+                isTBA: true, // Custom flag to identify these for styling/sorting if needed
+                declaredAssets: 0,
+                pendingCriminalCases: 0,
+                localIssues: [],
+                education: "",
+                age: 0,
+                lastUpdated: new Date().toISOString()
+            } as Candidate & { isTBA?: boolean };
+        });
+    }, [allCandidates, party, constituencies]);
 
     const filteredCandidates = useMemo(() => {
         let list = [...partyCandidates];
@@ -42,6 +64,12 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
         }
 
         list.sort((a, b) => {
+            const aIsTBA = (a as any).isTBA;
+            const bIsTBA = (b as any).isTBA;
+
+            if (aIsTBA && !bIsTBA) return 1;
+            if (!aIsTBA && bIsTBA) return -1;
+
             if (sortBy === "assets") return b.declaredAssets - a.declaredAssets;
             if (sortBy === "cases") return b.pendingCriminalCases - a.pendingCriminalCases;
             return a.name.localeCompare(b.name);
@@ -57,8 +85,12 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
         };
     }, [allCandidates]);
 
-    const officialCount = partyCandidates.filter(c => c.source === "official").length;
-    const potentialCount = partyCandidates.filter(c => c.source === "potential" || c.source === "news").length;
+    const actualPartyCandidates = useMemo(() => {
+        return allCandidates.filter(c => c.party === party.id);
+    }, [allCandidates, party.id]);
+
+    const officialCount = actualPartyCandidates.filter(c => c.source === "official").length;
+    const potentialCount = actualPartyCandidates.filter(c => c.source === "potential" || c.source === "news").length;
 
     const candidateMap = useMemo(() => {
         const map: Record<string, { partyColor: string; party: string }> = {};
@@ -82,7 +114,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
 
                 {/* Hero / Header Audit Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
-                    <div className="lg:col-span-1 card-glass p-8 flex flex-col items-center justify-center text-center">
+                    <div className="lg:col-span-1 card-glass p-5 sm:p-6 flex flex-col items-center justify-center text-center">
                         <div className="relative w-32 h-32 mb-4">
                             <svg className="w-full h-full transform -rotate-90">
                                 <circle
@@ -115,37 +147,29 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                         <p className="text-xs font-bold text-secondary uppercase tracking-widest">{party.alliance} Alliance</p>
                     </div>
 
-                    <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
-                        <div className="card-glass p-4 sm:p-6 flex flex-col justify-between">
+                    <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 items-start">
+                        <div className="card-glass p-4 sm:p-5">
                             <div>
-                                <div className="p-2 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-accent-green/10 text-accent-green mb-3 sm:mb-4 flex items-center justify-center">
-                                    <TrendingUp size={16} className="sm:hidden" />
-                                    <TrendingUp size={20} className="hidden sm:block" />
-                                </div>
                                 <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Average Wealth</p>
                                 <h3 className="text-lg sm:text-2xl font-bold">{formatAssets(party.averageAssets)}</h3>
                             </div>
-                            <p className="text-[10px] sm:text-xs text-secondary mt-2 sm:mt-4 italic">Declared Assets per Candidate</p>
+                            <p className="text-[10px] sm:text-xs text-secondary mt-3 italic">Declared Assets per Candidate</p>
                         </div>
 
-                        <div className="card-glass p-4 sm:p-6 flex flex-col justify-between">
+                        <div className="card-glass p-4 sm:p-5">
                             <EducationBarChart
                                 graduate={party.educationBreakdown.graduate}
                                 nonGraduate={party.educationBreakdown.nonGraduate}
                             />
-                            <p className="text-[10px] sm:text-xs text-secondary mt-2 sm:mt-4 italic">Qualifications Breakdown</p>
+                            <p className="text-[10px] sm:text-xs text-secondary mt-3 italic">Qualifications Breakdown</p>
                         </div>
 
-                        <div className="card-glass p-4 sm:p-6 flex flex-col justify-between col-span-2 md:col-span-1">
+                        <div className="card-glass p-4 sm:p-5 col-span-2 md:col-span-1">
                             <div>
-                                <div className="p-2 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-accent-blue/10 text-accent-blue mb-3 sm:mb-4 flex items-center justify-center">
-                                    <AlertCircle size={16} className="sm:hidden" />
-                                    <AlertCircle size={20} className="hidden sm:block" />
-                                </div>
                                 <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Ticket Allocation</p>
                                 <h3 className="text-lg sm:text-2xl font-bold">{party.declaredCandidates} / {party.totalCandidates}</h3>
                             </div>
-                            <div className="w-full h-1.5 sm:h-2 bg-black/5 rounded-full overflow-hidden mt-3 sm:mt-4">
+                            <div className="w-full h-1.5 sm:h-2 bg-black/5 rounded-full overflow-hidden mt-3">
                                 <div
                                     className="h-full rounded-full transition-all duration-1000 ease-out"
                                     style={{
@@ -155,20 +179,21 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                 />
                             </div>
                         </div>
+
+                        {/* Tracker Section (Moved to align under the 3 boxes) */}
+                        <div className="card-glass border border-[var(--color-border-light)] flex items-center justify-between col-span-2 md:col-span-3 mt-2 sm:mt-0 p-3 sm:p-5">
+                            <div className="flex flex-col items-center justify-center w-1/2 border-r border-[var(--color-border-light)]">
+                                <span className="text-2xl sm:text-3xl font-bold text-accent-green">{officialCount}</span>
+                                <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Official Candidates</span>
+                            </div>
+                            <div className="flex flex-col items-center justify-center w-1/2">
+                                <span className="text-2xl sm:text-3xl font-bold text-accent-blue">{potentialCount}</span>
+                                <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Potential Candidates</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Tracker Section */}
-                <div className="max-w-md mx-auto mb-12 p-4 rounded-2xl card-glass border border-[var(--color-border-light)] flex items-center justify-between">
-                    <div className="flex flex-col items-center justify-center w-1/2 border-r border-[var(--color-border-light)]">
-                        <span className="text-3xl font-bold text-accent-green">{officialCount}</span>
-                        <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Official Candidates</span>
-                    </div>
-                    <div className="flex flex-col items-center justify-center w-1/2">
-                        <span className="text-3xl font-bold text-accent-blue">{potentialCount}</span>
-                        <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Potential Candidates</span>
-                    </div>
-                </div>
 
                 {/* Seat Matrix Visualization */}
                 <div className="mb-12">

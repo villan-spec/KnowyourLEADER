@@ -41,19 +41,21 @@ export default function ComparisonView({ candidates, constituencyName, constitue
         "BJP": "#FF6B00",
         "INC": "#19AAED",
         "NTK": "#8B0000",
-        "TVK": "#FFAA00"
+        "TVK": "#FFAA00",
+        "VCK": "#0000FF", // Adding common missing ones just in case
+        "PMK": "#FFD700"
     };
 
     const missingCandidates: Candidate[] = MAJOR_PARTIES.filter(p => !existingParties.has(p)).map(party => ({
         id: `tba-${party}-${constituencyName.toLowerCase().replace(/\s+/g, '-')}`,
-        name: "To Be Announced",
+        name: "Yet to be announced",
         nameTamil: "அறிவிக்கப்படவில்லை",
         party: party,
         partyColor: PARTY_COLORS_FALLBACK[party] || "#888888",
         constituencyId: "",
         districtId: "",
         photo: null,
-        source: "news", // Doesn't matter for TBA due to rendering logic
+        source: "potential", // Consistent with empty data fallback
         declaredAssets: 0,
         pendingCriminalCases: 0,
         localIssues: [],

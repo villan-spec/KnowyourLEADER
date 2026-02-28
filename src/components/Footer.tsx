@@ -6,14 +6,10 @@ export default function Footer() {
         <footer className="border-t border-[var(--color-border-light)] mt-16">
             <div className="container-app py-8">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div>
-                        <p className="text-xs text-[var(--color-text-tertiary)] max-w-lg leading-relaxed">
-                            <strong className="text-[var(--color-text-secondary)]">Disclaimer:</strong> This platform is a non-partisan, open-source civic tool. Data is sourced from public news feeds and official Election Commission filings. We do not endorse any candidate or political party.
+                    <div className="w-full">
+                        <p className="text-xs text-[var(--color-text-tertiary)] w-full leading-relaxed block">
+                            <strong className="text-[var(--color-text-secondary)]">Disclaimer:</strong> The information provided on this page about the current and previous elections in the constituency is sourced from various publicly available platforms including https://old.eci.gov.in/statistical-report/statistical-reports/ and https://affidavit.eci.gov.in/. The ECI is the authoritative source for election-related data in India, and we rely on their official records for the content presented here. However, due to the complexity of electoral processes and potential data discrepancies, there may be occasional inaccuracies or omissions in the information provided.
                         </p>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-[var(--color-text-tertiary)] shrink-0">
-                        <ShieldCheck size={14} strokeWidth={2} />
-                        <span>Open Source Civic Tech</span>
                     </div>
                 </div>
 

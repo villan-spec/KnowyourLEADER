@@ -106,7 +106,7 @@ MIT — free to use, modify, and distribute.
 
 Moving away from personality-driven state politics, this dashboard shifts the focus back to **local representation**. It allows citizens to search their district, find their specific constituency, and compare MLA candidates side-by-side using objective, factual data.
 
-🌍 **Live Demo:** [r-leader.vercel.app](https://r-leader.vercel.app)
+🌍 **Live Demo:** https://know-your-leader.pages.dev/
 
 ---
 

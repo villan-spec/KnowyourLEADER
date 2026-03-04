@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { District, Constituency, Candidate, Party, PARTY_ALLIANCE } from "./data";
+import { District, Constituency, Candidate, Party, PARTY_ALLIANCE, ALLOWED_PARTIES } from "./data";
 
 const dataDir = path.join(process.cwd(), "data");
 
@@ -27,7 +27,8 @@ export function getConstituencyBySlug(slug: string): (Constituency & { districtN
 
 export function getCandidates(): Candidate[] {
     const raw = fs.readFileSync(path.join(dataDir, "candidates.json"), "utf-8");
-    return JSON.parse(raw);
+    const allCandidates: Candidate[] = JSON.parse(raw);
+    return allCandidates.filter(c => ALLOWED_PARTIES.includes(c.party));
 }
 
 export function getCandidatesByConstituency(constituencyId: string): Candidate[] {

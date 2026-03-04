@@ -1,6 +1,6 @@
 import CandidateCard from "./CandidateCard";
 import type { Candidate } from "@/lib/data";
-import { PARTY_NAMES } from "@/lib/data";
+import { PARTY_NAMES, ALLOWED_PARTIES } from "@/lib/data";
 import { Users, Scale } from "lucide-react";
 
 interface ComparisonViewProps {
@@ -31,7 +31,6 @@ export default function ComparisonView({ candidates, constituencyName, constitue
     const newsCount = candidates.filter((c) => c.source === "news").length;
 
     // Generate TBA candidates for major parties that are missing
-    const MAJOR_PARTIES = ["DMK", "AIADMK", "BJP", "INC", "NTK", "TVK"];
     const existingParties = new Set(candidates.map((c) => c.party));
 
     // Some basic colors for missing parties in case they aren't in data.ts yet (TVK is already there but just to be safe)
@@ -41,12 +40,16 @@ export default function ComparisonView({ candidates, constituencyName, constitue
         "BJP": "#FF6B00",
         "INC": "#19AAED",
         "NTK": "#8B0000",
-        "TVK": "#FFAA00",
-        "VCK": "#0000FF", // Adding common missing ones just in case
-        "PMK": "#FFD700"
+        "MNM": "#B91C1C",
+        "PMK": "#FFD700",
+        "VCK": "#1D4ED8",
+        "DMDK": "#FDE047",
+        "CPI": "#DC2626",
+        "CPM": "#DC2626",
+        "AMMK": "#064E3B",
     };
 
-    const missingCandidates: Candidate[] = MAJOR_PARTIES.filter(p => !existingParties.has(p)).map(party => ({
+    const missingCandidates: Candidate[] = ALLOWED_PARTIES.filter(p => !existingParties.has(p)).map(party => ({
         id: `tba-${party}-${constituencyName.toLowerCase().replace(/\s+/g, '-')}`,
         name: "Yet to be announced",
         nameTamil: "அறிவிக்கப்படவில்லை",
@@ -64,7 +67,15 @@ export default function ComparisonView({ candidates, constituencyName, constitue
         lastUpdated: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
     }));
 
-    const displayCandidates = [...candidates, ...missingCandidates];
+    const displayCandidates = [...candidates, ...missingCandidates].sort((a, b) => {
+        const order = { "official": 1, "potential": 2, "news": 3 };
+        const scoreA = (order as any)[a.source] || 99;
+        const scoreB = (order as any)[b.source] || 99;
+        if (scoreA !== scoreB) return scoreA - scoreB;
+
+        // Secondary sort: Try to group by alliance or party size if needed, but alphabetical is fine for equals
+        return a.party.localeCompare(b.party);
+    });
 
     return (
         <div>

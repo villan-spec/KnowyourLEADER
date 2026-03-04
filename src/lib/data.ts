@@ -141,6 +141,11 @@ export const DATA_SOURCES: DataSource[] = [
     { name: "Deccan Herald", url: "https://www.deccanherald.com/india/tamil-nadu", description: "Tamil Nadu news reports", type: "news" },
 ];
 
+export const ALLOWED_PARTIES = [
+    "DMK", "AIADMK", "BJP", "INC", "NTK", "MNM",
+    "PMK", "VCK", "DMDK", "CPI", "CPM", "AMMK"
+];
+
 export function getSourceUrl(candidate: Candidate): string {
     if (candidate.sourceUrl) return candidate.sourceUrl;
     if (candidate.source === "official" || candidate.source === "potential") {

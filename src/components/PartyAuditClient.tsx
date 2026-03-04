@@ -72,6 +72,13 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
 
             if (sortBy === "assets") return b.declaredAssets - a.declaredAssets;
             if (sortBy === "cases") return b.pendingCriminalCases - a.pendingCriminalCases;
+
+            // Default sort: Official first, then by name
+            const order = { "official": 1, "potential": 2, "news": 3 };
+            const scoreA = (order as any)[a.source] || 99;
+            const scoreB = (order as any)[b.source] || 99;
+            if (scoreA !== scoreB) return scoreA - scoreB;
+
             return a.name.localeCompare(b.name);
         });
 

@@ -1,8 +1,13 @@
 import { getParties } from "@/lib/data.server";
+import { ALLOWED_PARTIES } from "@/lib/data";
 import PartyCard from "@/components/PartyCard";
 
 export default function PartyIndexPage() {
-    const parties = getParties();
+    const parties = getParties().sort((a, b) => {
+        const idxA = ALLOWED_PARTIES.indexOf(a.id);
+        const idxB = ALLOWED_PARTIES.indexOf(b.id);
+        return (idxA !== -1 ? idxA : 99) - (idxB !== -1 ? idxB : 99);
+    });
 
     return (
         <main className="min-h-screen">

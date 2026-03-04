@@ -68,6 +68,11 @@ export default function ComparisonView({ candidates, constituencyName, constitue
     }));
 
     const displayCandidates = [...candidates, ...missingCandidates].sort((a, b) => {
+        const aIsTba = a.id.startsWith("tba-");
+        const bIsTba = b.id.startsWith("tba-");
+        if (aIsTba && !bIsTba) return 1;
+        if (!aIsTba && bIsTba) return -1;
+
         const order = { "official": 1, "potential": 2, "news": 3 };
         const scoreA = (order as any)[a.source] || 99;
         const scoreB = (order as any)[b.source] || 99;

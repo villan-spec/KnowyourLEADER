@@ -41,7 +41,7 @@ export function getCandidatesByDistrict(districtId: string): Candidate[] {
 
 export function getParties(): Party[] {
     const candidates = getCandidates();
-    const partiesMap: Record<string, Party> = {};
+    const partiesMap: Record<string, Party & { validDataCount: number }> = {};
 
     candidates.forEach(c => {
         if (!partiesMap[c.party]) {
@@ -54,14 +54,21 @@ export function getParties(): Party[] {
                 averageAssets: 0,
                 educationBreakdown: { graduate: 0, nonGraduate: 0 },
                 color: c.partyColor,
-                alliance: PARTY_ALLIANCE[c.party] || "Others"
+                alliance: PARTY_ALLIANCE[c.party] || "Others",
+                validDataCount: 0
             };
         }
 
         const p = partiesMap[c.party];
         p.declaredCandidates++;
-        if (c.pendingCriminalCases === 0) p.cleanRosterPercentage++;
-        p.averageAssets += c.declaredAssets;
+
+        const hasData = c.declaredAssets > 0 || c.pendingCriminalCases > 0;
+
+        if (hasData) {
+            p.validDataCount++;
+            if (c.pendingCriminalCases === 0) p.cleanRosterPercentage++;
+            p.averageAssets += c.declaredAssets;
+        }
 
         const edu = c.education.toLowerCase();
         if (edu.includes("graduate") || edu.includes("degree") || edu.includes("post graduate") || edu.includes("doctorate") || edu.includes("b.") || edu.includes("m.") || edu.includes("ips") || edu.includes("ias")) {
@@ -71,11 +78,14 @@ export function getParties(): Party[] {
         }
     });
 
-    return Object.values(partiesMap).map(p => ({
-        ...p,
-        cleanRosterPercentage: p.declaredCandidates > 0 ? Math.round((p.cleanRosterPercentage / p.declaredCandidates) * 100) : 0,
-        averageAssets: p.declaredCandidates > 0 ? Math.round(p.averageAssets / p.declaredCandidates) : 0
-    }));
+    return Object.values(partiesMap).map(p => {
+        const { validDataCount, ...rest } = p;
+        return {
+            ...rest,
+            cleanRosterPercentage: validDataCount > 0 ? Math.round((rest.cleanRosterPercentage / validDataCount) * 100) : 0,
+            averageAssets: validDataCount > 0 ? Math.round(rest.averageAssets / validDataCount) : 0
+        };
+    });
 }
 
 export function getPartyById(id: string): Party | undefined {

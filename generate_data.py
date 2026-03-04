@@ -477,6 +477,26 @@ def main():
                 "lastUpdated": "2026-03-04",
             })
 
+    # 5.5 Deduplication Sweep
+    print("\nPerforming Deduplication Sweep...")
+    official_keys = set()
+    for c in candidates:
+        if c["source"] == "official":
+            official_keys.add((c["party"], c["constituencyId"]))
+    
+    new_candidates = []
+    dedup_removed = 0
+    for c in candidates:
+        if c["source"] in ["potential", "news"]:
+            key = (c["party"], c["constituencyId"])
+            if key in official_keys:
+                dedup_removed += 1
+                continue
+        new_candidates.append(c)
+        
+    candidates = new_candidates
+    print(f"  => Removed {dedup_removed} orphaned potential candidates")
+
     # 6. Summary
     potential_count = sum(1 for c in candidates if c["source"] == "potential")
     official_count  = sum(1 for c in candidates if c["source"] == "official")
@@ -489,6 +509,7 @@ def main():
     print(f"  Fuzzy matched:    {matched}/{len(csv_lines)}")
     print(f"  Upgraded in-place: {upgraded}")
     print(f"  New official:      {matched - upgraded + len(csv_lines) - matched - len(unmatched_names)}")
+    print(f"  Deduplicated:      {dedup_removed} potentials removed")
     if unmatched_names:
         print(f"  Unmatched CSV names ({len(unmatched_names)}):")
         for n in unmatched_names:

@@ -1,7 +1,11 @@
+"use client";
+
 import { ShieldCheck, ExternalLink } from "lucide-react";
 import { DATA_SOURCES } from "@/lib/data";
+import { useTranslation } from "@/context/LanguageContext";
 
 export default function Footer() {
+    const { t } = useTranslation();
     return (
         <footer className="border-t border-[var(--color-border-light)] mt-16">
             <div className="container-app py-8">
@@ -15,7 +19,7 @@ export default function Footer() {
 
                 {/* Source Links */}
                 <div className="mt-4 pt-4 border-t border-[var(--color-border-light)]">
-                    <p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-2">Data Sources:</p>
+                    <p className="text-xs font-medium text-[var(--color-text-tertiary)] mb-2">{t("Data Sources:")}</p>
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                         {DATA_SOURCES.map((source, i) => (
                             <span key={source.name} className="inline-flex items-center gap-1">
@@ -40,7 +44,7 @@ export default function Footer() {
 
                 <div className="mt-4 pt-4 border-t border-[var(--color-border-light)]">
                     <p className="text-xs text-[var(--color-text-tertiary)]">
-                        &copy; 2026 Know Your Leader. Built for citizens, by citizens.
+                        &copy; 2026 {t("Know Your Leader")}. {t("Built for citizens, by citizens.")}
                     </p>
                 </div>
             </div>

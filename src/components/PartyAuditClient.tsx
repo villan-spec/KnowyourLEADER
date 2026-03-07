@@ -26,7 +26,9 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
     const [filterRegion, setFilterRegion] = useState<string>("All");
     const [filterAge, setFilterAge] = useState<boolean>(false);
 
-    const partyCandidates = useMemo(() => {
+    type ExtendedCandidate = Candidate & { isTBA?: boolean };
+
+    const partyCandidates = useMemo((): ExtendedCandidate[] => {
         return constituencies.map(constituency => {
             const existing = allCandidates.find(c => c.party === party.id && c.constituencyId === constituency.id);
             if (existing) return existing;
@@ -41,14 +43,14 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                 districtId: constituency.districtId,
                 photo: null,
                 source: "potential",
-                isTBA: true, // Custom flag to identify these for styling/sorting if needed
+                isTBA: true,
                 declaredAssets: 0,
                 pendingCriminalCases: 0,
                 localIssues: [],
                 education: "",
                 age: 0,
                 lastUpdated: new Date().toISOString()
-            } as Candidate & { isTBA?: boolean };
+            } as ExtendedCandidate;
         });
     }, [allCandidates, party, constituencies]);
 
@@ -64,8 +66,8 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
         }
 
         list.sort((a, b) => {
-            const aIsTBA = (a as any).isTBA;
-            const bIsTBA = (b as any).isTBA;
+            const aIsTBA = (a as ExtendedCandidate).isTBA;
+            const bIsTBA = (b as ExtendedCandidate).isTBA;
 
             if (aIsTBA && !bIsTBA) return 1;
             if (!aIsTBA && bIsTBA) return -1;
@@ -74,9 +76,9 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
             if (sortBy === "cases") return b.pendingCriminalCases - a.pendingCriminalCases;
 
             // Default sort: Official first, then by name
-            const order = { "official": 1, "potential": 2, "news": 3 };
-            const scoreA = (order as any)[a.source] || 99;
-            const scoreB = (order as any)[b.source] || 99;
+            const order: Record<string, number> = { "official": 1, "potential": 2, "news": 3 };
+            const scoreA = order[a.source] || 99;
+            const scoreB = order[b.source] || 99;
             if (scoreA !== scoreB) return scoreA - scoreB;
 
             return a.name.localeCompare(b.name);
@@ -180,7 +182,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                 <div
                                     className="h-full rounded-full transition-all duration-1000 ease-out"
                                     style={{
-                                        width: `${(party.declaredCandidates / party.totalCandidates) * 100}%`,
+                                        width: `${party.totalCandidates > 0 ? (party.declaredCandidates / party.totalCandidates) * 100 : 0}%`,
                                         backgroundColor: party.color
                                     }}
                                 />
@@ -248,7 +250,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                 {["name", "assets", "cases"].map((s) => (
                                     <button
                                         key={s}
-                                        onClick={() => setSortBy(s as any)}
+                                        onClick={() => setSortBy(s as "name" | "assets" | "cases")}
                                         className={`px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-bold rounded-lg transition-all capitalize ${sortBy === s ? "bg-white text-accent-blue shadow-sm" : "opacity-60 hover:opacity-100"}`}
                                     >
                                         {s === "cases" ? "Cases" : s}

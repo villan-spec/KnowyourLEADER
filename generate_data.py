@@ -508,7 +508,7 @@ def main():
     print(f"  Official  (2026): {official_count}")
     print(f"  Fuzzy matched:    {matched}/{len(csv_lines)}")
     print(f"  Upgraded in-place: {upgraded}")
-    print(f"  New official:      {matched - upgraded + len(csv_lines) - matched - len(unmatched_names)}")
+    print(f"  New official:      {len(csv_lines) - upgraded}")
     print(f"  Deduplicated:      {dedup_removed} potentials removed")
     if unmatched_names:
         print(f"  Unmatched CSV names ({len(unmatched_names)}):")

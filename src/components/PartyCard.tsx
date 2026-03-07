@@ -52,7 +52,7 @@ export default function PartyCard({ party }: PartyCardProps) {
                     <div
                         className="h-full rounded-full transition-all duration-1000 ease-out"
                         style={{
-                            width: `${(party.declaredCandidates / party.totalCandidates) * 100}%`,
+                            width: `${party.totalCandidates > 0 ? (party.declaredCandidates / party.totalCandidates) * 100 : 0}%`,
                             backgroundColor: party.color
                         }}
                     />

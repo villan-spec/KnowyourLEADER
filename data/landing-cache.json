@@ -1,0 +1,131 @@
+{
+  "total_candidates": 932,
+  "total_wealth": 16609266281,
+  "clean_record_count": 871,
+  "heavy_criminal_count": 19,
+  "record_holders": {
+    "richest": {
+      "id": "cand-official-0108",
+      "name": "Kathiravan",
+      "nameTamil": "",
+      "party": "DMK",
+      "partyColor": "#E31E24",
+      "constituencyId": "manachanallur",
+      "constituencyNumber": 144,
+      "photo": null,
+      "source": "official",
+      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=1521",
+      "declaredAssets": 1212156670,
+      "liabilities": 97010900,
+      "pendingCriminalCases": 99,
+      "localIssues": [],
+      "education": "12th Pass",
+      "age": 0,
+      "lastUpdated": "2026-03-30",
+      "electionYear": 2026
+    },
+    "poorest": {
+      "id": "cand-977",
+      "name": "Kasiraman",
+      "nameTamil": "",
+      "party": "NTK",
+      "partyColor": "#8B0000",
+      "constituencyId": "mayiladuthurai",
+      "districtId": "mayiladuthurai",
+      "photo": null,
+      "source": "official",
+      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=117",
+      "declaredAssets": 168,
+      "pendingCriminalCases": 0,
+      "localIssues": [],
+      "education": "12th Pass",
+      "age": 0,
+      "lastUpdated": "2026-03-04"
+    },
+    "most_criminal": {
+      "id": "cand-official-0108",
+      "name": "Kathiravan",
+      "nameTamil": "",
+      "party": "DMK",
+      "partyColor": "#E31E24",
+      "constituencyId": "manachanallur",
+      "constituencyNumber": 144,
+      "photo": null,
+      "source": "official",
+      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=1521",
+      "declaredAssets": 1212156670,
+      "liabilities": 97010900,
+      "pendingCriminalCases": 99,
+      "localIssues": [],
+      "education": "12th Pass",
+      "age": 0,
+      "lastUpdated": "2026-03-30",
+      "electionYear": 2026
+    },
+    "most_educated": {
+      "id": "cand-3056",
+      "name": "Senthilnathan",
+      "nameTamil": "",
+      "party": "NTK",
+      "partyColor": "#8B0000",
+      "constituencyId": "thiruvaiyaru",
+      "districtId": "thanjavur",
+      "photo": null,
+      "source": "official",
+      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=3420",
+      "declaredAssets": 2111628,
+      "pendingCriminalCases": 0,
+      "localIssues": [],
+      "education": "Doctorate",
+      "age": 0,
+      "lastUpdated": "2026-03-04"
+    }
+  },
+  "party_stats": {
+    "DMK": {
+      "total": 136,
+      "avg_cases": 4.66,
+      "clean_percent": 71.3,
+      "avg_assets": 52635348
+    },
+    "AIADMK": {
+      "total": 140,
+      "avg_cases": 0.29,
+      "clean_percent": 90.0,
+      "avg_assets": 61015200
+    },
+    "PMK": {
+      "total": 18,
+      "avg_cases": 0.17,
+      "clean_percent": 88.9,
+      "avg_assets": 8982766
+    },
+    "NTK": {
+      "total": 385,
+      "avg_cases": 0.01,
+      "clean_percent": 99.2,
+      "avg_assets": 996954
+    },
+    "TVK": {
+      "total": 234,
+      "avg_cases": 0.0,
+      "clean_percent": 100.0,
+      "avg_assets": 1057155
+    },
+    "Others": {
+      "total": 19,
+      "avg_cases": 0.21,
+      "clean_percent": 84.2,
+      "avg_assets": 6096786
+    }
+  },
+  "education_breakdown": {
+    "phd": 3,
+    "graduate": 118,
+    "high_school": 49,
+    "middle": 0,
+    "primary": 18,
+    "na": 744
+  },
+  "last_updated": "2026-03-30T14:42:31.175833"
+}

@@ -30,49 +30,7 @@ export default function ComparisonView({ candidates, constituencyName, constitue
     const potentialCount = candidates.filter((c) => c.source === "potential").length;
     const newsCount = candidates.filter((c) => c.source === "news").length;
 
-    // Generate TBA candidates for major parties that are missing
-    const existingParties = new Set(candidates.map((c) => c.party));
-
-    // Some basic colors for missing parties in case they aren't in data.ts yet (TVK is already there but just to be safe)
-    const PARTY_COLORS_FALLBACK: Record<string, string> = {
-        "DMK": "#E31E24",
-        "AIADMK": "#006B3F",
-        "BJP": "#FF6B00",
-        "INC": "#19AAED",
-        "NTK": "#8B0000",
-        "MNM": "#B91C1C",
-        "PMK": "#FFD700",
-        "VCK": "#1D4ED8",
-        "DMDK": "#FDE047",
-        "CPI": "#DC2626",
-        "CPM": "#DC2626",
-        "AMMK": "#064E3B",
-    };
-
-    const missingCandidates: Candidate[] = ALLOWED_PARTIES.filter(p => !existingParties.has(p)).map(party => ({
-        id: `tba-${party}-${constituencyName.toLowerCase().replace(/\s+/g, '-')}`,
-        name: "Yet to be announced",
-        nameTamil: "அறிவிக்கப்படவில்லை",
-        party: party,
-        partyColor: PARTY_COLORS_FALLBACK[party] || "#888888",
-        constituencyId: "",
-        districtId: "",
-        photo: null,
-        source: "potential", // Consistent with empty data fallback
-        declaredAssets: 0,
-        pendingCriminalCases: 0,
-        localIssues: [],
-        education: "",
-        age: 0,
-        lastUpdated: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-    }));
-
-    const displayCandidates = [...candidates, ...missingCandidates].sort((a, b) => {
-        const aIsTba = a.id.startsWith("tba-");
-        const bIsTba = b.id.startsWith("tba-");
-        if (aIsTba && !bIsTba) return 1;
-        if (!aIsTba && bIsTba) return -1;
-
+    const displayCandidates = [...candidates].sort((a, b) => {
         const order = { "official": 1, "potential": 2, "news": 3 };
         const scoreA = (order as any)[a.source] || 99;
         const scoreB = (order as any)[b.source] || 99;

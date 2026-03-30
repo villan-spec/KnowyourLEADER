@@ -25,17 +25,16 @@ export default function Header() {
                                 <span className="text-xs sm:text-sm font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[var(--color-text-primary)] group-hover:text-accent-blue transition-colors truncate">
                                     {t("Know Your Leader")}
                                 </span>
-                                <div className="h-1 w-1 rounded-full bg-accent-blue animate-pulse shrink-0" />
+                                <div className="h-1 w-1 rounded-full bg-[var(--color-accent-blue)] animate-pulse shrink-0" />
                             </div>
-                            <span className="text-[8px] sm:text-[9px] text-tertiary font-bold uppercase tracking-[0.08em] sm:tracking-[0.1em] mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
+                            <span className="text-[8px] sm:text-[9px] text-[var(--color-text-tertiary)] font-bold uppercase tracking-[0.08em] sm:tracking-[0.1em] mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
                                 {t("Tamil Nadu 2026 Assembly Election")}
                             </span>
                         </Link>
-
                         {/* Mobile Stats (Always visible top right on mobile, hidden on desktop here) */}
                         <div className="flex flex-col items-end sm:hidden shrink-0">
                             <span className="text-[10px] font-black leading-none">234</span>
-                            <span className="text-[7px] font-bold uppercase tracking-wider text-tertiary leading-tight">{t("Constituencies")}</span>
+                            <span className="text-[7px] font-bold uppercase tracking-wider text-[var(--color-text-tertiary)] leading-tight">{t("Constituencies")}</span>
                         </div>
                     </div>
 
@@ -47,8 +46,8 @@ export default function Header() {
                             <Link
                                 href="/"
                                 className={`flex-1 sm:flex-none text-center px-3 py-2 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-lg transition-all ${pathname === "/"
-                                    ? "bg-white text-accent-blue shadow-sm"
-                                    : "text-secondary hover:text-primary"
+                                    ? "bg-white text-[var(--color-accent-blue)] shadow-sm"
+                                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                                     }`}
                             >
                                 {t("Districts")}
@@ -56,8 +55,8 @@ export default function Header() {
                             <Link
                                 href="/party"
                                 className={`flex-1 sm:flex-none text-center px-3 py-2 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-lg transition-all ${pathname.startsWith("/party")
-                                    ? "bg-white text-accent-blue shadow-sm"
-                                    : "text-secondary hover:text-primary"
+                                    ? "bg-white text-[var(--color-accent-blue)] shadow-sm"
+                                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                                     }`}
                             >
                                 {t("Party Audit")}
@@ -66,8 +65,8 @@ export default function Header() {
                                 <button
                                     onClick={() => setPulseOpen(!pulseOpen)}
                                     className={`w-full sm:w-auto text-center px-3 py-2 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-lg transition-all flex items-center justify-center gap-1 ${pulseActive
-                                        ? "bg-white text-accent-blue shadow-sm"
-                                        : "text-secondary hover:text-primary"
+                                        ? "bg-white text-[var(--color-accent-blue)] shadow-sm"
+                                        : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                                         }`}
                                 >
                                     <Zap size={10} strokeWidth={2.5} className="shrink-0" />

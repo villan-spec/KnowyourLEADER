@@ -1,7 +1,7 @@
 import MetricRing from "./MetricRing";
 import TrustBadge from "./TrustBadge";
 import IssueTag from "./IssueTag";
-import { User, AlertTriangle, ExternalLink } from "lucide-react";
+import { User } from "lucide-react";
 import type { Candidate } from "@/lib/data";
 import { formatAssets, getSourceUrl, getAssetsSourceUrl, getCriminalCasesSourceUrl, getIssuesSourceUrl, PARTY_NAMES } from "@/lib/data";
 
@@ -11,7 +11,6 @@ interface CandidateCardProps {
     maxCases: number;
 }
 
-/** Map party colors that have poor contrast on white to readable alternatives */
 function getReadablePartyColor(color: string): string {
     const lowContrast: Record<string, string> = {
         "#FFD700": "#B8860B", // PMK gold → dark goldenrod
@@ -126,34 +125,6 @@ export default function CandidateCard({ candidate, maxAssets, maxCases }: Candid
                     </div>
                 </div>
             )}
-
-            {/* Footer */}
-            <div className="flex items-center justify-between pt-2 border-t border-[var(--color-border-light)]">
-                <span className="text-xs text-[var(--color-text-tertiary)]">
-                    {isTBA ? "Awaiting announcement" : `Updated ${candidate.lastUpdated}`}
-                </span>
-                {!isTBA && (
-                    <div className="flex items-center gap-3">
-                        {candidate.pendingCriminalCases > 0 && (
-                            <span className="text-xs text-[var(--color-accent-red)] flex items-center gap-1 font-medium">
-                                <AlertTriangle size={12} strokeWidth={2.5} />
-                                {candidate.pendingCriminalCases} case{candidate.pendingCriminalCases > 1 ? "s" : ""} pending
-                            </span>
-                        )}
-                        <a
-                            href={sourceUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-[var(--color-accent-blue)] flex items-center gap-1 font-medium hover:opacity-80 transition-opacity"
-                            style={{ textDecoration: "none" }}
-                            title={isOfficial ? "View on MyNeta.info (ECI 2026)" : isPotential ? "View on MyNeta.info (2021 data)" : "Search news source"}
-                        >
-                            Source
-                            <ExternalLink size={10} strokeWidth={2.5} />
-                        </a>
-                    </div>
-                )}
-            </div>
         </div>
     );
 }

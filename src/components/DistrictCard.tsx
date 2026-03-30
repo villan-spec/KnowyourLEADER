@@ -42,13 +42,9 @@ export default function DistrictCard({ id, name, nameTamil, constituencyCount, c
                     <span className="text-xs text-[var(--color-text-secondary)]">
                         <span className="font-semibold text-[var(--color-text-primary)]">{constituencyCount}</span> constituencies
                     </span>
-                    {candidateCount > 0 ? (
-                        <span className="text-xs text-[var(--color-text-secondary)]">
-                            <span className="font-semibold text-[var(--color-text-primary)]">{candidateCount}</span> candidates
-                        </span>
-                    ) : (
-                        <span className="text-xs text-[var(--color-text-tertiary)] italic">Yet to be announced</span>
-                    )}
+                    <span className="text-xs text-[var(--color-text-secondary)]">
+                        <span className="font-semibold text-[var(--color-text-primary)]">{candidateCount}</span> candidates
+                    </span>
                 </div>
             </div>
         </Link>

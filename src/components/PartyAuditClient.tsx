@@ -29,30 +29,8 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
     type ExtendedCandidate = Candidate & { isTBA?: boolean };
 
     const partyCandidates = useMemo((): ExtendedCandidate[] => {
-        return constituencies.map(constituency => {
-            const existing = allCandidates.find(c => c.party === party.id && c.constituencyId === constituency.id);
-            if (existing) return existing;
-
-            return {
-                id: `tba-${party.id}-${constituency.id}`,
-                name: "Yet to be announced",
-                nameTamil: "அறிவிக்கப்படவில்லை",
-                party: party.id,
-                partyColor: party.color,
-                constituencyId: constituency.id,
-                districtId: constituency.districtId,
-                photo: null,
-                source: "potential",
-                isTBA: true,
-                declaredAssets: 0,
-                pendingCriminalCases: 0,
-                localIssues: [],
-                education: "",
-                age: 0,
-                lastUpdated: new Date().toISOString()
-            } as ExtendedCandidate;
-        });
-    }, [allCandidates, party, constituencies]);
+        return allCandidates.filter(c => c.party === party.id);
+    }, [allCandidates, party]);
 
     const filteredCandidates = useMemo(() => {
         let list = [...partyCandidates];
@@ -116,7 +94,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
             <div className="container-app py-10 sm:py-16">
                 <Link
                     href="/party"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-accent-blue mb-8 hover:opacity-70 transition-opacity"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent-blue)] mb-8 hover:opacity-70 transition-opacity"
                 >
                     <ArrowLeft size={16} /> Back to Parties
                 </Link>
@@ -153,16 +131,16 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                             </div>
                         </div>
                         <h1 className="text-3xl sm:text-4xl font-black mb-1">{PARTY_NAMES[party.id] || party.id}</h1>
-                        <p className="text-xs font-bold text-secondary uppercase tracking-widest">{party.alliance} Alliance</p>
+                        <p className="text-xs font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">{party.alliance} Alliance</p>
                     </div>
 
                     <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 items-start">
                         <div className="card-glass p-4 sm:p-5">
                             <div>
-                                <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Average Wealth</p>
+                                <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-1">Average Wealth</p>
                                 <h3 className="text-lg sm:text-2xl font-bold">{formatAssets(party.averageAssets)}</h3>
                             </div>
-                            <p className="text-[10px] sm:text-xs text-secondary mt-3 italic">Declared Assets per Candidate</p>
+                            <p className="text-[10px] sm:text-xs text-[var(--color-text-secondary)] mt-3 italic">Declared Assets per Candidate</p>
                         </div>
 
                         <div className="card-glass p-4 sm:p-5">
@@ -170,12 +148,12 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                 graduate={party.educationBreakdown.graduate}
                                 nonGraduate={party.educationBreakdown.nonGraduate}
                             />
-                            <p className="text-[10px] sm:text-xs text-secondary mt-3 italic">Qualifications Breakdown</p>
+                            <p className="text-[10px] sm:text-xs text-[var(--color-text-secondary)] mt-3 italic">Qualifications Breakdown</p>
                         </div>
 
                         <div className="card-glass p-4 sm:p-5 col-span-2 md:col-span-1">
                             <div>
-                                <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-tertiary mb-1">Ticket Allocation</p>
+                                <p className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-1">Ticket Allocation</p>
                                 <h3 className="text-lg sm:text-2xl font-bold">{party.declaredCandidates} / {party.totalCandidates}</h3>
                             </div>
                             <div className="w-full h-1.5 sm:h-2 bg-black/5 rounded-full overflow-hidden mt-3">
@@ -192,12 +170,12 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                         {/* Tracker Section (Moved to align under the 3 boxes) */}
                         <div className="card-glass border border-[var(--color-border-light)] flex items-center justify-between col-span-2 md:col-span-3 mt-2 sm:mt-0 p-3 sm:p-5">
                             <div className="flex flex-col items-center justify-center w-1/2 border-r border-[var(--color-border-light)]">
-                                <span className="text-2xl sm:text-3xl font-bold text-accent-green">{officialCount}</span>
-                                <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Official Candidates</span>
+                                <span className="text-2xl sm:text-3xl font-bold text-[var(--color-accent-green)]">{officialCount}</span>
+                                <span className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-bold uppercase tracking-wider mt-1 text-center">Official Candidates</span>
                             </div>
                             <div className="flex flex-col items-center justify-center w-1/2">
-                                <span className="text-2xl sm:text-3xl font-bold text-accent-blue">{potentialCount}</span>
-                                <span className="text-[10px] sm:text-xs text-tertiary font-bold uppercase tracking-wider mt-1 text-center">Potential Candidates</span>
+                                <span className="text-2xl sm:text-3xl font-bold text-[var(--color-accent-blue)]">{potentialCount}</span>
+                                <span className="text-[10px] sm:text-xs text-[var(--color-text-tertiary)] font-bold uppercase tracking-wider mt-1 text-center">Potential Candidates</span>
                             </div>
                         </div>
                     </div>
@@ -224,7 +202,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                             </h3>
 
                             <div className="flex items-center gap-2 shrink-0">
-                                <span className="text-[10px] sm:text-xs font-bold text-tertiary uppercase tracking-wider">Region:</span>
+                                <span className="text-[10px] sm:text-xs font-bold text-[var(--color-text-tertiary)] uppercase tracking-wider">Region:</span>
                                 <select
                                     value={filterRegion}
                                     onChange={(e) => setFilterRegion(e.target.value)}
@@ -236,14 +214,14 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
 
                             <button
                                 onClick={() => setFilterAge(!filterAge)}
-                                className={`px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${filterAge ? "bg-accent-blue text-white" : "bg-black/5 hover:bg-black/10"}`}
+                                className={`px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${filterAge ? "bg-[var(--color-accent-blue)] text-white" : "bg-black/5 hover:bg-black/10"}`}
                             >
                                 Youth
                             </button>
                         </div>
 
                         <div className="flex items-center gap-3 sm:gap-4 justify-between sm:justify-end">
-                            <span className="text-[10px] sm:text-xs font-bold text-tertiary uppercase tracking-wider flex items-center gap-1 shrink-0">
+                            <span className="text-[10px] sm:text-xs font-bold text-[var(--color-text-tertiary)] uppercase tracking-wider flex items-center gap-1 shrink-0">
                                 <SortAsc size={14} /> Sort:
                             </span>
                             <div className="flex bg-black/5 p-1 rounded-xl">
@@ -251,7 +229,7 @@ export default function PartyAuditClient({ party, allCandidates, constituencies 
                                     <button
                                         key={s}
                                         onClick={() => setSortBy(s as "name" | "assets" | "cases")}
-                                        className={`px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-bold rounded-lg transition-all capitalize ${sortBy === s ? "bg-white text-accent-blue shadow-sm" : "opacity-60 hover:opacity-100"}`}
+                                        className={`px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-bold rounded-lg transition-all capitalize ${sortBy === s ? "bg-white text-[var(--color-accent-blue)] shadow-sm" : "opacity-60 hover:opacity-100"}`}
                                     >
                                         {s === "cases" ? "Cases" : s}
                                     </button>

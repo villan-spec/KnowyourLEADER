@@ -28,7 +28,10 @@ export function getConstituencyBySlug(slug: string): (Constituency & { districtN
 export function getCandidates(): Candidate[] {
     const raw = fs.readFileSync(path.join(dataDir, "candidates.json"), "utf-8");
     const allCandidates: Candidate[] = JSON.parse(raw);
-    return allCandidates.filter(c => ALLOWED_PARTIES.includes(c.party));
+    return allCandidates.filter(c => 
+        ALLOWED_PARTIES.includes(c.party) && 
+        c.source === "official"
+    );
 }
 
 export function getCandidatesByConstituency(constituencyId: string): Candidate[] {

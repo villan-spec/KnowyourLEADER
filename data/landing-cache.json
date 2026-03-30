@@ -1,7 +1,7 @@
 {
-  "total_candidates": 932,
-  "total_wealth": 16609266281,
-  "clean_record_count": 871,
+  "total_candidates": 698,
+  "total_wealth": 16445484476,
+  "clean_record_count": 638,
   "heavy_criminal_count": 19,
   "record_holders": {
     "richest": {
@@ -11,6 +11,7 @@
       "party": "DMK",
       "partyColor": "#E31E24",
       "constituencyId": "manachanallur",
+      "districtId": "tiruchirappalli",
       "constituencyNumber": 144,
       "photo": null,
       "source": "official",
@@ -25,22 +26,25 @@
       "electionYear": 2026
     },
     "poorest": {
-      "id": "cand-977",
-      "name": "Kasiraman",
+      "id": "cand-official-0290",
+      "name": "K. Hari",
       "nameTamil": "",
-      "party": "NTK",
-      "partyColor": "#8B0000",
-      "constituencyId": "mayiladuthurai",
-      "districtId": "mayiladuthurai",
+      "party": "AIADMK",
+      "partyColor": "#006B3F",
+      "constituencyId": "tiruttani",
+      "districtId": "tiruvallur",
+      "constituencyNumber": 3,
       "photo": null,
       "source": "official",
-      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=117",
-      "declaredAssets": 168,
+      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=3501",
+      "declaredAssets": 17000,
+      "liabilities": 0,
       "pendingCriminalCases": 0,
       "localIssues": [],
-      "education": "12th Pass",
+      "education": "5th Pass",
       "age": 0,
-      "lastUpdated": "2026-03-04"
+      "lastUpdated": "2026-03-30",
+      "electionYear": 2026
     },
     "most_criminal": {
       "id": "cand-official-0108",
@@ -49,6 +53,7 @@
       "party": "DMK",
       "partyColor": "#E31E24",
       "constituencyId": "manachanallur",
+      "districtId": "tiruchirappalli",
       "constituencyNumber": 144,
       "photo": null,
       "source": "official",
@@ -63,22 +68,25 @@
       "electionYear": 2026
     },
     "most_educated": {
-      "id": "cand-3056",
-      "name": "Senthilnathan",
+      "id": "cand-official-0105",
+      "name": "Inigo Irudhayaraj",
       "nameTamil": "",
-      "party": "NTK",
-      "partyColor": "#8B0000",
-      "constituencyId": "thiruvaiyaru",
-      "districtId": "thanjavur",
+      "party": "DMK",
+      "partyColor": "#E31E24",
+      "constituencyId": "tiruchirappalli-east",
+      "districtId": "unknown",
+      "constituencyNumber": 141,
       "photo": null,
       "source": "official",
-      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=3420",
-      "declaredAssets": 2111628,
-      "pendingCriminalCases": 0,
+      "sourceUrl": "https://myneta.info/TamilNadu2021/candidate.php?candidate_id=2062",
+      "declaredAssets": 173711662,
+      "liabilities": 14815941,
+      "pendingCriminalCases": 2,
       "localIssues": [],
       "education": "Doctorate",
       "age": 0,
-      "lastUpdated": "2026-03-04"
+      "lastUpdated": "2026-03-30",
+      "electionYear": 2026
     }
   },
   "party_stats": {
@@ -101,10 +109,10 @@
       "avg_assets": 8982766
     },
     "NTK": {
-      "total": 385,
+      "total": 151,
       "avg_cases": 0.01,
-      "clean_percent": 99.2,
-      "avg_assets": 996954
+      "clean_percent": 98.7,
+      "avg_assets": 1457256
     },
     "TVK": {
       "total": 234,
@@ -120,12 +128,12 @@
     }
   },
   "education_breakdown": {
-    "phd": 3,
-    "graduate": 118,
-    "high_school": 49,
+    "phd": 2,
+    "graduate": 107,
+    "high_school": 46,
     "middle": 0,
-    "primary": 18,
-    "na": 744
+    "primary": 17,
+    "na": 526
   },
-  "last_updated": "2026-03-30T14:42:31.175833"
+  "last_updated": "2026-03-30T18:01:42.611931"
 }

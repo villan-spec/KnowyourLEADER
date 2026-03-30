@@ -143,7 +143,8 @@ export const DATA_SOURCES: DataSource[] = [
 
 export const ALLOWED_PARTIES = [
     "DMK", "AIADMK", "BJP", "INC", "NTK", "MNM",
-    "PMK", "VCK", "DMDK", "CPI", "CPM", "AMMK"
+    "PMK", "VCK", "DMDK", "CPI", "CPM", "AMMK",
+    "TVK", "MDMK", "TMC(M)", "IJK"
 ];
 
 export function getSourceUrl(candidate: Candidate): string {

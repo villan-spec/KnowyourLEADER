@@ -56,7 +56,6 @@ export default function DistrictHubClient({ districts, candidates, dataSources }
 
     const totalConstituencies = districts.reduce((sum, d) => sum + d.constituencies.length, 0);
     const officialCount = candidates.filter(c => c.source === "official").length;
-    const potentialCount = candidates.filter(c => c.source === "potential" || c.source === "news").length;
 
     return (
         <div className="container-app py-10 sm:py-16">
@@ -75,14 +74,10 @@ export default function DistrictHubClient({ districts, candidates, dataSources }
             </div>
 
             {/* Tracker Section */}
-            <div className="max-w-md mx-auto mb-8 sm:mb-10 p-4 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border-light)] flex items-center justify-between">
-                <div className="flex flex-col items-center justify-center w-1/2 border-r border-[var(--color-border-light)]">
-                    <span className="text-3xl font-bold text-[var(--color-accent-green)]">{officialCount}</span>
-                    <span className="text-xs text-[var(--color-text-tertiary)] font-medium mt-1">{t("Official Candidates")}</span>
-                </div>
-                <div className="flex flex-col items-center justify-center w-1/2">
-                    <span className="text-3xl font-bold text-[var(--color-accent-blue)]">{potentialCount}</span>
-                    <span className="text-xs text-[var(--color-text-tertiary)] font-medium mt-1">{t("Potential Candidates")}</span>
+            <div className="max-w-md mx-auto mb-8 sm:mb-10 p-5 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border-light)] flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center w-full">
+                    <span className="text-4xl font-black text-[var(--color-accent-green)]">{officialCount}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mt-2">{t("Official Candidates Tracked")}</span>
                 </div>
             </div>
 

@@ -35,19 +35,19 @@ export default function LiveStatsCounter({ stats }: LiveStatsCounterProps) {
     ];
 
     return (
-        <section className="py-12 relative z-10">
+        <section className="py-8 relative z-10">
             <div className="container-app">
-                <div className="text-center mb-10">
-                    <h2 className="text-3xl font-black flex justify-center items-center gap-2">
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-black flex justify-center items-center gap-2">
                         <FileSpreadsheet className="text-[var(--color-accent-blue)]" />
                         TAMIL NADU 2026: BY THE NUMBERS
                     </h2>
-                    <p className="text-tamil text-[var(--color-text-secondary)] mt-2 italic font-semibold">
+                    <p className="text-tamil text-[var(--color-text-secondary)] mt-1 italic font-semibold text-sm">
                         இலக்கங்களில் பார்ப்போம்
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     {/* Total Candidates */}
                     <div className="card-glass p-6 sm:p-8 flex flex-col justify-between group overflow-hidden relative">
                         <div className="absolute right-[-20px] top-[-20px] opacity-[0.03] group-hover:scale-110 transition-transform duration-500">
@@ -55,12 +55,12 @@ export default function LiveStatsCounter({ stats }: LiveStatsCounterProps) {
                         </div>
                         <div>
                             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-2">Total Candidates</p>
-                            <h3 className="text-5xl sm:text-6xl font-black text-[var(--color-accent-blue)]">
+                            <h3 className="text-4xl sm:text-5xl font-black text-[var(--color-accent-blue)]">
                                 <AnimatedCounter value={stats.total_candidates} />
                             </h3>
                         </div>
-                        <div className="mt-6 border-t border-[var(--color-border-light)] pt-4">
-                            <p className="font-medium text-sm text-[var(--color-text-secondary)]">Across 234 seats • 38 districts</p>
+                        <div className="mt-4 border-t border-[var(--color-border-light)] pt-4">
+                            <p className="font-medium text-xs text-[var(--color-text-secondary)]">Across 234 seats • 38 districts</p>
                         </div>
                     </div>
 
@@ -71,60 +71,36 @@ export default function LiveStatsCounter({ stats }: LiveStatsCounterProps) {
                         </div>
                         <div>
                             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-2">Total Declared Wealth</p>
-                            <h3 className="text-5xl sm:text-6xl font-black text-[var(--color-tn-temple)] font-mono">
+                            <h3 className="text-4xl sm:text-5xl font-black text-[var(--color-tn-temple)] font-mono">
                                 ₹<AnimatedCounter value={Math.floor(stats.total_wealth / 10000000)} />
-                                <span className="text-2xl sm:text-3xl"> Cr</span>
+                                <span className="text-xl sm:text-2xl"> Cr</span>
                             </h3>
                         </div>
-                        <div className="mt-6 border-t border-[var(--color-border-light)] pt-4">
-                            <p className="font-semibold text-sm"> Enough to build {schoolsCanBuild.toLocaleString()} new schools.</p>
-                            <div className="flex items-center gap-1.5 text-tamil text-xs text-[var(--color-text-secondary)] italic mt-1">
+                        <div className="mt-4 border-t border-[var(--color-border-light)] pt-4">
+                            <p className="font-semibold text-xs"> Enough to build {schoolsCanBuild.toLocaleString()} new schools.</p>
+                            <div className="flex items-center gap-1.5 text-tamil text-[10px] text-[var(--color-text-secondary)] italic mt-0.5">
                                 <span>Or buy {dosaPlates.toLocaleString()} Saravana Bhavan dosa plates</span>
-                                <HandCoins size={12} />
+                                <HandCoins size={10} />
                             </div>
                         </div>
                     </div>
 
                     {/* Clean Records */}
-                    <div className="card-glass p-6 sm:p-8 flex flex-col justify-between group overflow-hidden relative">
+                    <div className="card-glass p-6 sm:p-8 flex flex-col justify-between group overflow-hidden relative col-span-1 md:col-span-2">
                         <div className="absolute right-[-20px] top-[-20px] opacity-[0.03] group-hover:scale-110 transition-transform duration-500">
                             <FileSpreadsheet size={200} />
                         </div>
-                        <div>
-                            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-2">Clean Record</p>
+                        <div className="text-center">
+                            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-2">Verified Clean Records</p>
                             <h3 className="text-5xl sm:text-6xl font-black text-[var(--color-accent-green)]">
                                 <AnimatedCounter value={stats.clean_record_count} />
-                                <span className="text-lg text-[var(--color-text-tertiary)] ml-2">
+                                <span className="text-xl text-[var(--color-text-tertiary)] ml-2">
                                     ({Math.round((stats.clean_record_count / stats.total_candidates) * 100)}%)
                                 </span>
                             </h3>
-                        </div>
-                        <div className="mt-6 border-t border-[var(--color-border-light)] pt-4">
-                            <div className="flex items-center gap-2 font-medium text-sm text-[var(--color-text-secondary)]">
-                                <span>"Good News!"</span>
-                                <CheckCircle2 size={16} className="text-[var(--color-accent-green)]" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* 10+ Criminal Cases */}
-                    <div className="card-glass p-6 sm:p-8 flex flex-col justify-between group overflow-hidden relative">
-                        <div className="absolute right-[-20px] top-[-20px] opacity-[0.03] group-hover:scale-110 transition-transform duration-500">
-                            <Scale size={200} />
-                        </div>
-                        <div>
-                            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-tertiary)] mb-2">10+ Criminal Cases</p>
-                            <h3 className="text-5xl sm:text-6xl font-black text-[var(--color-accent-red)]">
-                                <AnimatedCounter value={stats.heavy_criminal_count} />
-                                <span className="text-lg text-[var(--color-text-tertiary)] ml-2">
-                                    ({Math.round((stats.heavy_criminal_count / stats.total_candidates) * 100)}%)
-                                </span>
-                            </h3>
-                        </div>
-                        <div className="mt-6 border-t border-[var(--color-border-light)] pt-4">
-                            <div className="flex items-center gap-2 font-medium text-sm text-[var(--color-text-secondary)]">
-                                <span>"Concerning..."</span>
-                                <AlertCircle size={16} className="text-[var(--color-accent-red)]" />
+                            <div className="mt-3 flex items-center justify-center gap-2 font-black text-[10px] text-[var(--color-accent-green)] uppercase tracking-widest">
+                                <span>Verified No Criminal Cases</span>
+                                <CheckCircle2 size={14} />
                             </div>
                         </div>
                     </div>

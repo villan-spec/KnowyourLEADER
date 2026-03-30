@@ -98,7 +98,7 @@ export default function HeroRecordBreakers({ recordHolders }: HeroRecordBreakers
     ];
 
     return (
-        <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-20 overflow-hidden">
+        <section className="relative pt-12 pb-8 sm:pt-16 sm:pb-12 overflow-hidden">
             {/* Background Image / Pattern */}
             <div 
                 className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none scale-110" 
@@ -110,32 +110,32 @@ export default function HeroRecordBreakers({ recordHolders }: HeroRecordBreakers
             />
             
             {/* Funny Floating Illustrations */}
-            <div className="absolute top-[15%] -left-10 w-48 h-48 opacity-20 hover:opacity-50 transition-opacity hidden xl:block animate-pulse pointer-events-none">
+            <div className="absolute top-[10%] -left-10 w-40 h-40 opacity-20 hover:opacity-50 transition-opacity hidden xl:block animate-pulse pointer-events-none">
                 <img src="/images/cartoon-wealth.png" alt="Humor 1" className="rotate-[-15deg]" />
             </div>
-            <div className="absolute top-[20%] -right-10 w-64 h-64 opacity-20 hover:opacity-50 transition-opacity hidden xl:block animate-bounce pointer-events-none" style={{ animationDuration: '4s' }}>
+            <div className="absolute top-[15%] -right-10 w-56 h-56 opacity-20 hover:opacity-50 transition-opacity hidden xl:block animate-bounce pointer-events-none" style={{ animationDuration: '4s' }}>
                 <img src="/images/cartoon-transparency.png" alt="Humor 2" className="rotate-[12deg]" />
             </div>
             
             <div className="container-app relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in delay-100">
-                    <div className="mb-4 flex justify-center">
-                        <div className="px-4 py-1.5 rounded-full bg-[var(--color-accent-blue)]/10 text-[var(--color-accent-blue)] text-xs font-black uppercase tracking-widest border border-[var(--color-accent-blue)]/20 shadow-sm animate-bounce">
+                <div className="text-center max-w-4xl mx-auto mb-8 animate-fade-in delay-100">
+                    <div className="mb-3 flex justify-center">
+                        <div className="px-3 py-1 rounded-full bg-[var(--color-accent-blue)]/10 text-[var(--color-accent-blue)] text-[10px] font-black uppercase tracking-widest border border-[var(--color-accent-blue)]/20 shadow-sm">
                            🎯 MISSION: CLEAN ASSEMBLY 2026
                         </div>
                     </div>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4">
-                        <span className="block text-[var(--color-text-secondary)] text-xl sm:text-2xl font-bold mb-2">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2">
+                        <span className="block text-[var(--color-text-secondary)] text-sm sm:text-base font-bold mb-1">
                             தமிழ்நாடு உங்களை அழைக்கிறது
                         </span>
                         Tamil Nadu's Election
                         <span className="block text-[var(--color-accent-blue)]">Hall of Records</span>
                     </h1>
-                    <div className="flex flex-col items-center mt-6">
-                         <p className="text-lg sm:text-xl text-[var(--color-text-secondary)] italic max-w-lg">
+                    <div className="flex flex-col items-center mt-3">
+                         <p className="text-base sm:text-lg text-[var(--color-text-secondary)] italic max-w-lg leading-snug">
                             "1,045 candidates. Some impressive. Some... well, let's just say they have 'big personalities'."
                          </p>
-                         <div className="mt-4 flex gap-4 text-[10px] font-black uppercase tracking-widest text-[var(--color-text-tertiary)] opacity-60">
+                         <div className="mt-2 flex gap-4 text-[9px] font-black uppercase tracking-widest text-[var(--color-text-tertiary)] opacity-60">
                              <span>#DataMeetsHumor</span>
                              <span>•</span>
                              <span>#VoterIsKing</span>
@@ -168,23 +168,19 @@ export default function HeroRecordBreakers({ recordHolders }: HeroRecordBreakers
                                     {card.value}
                                 </p>
                                 
-                                <div className="border-l-2 border-[var(--color-border)] pl-4 py-1 mb-6">
-                                    <p className="font-bold text-sm text-[var(--color-text-primary)]">{card.name}</p>
-                                    <p className="text-xs font-semibold text-[var(--color-text-secondary)] mt-1">{card.party} • {card.constituency.replace('-', ' ')}</p>
+                                <div className="border-l-2 border-[var(--color-border)] pl-3 py-0.5 mb-4">
+                                    <p className="font-bold text-xs text-[var(--color-text-primary)]">{card.name}</p>
+                                    <p className="text-[10px] font-semibold text-[var(--color-text-secondary)]">{card.party}</p>
                                 </div>
                                 
-                                <div className="bg-black/5 rounded-lg p-3 mb-6 relative">
-                                    <div className="absolute -left-1 -top-2 text-2xl opacity-20 text-[var(--color-text-tertiary)] font-serif">"</div>
-                                    <p className="text-xs font-medium italic text-center z-10 relative">
+                                <div className="bg-black/5 rounded-lg p-2.5 mb-4 relative">
+                                    <p className="text-[10px] font-medium italic text-center">
                                         {card.humorEn}
-                                    </p>
-                                    <p className="text-tamil text-[10px] text-center mt-1 text-[var(--color-text-secondary)] italic">
-                                        {card.humorTa}
                                     </p>
                                 </div>
                             </div>
                             
-                            <Link href={`/constituency/${card.slug}`} className="block w-full text-center py-2.5 rounded-lg bg-white border border-[var(--color-border-light)] text-xs font-bold hover:bg-[var(--color-accent-blue)] hover:text-white hover:border-[var(--color-accent-blue)] transition-all shadow-sm">
+                            <Link href={`/constituency/${card.slug}`} className="block w-full text-center py-2 rounded-lg bg-white border border-[var(--color-border-light)] text-[10px] font-bold hover:bg-[var(--color-accent-blue)] hover:text-white transition-all">
                                 VIEW CANDIDATE
                             </Link>
                         </div>

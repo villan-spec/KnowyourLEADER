@@ -4,7 +4,7 @@ import HeroRecordBreakers from "@/components/landing/HeroRecordBreakers";
 import LiveStatsCounter from "@/components/landing/LiveStatsCounter";
 import ConstituencyFinder from "@/components/landing/ConstituencyFinder";
 import PartyComparisonDashboard from "@/components/landing/PartyComparisonDashboard";
-import { getDistricts, getAllConstituencies } from "@/lib/data.server";
+import { getDistricts, getAllConstituencies, getCandidates } from "@/lib/data.server";
 
 export default async function LandingPage() {
     const cachePath = path.join(process.cwd(), "data", "landing-cache.json");
@@ -19,6 +19,7 @@ export default async function LandingPage() {
 
     const constituencies = getAllConstituencies();
     const districts = getDistricts();
+    const candidates = getCandidates();
 
     return (
         <main className="min-h-screen bg-[var(--color-background)]">
@@ -26,7 +27,7 @@ export default async function LandingPage() {
             <HeroRecordBreakers recordHolders={stats.record_holders} />
 
             {/* Search/Finder Section - Moved below Hero Section as requested */}
-            <ConstituencyFinder constituencies={constituencies} districts={districts} />
+            <ConstituencyFinder constituencies={constituencies} districts={districts} candidates={candidates} />
 
             {/* Stats Section */}
             <LiveStatsCounter stats={stats} />

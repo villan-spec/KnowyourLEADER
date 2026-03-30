@@ -16,7 +16,7 @@ export default function ComparisonView({ candidates, constituencyName, constitue
                 <Users size={48} strokeWidth={1.2} className="mx-auto mb-4 text-[var(--color-text-tertiary)]" />
                 <h3 className="text-lg font-semibold text-[var(--color-text-secondary)]">No Candidates Yet</h3>
                 <p className="text-sm text-[var(--color-text-tertiary)] mt-2 max-w-md mx-auto">
-                    Candidate data for this constituency hasn&apos;t been sourced yet. Check back as our automation pipeline discovers new data from official filings and news sources.
+                    Official candidate data for this constituency hasn&apos;t been announced yet. Check back soon for verified information.
                 </p>
             </div>
         );
@@ -56,17 +56,7 @@ export default function ComparisonView({ candidates, constituencyName, constitue
                 <div className="flex items-center gap-3 ml-13 sm:ml-0">
                     {officialCount > 0 && (
                         <span className="text-xs px-3 py-1.5 rounded-full bg-[var(--color-accent-green)]/8 text-[var(--color-accent-green)] font-semibold">
-                            {officialCount} Official
-                        </span>
-                    )}
-                    {potentialCount > 0 && (
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-[var(--color-accent-amber)]/8 text-[var(--color-accent-amber)] font-semibold">
-                            {potentialCount} Potential
-                        </span>
-                    )}
-                    {newsCount > 0 && (
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-[var(--color-accent-blue)]/8 text-[var(--color-accent-blue)] font-semibold">
-                            {newsCount} News-Sourced
+                            {officialCount} Official Verified
                         </span>
                     )}
                 </div>

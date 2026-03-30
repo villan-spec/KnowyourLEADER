@@ -41,12 +41,16 @@ PARTY_COLORS = {
 # Map party name variants in TXT → Excel party code
 PARTY_ALIAS = {
     "NTK":    "Naam Tamilar Katchi",
-    "TVK":    "TVK",     # may not be in Excel (new party 2024)
+    "TVK":    "TVK",     
     "PMK":    "Pattali Makkal Katchi",
     "VCK":    "Viduthalai Chiruthaigal Katchi",
     "MDMK":   "Dravida Murpokku Makkal Katchi",
     "TMC(M)": "TMC",
     "IJK":    "IJK",
+    "DMK":    "DMK",
+    "AIADMK": "AIADMK",
+    "BJP":    "BJP",
+    "INC":    "INC",
 }
 
 FUZZY_THRESHOLD        = 75   # name fuzzy match floor
@@ -128,7 +132,7 @@ def parse_official_txt(path: Path) -> list:
 
             hm = HEADER_RE.match(line)
             if hm:
-                current_party = hm.group(1).strip()
+                current_party = hm.group(1).split(" ")[0].strip() # DMK, AIADMK, etc
                 continue
 
             cm = CANDIDATE_RE.match(line)
@@ -234,7 +238,7 @@ def find_match(record: dict, df: pd.DataFrame) -> dict | None:
 _ID_COUNTER = [1]
 
 
-def make_candidate(record: dict, row: dict | None) -> dict:
+def make_candidate(record: dict, row: dict | None, dist_id: str) -> dict:
     party    = record["party"]
     cand_id  = f"cand-official-{_ID_COUNTER[0]:04d}"
     _ID_COUNTER[0] += 1
@@ -242,12 +246,14 @@ def make_candidate(record: dict, row: dict | None) -> dict:
     assets    = row["_assets"]   if row else 0
     liabs     = row["_liabs"]    if row else 0
     criminal  = row["_criminal"] if row else 0
-    education = str(row.get("Education", "")).strip() if row else "Unknown"
+    education = str(row.get("Education", "")).strip() if row else "NIL"
     src_url   = str(row.get("Link", "")).strip()       if row else ""
+    
     if src_url and not src_url.startswith("http"):
         src_url = "https://myneta.info/TamilNadu2021/" + src_url
-    if education in ("", "nan"):
-        education = "Unknown"
+    
+    if education in ("", "nan", "Unknown"):
+        education = "NIL"
 
     return {
         "id":                   cand_id,
@@ -256,6 +262,7 @@ def make_candidate(record: dict, row: dict | None) -> dict:
         "party":                party,
         "partyColor":           PARTY_COLORS.get(party, "#999999"),
         "constituencyId":       slugify(record["constituency"]),
+        "districtId":           dist_id,
         "constituencyNumber":   record["const_no"],
         "photo":                None,
         "source":               "official",
@@ -275,32 +282,11 @@ def make_candidate(record: dict, row: dict | None) -> dict:
 # Step 5 – Update candidates.json
 # ─────────────────────────────────────────────────────────────────────────────
 
-def update_json(official_records: list, excel_df: pd.DataFrame):
-    with open(CANDIDATES, encoding="utf-8") as f:
-        db: list = json.load(f)
-    print(f"[json]   Loaded {len(db)} existing candidates")
-
-    # Set of (constituency_slug, party_upper) covered by the official list
-    official_keys = {
-        (slugify(r["constituency"]), r["party"].upper())
-        for r in official_records
-    }
-
-    # Keep ONLY existing official candidates, remove any potential or unannounced
-    kept    = []
-    removed = 0
-    for c in db:
-        if c.get("source") == "official":
-            kept.append(c)
-        else:
-            removed += 1
-
-    print(f"[json]   Removed {removed} obsolete potential candidates")
-
-    # Build official entries
-    matched = 0
+def update_json(official_records: list, excel_df: pd.DataFrame, const_to_dist: dict):
+    # Clear old database to avoid duplication, strictly following the new list
     new_officials = []
     unmatched_names = []
+    matched = 0
 
     for record in official_records:
         row = find_match(record, excel_df)
@@ -308,7 +294,10 @@ def update_json(official_records: list, excel_df: pd.DataFrame):
             matched += 1
         else:
             unmatched_names.append(f"{record['name']} | {record['party']} | {record['constituency']}")
-        new_officials.append(make_candidate(record, row))
+        
+        c_slug = slugify(record["constituency"])
+        dist_id = const_to_dist.get(c_slug, "unknown")
+        new_officials.append(make_candidate(record, row, dist_id))
 
     print(f"[match]  Matched {matched}/{len(official_records)} candidates to Excel")
 
@@ -318,14 +307,14 @@ def update_json(official_records: list, excel_df: pd.DataFrame):
             f.write("\n".join(unmatched_names))
         print(f"[match]  Unmatched list saved -> {unmatched_path.name}")
 
-    final_db = kept + new_officials
-    print(f"[json]   Final size: {len(final_db)} candidates  ({len(kept)} kept + {len(new_officials)} new official)")
+    final_db = new_officials
+    print(f"[json]   Final size: {len(final_db)} candidates")
 
     with open(CANDIDATES, "w", encoding="utf-8") as f:
         json.dump(final_db, f, indent=2, ensure_ascii=False)
 
     print(f"[json]   Saved -> {CANDIDATES}")
-    return matched, len(official_records) - matched, removed
+    return matched, len(official_records) - matched, 0
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -341,9 +330,19 @@ def main():
         shutil.copy2(CANDIDATES, BACKUP)
         print(f"[backup] {BACKUP.name}")
 
+    # Load districts to get mapping
+    DISTRICTS_JSON = ROOT / "data" / "districts.json"
+    const_to_dist = {}
+    if DISTRICTS_JSON.exists():
+        with open(DISTRICTS_JSON, encoding="utf-8") as f:
+            dists = json.load(f)
+            for d in dists:
+                for c in d["constituencies"]:
+                    const_to_dist[c["id"]] = d["id"]
+
     official = parse_official_txt(TXT_FILE)
     excel_df = load_excel(EXCEL_FILE)
-    matched, unmatched, removed = update_json(official, excel_df)
+    matched, unmatched, removed = update_json(official, excel_df, const_to_dist)
 
     print()
     print("=" * 60)

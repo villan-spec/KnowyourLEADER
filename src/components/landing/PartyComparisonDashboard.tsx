@@ -71,24 +71,24 @@ export default function PartyComparisonDashboard({ partyStats }: PartyComparison
     ];
 
     return (
-        <section className="py-20 bg-white">
+        <section className="py-12 bg-white">
             <div className="container-app">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-black flex justify-center items-center gap-3">
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-black flex justify-center items-center gap-3">
                         <TrendingUp className="text-[var(--color-accent-blue)]" />
                         PARTY COMPARISON AT A GLANCE
                     </h2>
-                    <p className="text-tamil text-[var(--color-text-secondary)] mt-2 italic font-semibold">
+                    <p className="text-tamil text-xs text-[var(--color-text-secondary)] mt-1 italic font-semibold">
                         கட்சி ஒப்பீடு ஒரே பார்வையில்
                     </p>
                 </div>
 
-                <div className="flex flex-wrap justify-center mb-10 gap-2">
+                <div className="flex flex-wrap justify-center mb-8 gap-2">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveMetric(tab.id as Metric)}
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm border ${activeMetric === tab.id ? "bg-[var(--color-accent-blue)] text-white border-[var(--color-accent-blue)]" : "bg-white hover:bg-gray-50 border-gray-100"}`}
+                            className={`flex items-center gap-2 px-3 py-2 rounded-xl font-bold text-xs transition-all shadow-sm border ${activeMetric === tab.id ? "bg-[var(--color-accent-blue)] text-white border-[var(--color-accent-blue)]" : "bg-white hover:bg-gray-50 border-gray-100"}`}
                         >
                             {tab.icon}
                             {tab.label}
@@ -96,7 +96,7 @@ export default function PartyComparisonDashboard({ partyStats }: PartyComparison
                     ))}
                 </div>
 
-                <div className="max-w-4xl mx-auto space-y-6">
+                <div className="max-w-3xl mx-auto space-y-4">
                     {sortedParties.map((p) => {
                         const stats = partyStats[p];
                         let value = 0;
@@ -109,10 +109,10 @@ export default function PartyComparisonDashboard({ partyStats }: PartyComparison
                         const barWidth = Math.min(100, (value / maxValues[activeMetric]) * 100);
 
                         return (
-                            <div key={p} className="relative group p-2">
-                                <div className="flex items-center gap-4 mb-2">
-                                    <div className="w-24 font-black text-sm">{PARTY_NAMES[p]?.en || p}</div>
-                                    <div className="flex-grow h-6 bg-gray-50 rounded-lg overflow-hidden relative border border-gray-100">
+                            <div key={p} className="relative group px-1">
+                                <div className="flex items-center gap-3 mb-1">
+                                    <div className="w-20 font-black text-xs uppercase opacity-80">{PARTY_NAMES[p]?.en || p}</div>
+                                    <div className="flex-grow h-4 bg-gray-50 rounded-full overflow-hidden relative border border-gray-100">
                                         <div 
                                             className="h-full transition-all duration-1000 ease-out relative"
                                             style={{ 
@@ -120,11 +120,8 @@ export default function PartyComparisonDashboard({ partyStats }: PartyComparison
                                                 backgroundColor: PARTY_COLORS[p] || '#888888'
                                             }}
                                         />
-                                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-black opacity-40 group-hover:opacity-100 transition-opacity">
-                                            {getHumorTooltip(p, value)}
-                                        </div>
                                     </div>
-                                    <div className="w-16 text-right font-black text-sm">
+                                    <div className="w-14 text-right font-black text-xs">
                                         {activeMetric === 'clean' ? `${value}%` : activeMetric === 'cases' ? value : formatAssets(value).replace('₹', '')}
                                     </div>
                                 </div>
